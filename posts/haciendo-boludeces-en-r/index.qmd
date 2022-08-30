@@ -1,0 +1,6 @@
+---
+title: "Haciendo boludeces en R"
+author: "Checho"
+---
+
+# ¿Por qué elegí esto como mi primer post?

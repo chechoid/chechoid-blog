@@ -1,0 +1,23 @@
+project:
+  type: website
+
+website:
+  title: "chechoid-blog"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/chechoid
+      - icon: twitter
+        href: https://twitter.com/sergiogarciamor
+      - icon: linkedin
+        href: https://linkedin.com/in/sergiogarciamora
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css
+
+editor: visual
+
