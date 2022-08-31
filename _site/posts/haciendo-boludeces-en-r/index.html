@@ -16,6 +16,69 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -107,7 +170,11 @@ ul.task-list{list-style: none;}
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Haciendo boludeces en R</h1>
-                      </div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">fun</div>
+                <div class="quarto-category">ggplot2</div>
+              </div>
+                  </div>
   </div>
     
   
@@ -134,8 +201,298 @@ ul.task-list{list-style: none;}
 
 
 
+<section id="por-qué-elegí-esto-como-mi-primer-post" class="level1">
+<h1>¿Por qué elegí esto como mi primer post?</h1>
+<p>Una vez vi una charla de Ryan Timpe, un Data Scientist de Lego, que en una <a href="https://www.rstudio.com/resources/rstudioconf-2020/learning-r-with-humorous-side-projects/">charla en la RStudio Conference</a> contaba cómo a veces hacía proyectos que fueran divertidos para aprender nuevos skills de análisis de datos. En su charla cuenta por ejemplo, que hizo un análisis de los diálogos de la serie <em>The Golden Girls</em> usando técnicas de text mining para detectar cuáles eran las palabras más frecuentes, entonces cada vez que una protagonista decía esa palabra ellos hacían un fondo blanco de lo que estuvieran tomando.</p>
+<p>Este post va de lo mismo. Yo quería aprender a usar imágenes en mis visualizaciones, así nació este proyecto en el que usé imágenes de personas con rasgos “similares” a los míos e incluir las fotos en un gráfico de dispersión.</p>
+<p>Esto que es una boludez implicó:</p>
+<ul>
+<li><p>Crear un formulario en Google Forms</p></li>
+<li><p>Levantar los datos de las respuestas</p></li>
+<li><p>Procesar los resultados</p></li>
+<li><p>E incluir visualizaciones usando las imágenes de las personas.</p></li>
+</ul>
+<p>Este tipo de proyectos lo que permite es que el esfuerzo que dedicás a aprender no se sienta pesado, y que te da una motivación extra para buscar la solución para lograr el resultado.</p>
+</section>
+<section id="un-poco-de-contexto" class="level1">
+<h1>Un poco de contexto</h1>
+<p>Este soy yo:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="archivos/sergio.jpg" class="img-fluid figure-img" alt="Foto de Sergio, sosteniendo una copa de vino" width="372"></p>
+<p></p><figcaption class="figure-caption">En mi luna de miel en Mendoza</figcaption><p></p>
+</figure>
+</div>
+<p>Como verán, tengo el pelo más o menos largo, con flequillo y barba candado. Mucha gente dice que me parezco a Nicolás del Caño 🤷, un diputado del Partido de los Trabajadores Socialistas de Argentina y que tiene un corte de pelo parecido al mío y también usa barba.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.izquierdadiario.es/IMG/auton3.jpg?1605455691" class="img-fluid figure-img" width="221"></p>
+<p></p><figcaption class="figure-caption">Nicolás del Caño</figcaption><p></p>
+</figure>
+</div>
+<p>En estas fotos no nos vemos tan parecidos, pero déjenme contarles una anécdota. Cuando mi hija tenía 3 años aproximadamente estábamos en campaña electoral de diputados y había afiches de todos los partidos políticos pegados por todos lados, incluyendo claro está los del PTS y Nicolás del Caño obviamente.</p>
+<p>En esa época mi hija y mi esposa iban caminando por la calle, y cuando se estaban acercando a uno de los afiches de Del Caño mi hija apunta con su dedito y dice “Papá!” como si yo fuera el que estaba en el afiche. Así que algún parecido hay.</p>
+<p>También dijo lo mismo mirando un afiche de Johnny Depp promocionando el perfume Savage, pero esa no me la cree nadie.</p>
+<p>Otros personajes con los que mis amigos suelen bromear que somos parecidos son el Gigoló, Roberto Baradel, o el Mono Burgos.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.cronica.com.ar/export/sites/cronica/img/2019/05/06/gigolo_2.jpg_343233968.jpg" class="img-fluid figure-img" width="184"></p>
+<p></p><figcaption class="figure-caption">El Gigoló</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cdn.cnn.com/cnnnext/dam/assets/190306231108-pba-baradel-large-169.jpg" class="img-fluid figure-img" width="339"></p>
+<p></p><figcaption class="figure-caption">Roberto Baradel</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Germ%25C3%25A1n_Burgos_-_01.jpg" class="img-fluid figure-img" width="213"></p>
+<p></p><figcaption class="figure-caption">El Mono Burgos</figcaption><p></p>
+</figure>
+</div>
+<p>Ya sé lo que están pensando: <em>Con amigos así quién necesita enemigos</em>. Pero igual se hacen querer.</p>
+<section id="génesis-de-la-idea-k-nn" class="level2">
+<h2 class="anchored" data-anchor-id="génesis-de-la-idea-k-nn">Génesis de la idea: k-nn</h2>
+<p>La idea de este análisis surgió un día después de hacer una explicación sobre un método de clustering llamado <strong>k-nn</strong>. Los métodos de clustering son técnicas de ciencia de datos que permiten hallar grupos entre los datos (llamados <em>clusters</em> en la jerga).</p>
+<p>El método k-nn, <em>k</em> <em>nearest neighbors</em> o de vecinos más cercanos lo que hace es asignar a cada individuo a un cluster en función de las características de sus “vecinos”. Es decir que determina a qué grupo pertenece cada caso en función a qué casos se parece más.</p>
+<p>La forma que se me ocurrió para explicar esto de manera visual fue con este dibujo que hice en Paint:</p>
+<p><img src="archivos/clones_paint.jpg" class="img-fluid"></p>
+<p>La explicación es que yo, dentro de ese conjunto de datos, estoy más cerca de pertenecer al cluster del Mono Burgos y de Nicolás del Caño, más que del cluster de Keanu Reeves, Jeff Bridges y Brad Pitt.</p>
+<p>Y después tuve una idea. <strong>¿Y si hago esto con datos?</strong></p>
+<p><img src="https://media1.giphy.com/media/3oz8xP6SaSkSU9dhcI/200w.gif?cid=82a1493b6dys6v5sl1wm0y65sc1ej72nglv6y40cwx6rrtw2&amp;rid=200w.gif&amp;ct=g" class="img-fluid"></p>
+</section>
+</section>
+<section id="haciendo-cosas-raras-para-gente-normal-en-r" class="level1">
+<h1>Haciendo cosas raras para gente normal en R</h1>
+<p>La idea entonces es replicar el gráfico de arriba pero usando datos. Entonces lo que hice fue en primer lugar buscar fotos de personajes argentinos e internacionales que tengan el pelo más o menos largo, usen barba, y en algunos casos tengan unos kilos de más.</p>
+<p>Para este paso lo que hice fue pasar todas las fotos de los personas en Canva para que me queden todas las imágenes del mismo tamaño.</p>
+<p>Luego me armé un formulario en Google Forms con cada imagen para compartir con amigas y amigos para que voten del 1 al 10 la <em>facha</em> (facha en Argentina es una forma de decir belleza) y la <em>copadez</em> (que tan agradables son las personas).</p>
+<p>Los personajes involucrados fueron:</p>
+<ul>
+<li><p>Nicolás del Caño</p></li>
+<li><p>Roberto Baradel</p></li>
+<li><p>El Mono Burgos</p></li>
+<li><p>Ricardo Caruso Lombardi</p></li>
+<li><p>Ben Affleck</p></li>
+<li><p>Jeff Bridges</p></li>
+<li><p>Brad Pitt</p></li>
+<li><p>Javier Bardem</p></li>
+<li><p>Keanu Reeves</p></li>
+<li><p>Y su fiel servidor 😉</p></li>
+</ul>
+<p>En mi análisis original cargué los datos directamente desde el Google Sheets que se genera con los resultados del Forms. Solo para los fines de reproducibilidad en este caso voy a usar un archivo csv así si quieren pueden replicar los resultados.</p>
+<p>Así que ahora podemos armar el script.</p>
+<section id="cargando-los-datos-y-preparándolos" class="level2">
+<h2 class="anchored" data-anchor-id="cargando-los-datos-y-preparándolos">Cargando los datos y preparándolos</h2>
+<p>Empecemos cargando las librerías y los datos directamente desde un repositorio:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># Cargar, limpiar y preparar datos</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggimage)   <span class="co"># Para usar imágenes en las visualizaciones</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>clones <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://raw.githubusercontent.com/chechoid/silliest-use-of-r/main/source.csv"</span>, <span class="at">delim =</span> <span class="st">";"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>comentarios <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">comentarios =</span> <span class="st">`</span><span class="at">Poné lo que quieras... parecidos, chistes, comentarios, etc...</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(comentarios))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Exploremos los datos</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(clones)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 24
+  `Marca temporal`    Facha de…¹ Copad…² Facha…³ Copad…⁴ Facha…⁵ Copad…⁶ Facha…⁷
+  &lt;dttm&gt;                   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1 2021-06-23 12:37:28         10      10       7      10       1       1       1
+2 2021-06-23 12:39:12          4      10       5       9       1       1       1
+3 2021-06-23 12:42:21          8       9       8       9       5       4       3
+4 2021-06-23 12:43:24         10      10       1       1       1       1       1
+5 2021-06-23 12:45:03         10       8       4       9       6       9       1
+6 2021-06-23 12:45:12          5       9       1       8      10       8       1
+# … with 16 more variables: `Copadez de Roberto` &lt;dbl&gt;, `Facha de Jeff` &lt;dbl&gt;,
+#   `Copadez de Jeff` &lt;dbl&gt;, `Facha de Brad` &lt;dbl&gt;, `Copadez de Brad` &lt;dbl&gt;,
+#   `Facha del Mono` &lt;dbl&gt;, `Copadez del Mono` &lt;dbl&gt;, `Facha de Sergio` &lt;dbl&gt;,
+#   `Copadez de Sergio` &lt;dbl&gt;, `Facha de Ricky` &lt;dbl&gt;,
+#   `Copadez de Ricky` &lt;dbl&gt;, `Facha de Ben` &lt;dbl&gt;, `Copadez de Ben` &lt;dbl&gt;,
+#   `Facha de Javier` &lt;dbl&gt;, `Copadez de Javier` &lt;dbl&gt;,
+#   `Poné lo que quieras... parecidos, chistes, comentarios, etc...` &lt;chr&gt;, …
+# ℹ Use `colnames()` to see all variable names</code></pre>
+</div>
+</div>
+<p>Ahí podemos ver que para cada personaje tenemos una columna con el puntaje de su facha y su puntaje de copadez.</p>
+<p>El siguiente paso consiste en eliminar algunas columnas que no son relevantes para el análisis, y agregamos una columna de <code>id</code>. Y luego tenemos que “pivotear” la tabla para que nos queden todas las columnas de puntajes de los personajes en dos columnas:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminar columnas innecesarias</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>clones <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Marca temporal</span><span class="st">`</span>, <span class="sc">-</span><span class="st">`</span><span class="at">Poné lo que quieras... parecidos, chistes, comentarios, etc...</span><span class="st">`</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Agregar columna de id</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>clones <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowid_to_column</span>(<span class="at">var =</span> <span class="st">"id"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivotear variables</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>clones <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"Facha de Keanu"</span><span class="sc">:</span> <span class="st">"Copadez de Javier"</span>),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"personaje"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"puntaje"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Veamos como queda el dataset ahora</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(clones)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+     id personaje          puntaje
+  &lt;int&gt; &lt;chr&gt;                &lt;dbl&gt;
+1     1 Facha de Keanu          10
+2     1 Copadez de Keanu        10
+3     1 Facha de Russell         7
+4     1 Copadez de Russell      10
+5     1 Facha de Nico            1
+6     1 Copadez de Nico          1</code></pre>
+</div>
+</div>
+<p>Habíamos comenzado con un dataset de 66 filas y 24 columnas. Ahora terminamos con un data frame de 1.452 filas en 3 columnas. Ahora necesitamos eliminar las palabras intermedias <code>de</code> y <code>del</code> de los nombres en la columna <code>personaje</code> así después podemos crear una columna para <code>facha</code>, y otra para <code>copadez</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separar variables categóricas</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>clones <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">personaje =</span> <span class="fu">str_remove</span>(personaje, <span class="st">"de "</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">personaje =</span> <span class="fu">str_remove</span>(personaje, <span class="st">"del "</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Veamos el puntaje promedio de cada personaje y sus caraceterísticas</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>clones <span class="sc">%&gt;%</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(personaje) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">valor_promedio =</span> <span class="fu">mean</span>(puntaje)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> valor_promedio, <span class="at">y =</span> personaje)) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/preproceso2-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dividimos la columna 'personaje' en dos columnas, una para la métrica y otra para el nombre</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>clones <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(personaje,  <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"metrica"</span>, <span class="st">"persona"</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivotear ancho </span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>clones <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(id, persona),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from =</span> metrica,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> puntaje)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Veamos como queda el data frame ahora</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(clones)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+     id persona Facha Copadez
+  &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1     1 Keanu      10      10
+2     1 Russell     7      10
+3     1 Nico        1       1
+4     1 Roberto     1       1
+5     1 Jeff        5       5
+6     1 Brad       10      10</code></pre>
+</div>
+</div>
+<p>Luego de estos pasos quedamos con un data frame de 726 filas, una para cada votación para cada personaje, y con 4 columnas, <code>id</code>, <code>persona</code>, <code>Facha</code> y <code>Copadez</code>. Con estos datos podemos ver los resultados de cada persona:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculamos los resultados promedios para cada persona y graficamos los resultados</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>resultados <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(persona) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">facha_promedio =</span> <span class="fu">mean</span>(Facha),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">copadez_promedio =</span> <span class="fu">mean</span>(Copadez))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(resultados, <span class="fu">aes</span>(<span class="at">x =</span> copadez_promedio, <span class="at">y =</span> facha_promedio, <span class="at">color =</span> persona)) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/resultados_promedios-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>En esencia, este es el gráfico al que queremos llegar. Así como está es medio aburrido, así que vamos a enchular este gráfico con imágenes.</p>
+</section>
+<section id="trabajando-con-las-imágenes" class="level2">
+<h2 class="anchored" data-anchor-id="trabajando-con-las-imágenes">Trabajando con las imágenes</h2>
+<p>Como contaba antes, primero armé una presentación en Canva y pegué todas las imágenes de cada personaje para que queden más o menos del mismo tamaño. Luego guardé cada imagen en un archivo separado, y en este caso las guardé en una carpeta que se llama <code>clones</code>.</p>
+<p>Podría haber hecho la carga de las fotos una por una, pero quería hacer este trabajo lo más eficiente posible tratando de repetir pasos. Para eso tenemos que crear un data frame que tenga por un lado el nombre de la persona <strong>tal cual</strong> lo tenemos en la tabla de las votaciones, y que incluya la dirección a la imagen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos un vector con los nombres de las personas</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>persona <span class="ot">&lt;-</span> resultados <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(persona) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Creo un vector de imágenes</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>ruta <span class="ot">&lt;-</span> <span class="st">"pics"</span>        <span class="co"># Ruta de las fotos</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>extension <span class="ot">&lt;-</span> <span class="st">"png"</span>   <span class="co"># Extensión de los archivos de imágenes</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># nombres de los archivos</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>imagen <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Ben"</span>, <span class="st">"Brad"</span>, <span class="st">"Javier"</span>, <span class="st">"jeff"</span>, <span class="st">"keanu"</span>, <span class="st">"mono"</span>, <span class="st">"nico"</span>, </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">"ricky"</span>, <span class="st">"roberto"</span>, <span class="st">"russell"</span>, <span class="st">"sergio"</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Creo el vector de fotos con dirección y extensión completa</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>foto <span class="ot">&lt;-</span> <span class="fu">str_c</span>(ruta, imagen, <span class="at">sep =</span> <span class="st">"/"</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>foto <span class="ot">&lt;-</span> <span class="fu">str_c</span>(foto, extension, <span class="at">sep =</span> <span class="st">"."</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Creo el dataframe y lo agrego al dataframe resultados</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>pics <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(persona, foto)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver el resultado de este proceso</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>pics</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   persona             foto
+1      Ben     pics/Ben.png
+2     Brad    pics/Brad.png
+3   Javier  pics/Javier.png
+4     Jeff    pics/jeff.png
+5    Keanu   pics/keanu.png
+6     Mono    pics/mono.png
+7     Nico    pics/nico.png
+8    Ricky   pics/ricky.png
+9  Roberto pics/roberto.png
+10 Russell pics/russell.png
+11  Sergio  pics/sergio.png</code></pre>
+</div>
+</div>
+<p>Ahora tenemos un data frame de 11 filas y dos columnas, con el nombre de cada persona, y la dirección al archivo que contiene las imágenes de cada una. Estos datos lo podemos integrar al data frame que veníamos trabajando con los resultados de Facha y Copadez promedio de cada personaje.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Unimos los datasets</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>resultados <span class="ot">&lt;-</span> <span class="fu">left_join</span>(resultados, pics)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(resultados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  persona facha_promedio copadez_promedio foto           
+  &lt;chr&gt;            &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;          
+1 Ben               8.23             6.47 pics/Ben.png   
+2 Brad              8.52             7.55 pics/Brad.png  
+3 Javier            6.89             6.56 pics/Javier.png
+4 Jeff              5.06             6.45 pics/jeff.png  
+5 Keanu             7.77             8.74 pics/keanu.png 
+6 Mono              3.30             6.30 pics/mono.png  </code></pre>
+</div>
+</div>
+</section>
+<section id="poniendo-imágenes-al-gráfico" class="level2">
+<h2 class="anchored" data-anchor-id="poniendo-imágenes-al-gráfico">Poniendo imágenes al gráfico</h2>
+<p>Y ahora si, a lo que venimos: incluir las fotos en el gráfico</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># El gráfico final</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(resultados, <span class="fu">aes</span>(<span class="at">x =</span> copadez_promedio, <span class="at">y =</span> facha_promedio)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_image</span>(<span class="fu">aes</span>(<span class="at">image=</span>foto), <span class="at">size =</span> <span class="fl">0.08</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Facha y Copadez Promedio de cada Personaje"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Copadez Promedio"</span>, </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Facha Promedio"</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"n = 66</span><span class="sc">\n</span><span class="st">Ninguna tía participó del relevamiento"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/grafico_final-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
