@@ -3,6 +3,8 @@ project:
 
 website:
   title: "chechoid.netlify.app"
+  site-url: "https://chechoid.netlify.app"
+  description: "Un blog sobre R y People Analytics"
   navbar:
     right:
       - about.qmd

@@ -1,0 +1,4 @@
+- source: project
+  netlify:
+    - id: 022af104-5c82-490a-88ab-c58716aba8b7
+      url: 'https://zippy-chebakia-b3bbe3.netlify.app'

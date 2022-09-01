@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>chechoid.netlify.app</title>
+<link>https://zippy-chebakia-b3bbe3.netlify.app/index.html</link>
+<atom:link href="https://zippy-chebakia-b3bbe3.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
+<description>Un blog sobre R y People Analytics</description>
+<generator>quarto-1.0.38</generator>
+<lastBuildDate>Thu, 01 Sep 2022 16:22:57 GMT</lastBuildDate>
+<item>
+  <title>Haciendo pavadas en R</title>
+  <dc:creator>Checho</dc:creator>
+  <link>https://zippy-chebakia-b3bbe3.netlify.app/posts/haciendo-boludeces-en-r/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="por-qué-elegí-esto-como-mi-primer-post" class="level1">
+<h1>¿Por qué elegí esto como mi primer post?</h1>
+<p>Una vez vi una charla de Ryan Timpe, un Data Scientist de Lego, que en una <a href="https://www.rstudio.com/resources/rstudioconf-2020/learning-r-with-humorous-side-projects/">charla en la RStudio Conference</a> contaba cómo a veces hacía proyectos que fueran divertidos para aprender nuevos skills de análisis de datos. En su charla cuenta por ejemplo, que hizo un análisis de los diálogos de la serie <em>The Golden Girls</em> usando técnicas de text mining para detectar cuáles eran las palabras más frecuentes, entonces cada vez que una protagonista decía esa palabra ellos hacían un fondo blanco de lo que estuvieran tomando.</p>
+<p>Este post va de lo mismo. Yo quería aprender a usar imágenes en mis visualizaciones, así nació este proyecto en el que usé imágenes de personas con rasgos “similares” a los míos e incluir las fotos en un gráfico de dispersión.</p>
+<p>Esto que es una boludez implicó:</p>
+<ul>
+<li><p>Crear un formulario en Google Forms</p></li>
+<li><p>Levantar los datos de las respuestas</p></li>
+<li><p>Procesar los resultados</p></li>
+<li><p>E incluir visualizaciones usando las imágenes de las personas.</p></li>
+</ul>
+<p>Este tipo de proyectos lo que permite es que el esfuerzo que dedicás a aprender no se sienta pesado, y que te da una motivación extra para buscar la solución para lograr el resultado.</p>
+</section>
+<section id="un-poco-de-contexto" class="level1">
+<h1>Un poco de contexto</h1>
+<p>Este soy yo:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://zippy-chebakia-b3bbe3.netlify.app/posts/haciendo-boludeces-en-r/archivos/sergio.jpg" class="img-fluid figure-img" alt="Foto de Sergio, sosteniendo una copa de vino" width="372"></p>
+<p></p><figcaption class="figure-caption">En mi luna de miel en Mendoza</figcaption><p></p>
+</figure>
+</div>
+<p>Como verán, tengo el pelo más o menos largo, con flequillo y barba candado. Mucha gente dice que me parezco a Nicolás del Caño 🤷, un diputado del Partido de los Trabajadores Socialistas de Argentina y que tiene un corte de pelo parecido al mío y también usa barba.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://zippy-chebakia-b3bbe3.netlify.app/posts/haciendo-boludeces-en-r/https:/www.izquierdadiario.es/IMG/auton3.jpg?1605455691" class="img-fluid figure-img" width="221"></p>
+<p></p><figcaption class="figure-caption">Nicolás del Caño</figcaption><p></p>
+</figure>
+</div>
+<p>En estas fotos no nos vemos tan parecidos, pero déjenme contarles una anécdota. Cuando mi hija tenía 3 años aproximadamente estábamos en campaña electoral de diputados y había afiches de todos los partidos políticos pegados por todos lados, incluyendo claro está los del PTS y Nicolás del Caño obviamente.</p>
+<p>En esa época mi hija y mi esposa iban caminando por la calle, y cuando se estaban acercando a uno de los afiches de Del Caño mi hija apunta con su dedito y dice “Papá!” como si yo fuera el que estaba en el afiche. Así que algún parecido hay.</p>
+<p>También dijo lo mismo mirando un afiche de Johnny Depp promocionando el perfume Savage, pero esa no me la cree nadie.</p>
+<p>Otros personajes con los que mis amigos suelen bromear que somos parecidos son el Gigoló, Roberto Baradel, o el Mono Burgos.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://zippy-chebakia-b3bbe3.netlify.app/posts/haciendo-boludeces-en-r/https:/www.cronica.com.ar/export/sites/cronica/img/2019/05/06/gigolo_2.jpg_343233968.jpg" class="img-fluid figure-img" width="184"></p>
+<p></p><figcaption class="figure-caption">El Gigoló</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://zippy-chebakia-b3bbe3.netlify.app/posts/haciendo-boludeces-en-r/https:/cdn.cnn.com/cnnnext/dam/assets/190306231108-pba-baradel-large-169.jpg" class="img-fluid figure-img" width="339"></p>
+<p></p><figcaption class="figure-caption">Roberto Baradel</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://zippy-chebakia-b3bbe3.netlify.app/posts/haciendo-boludeces-en-r/https:/upload.wikimedia.org/wikipedia/commons/b/b7/Germ%25C3%25A1n_Burgos_-_01.jpg" class="img-fluid figure-img" width="213"></p>
+<p></p><figcaption class="figure-caption">El Mono Burgos</figcaption><p></p>
+</figure>
+</div>
+<p>Ya sé lo que están pensando: <em>Con amigos así quién necesita enemigos</em>. Pero igual se hacen querer.</p>
+<section id="génesis-de-la-idea-k-nn" class="level2">
+<h2 class="anchored" data-anchor-id="génesis-de-la-idea-k-nn">Génesis de la idea: k-nn</h2>
+<p>La idea de este análisis surgió un día después de hacer una explicación sobre un método de clustering llamado <strong>k-nn</strong>. Los métodos de clustering son técnicas de ciencia de datos que permiten hallar grupos entre los datos (llamados <em>clusters</em> en la jerga).</p>
+<p>El método k-nn, <em>k</em> <em>nearest neighbors</em> o de vecinos más cercanos lo que hace es asignar a cada individuo a un cluster en función de las características de sus “vecinos”. Es decir que determina a qué grupo pertenece cada caso en función a qué casos se parece más.</p>
+<p>La forma que se me ocurrió para explicar esto de manera visual fue con este dibujo que hice en Paint:</p>
+<p><img src="https://zippy-chebakia-b3bbe3.netlify.app/posts/haciendo-boludeces-en-r/archivos/clones_paint.jpg" class="img-fluid"></p>
+<p>La explicación es que yo, dentro de ese conjunto de datos, estoy más cerca de pertenecer al cluster del Mono Burgos y de Nicolás del Caño, más que del cluster de Keanu Reeves, Jeff Bridges y Brad Pitt.</p>
+<p>Y después tuve una idea. <strong>¿Y si hago esto con datos?</strong></p>
+<p><img src="https://zippy-chebakia-b3bbe3.netlify.app/posts/haciendo-boludeces-en-r/https:/media1.giphy.com/media/3oz8xP6SaSkSU9dhcI/200w.gif?cid=82a1493b6dys6v5sl1wm0y65sc1ej72nglv6y40cwx6rrtw2&amp;rid=200w.gif&amp;ct=g" class="img-fluid"></p>
+</section>
+</section>
+<section id="haciendo-cosas-raras-para-gente-normal-en-r" class="level1">
+<h1>Haciendo cosas raras para gente normal en R</h1>
+<p>La idea entonces es replicar el gráfico de arriba pero usando datos. Entonces lo que hice fue en primer lugar buscar fotos de personajes argentinos e internacionales que tengan el pelo más o menos largo, usen barba, y en algunos casos tengan unos kilos de más.</p>
+<p>Para este paso lo que hice fue pasar todas las fotos de los personas en Canva para que me queden todas las imágenes del mismo tamaño.</p>
+<p>Luego me armé un formulario en Google Forms con cada imagen para compartir con amigas y amigos para que voten del 1 al 10 la <em>facha</em> (facha en Argentina es una forma de decir belleza) y la <em>copadez</em> (que tan agradables son las personas).</p>
+<p>Los personajes involucrados fueron:</p>
+<ul>
+<li><p>Nicolás del Caño</p></li>
+<li><p>Roberto Baradel</p></li>
+<li><p>El Mono Burgos</p></li>
+<li><p>Ricardo Caruso Lombardi</p></li>
+<li><p>Ben Affleck</p></li>
+<li><p>Jeff Bridges</p></li>
+<li><p>Brad Pitt</p></li>
+<li><p>Javier Bardem</p></li>
+<li><p>Keanu Reeves</p></li>
+<li><p>Y su fiel servidor 😉</p></li>
+</ul>
+<p>En mi análisis original cargué los datos directamente desde el Google Sheets que se genera con los resultados del Forms. Solo para los fines de reproducibilidad en este caso voy a usar un archivo csv así si quieren pueden replicar los resultados.</p>
+<p>Así que ahora podemos armar el script.</p>
+<section id="cargando-los-datos-y-preparándolos" class="level2">
+<h2 class="anchored" data-anchor-id="cargando-los-datos-y-preparándolos">Cargando los datos y preparándolos</h2>
+<p>Empecemos cargando las librerías y los datos directamente desde un repositorio:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;"># Paquetes</span></span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;">library</span>(tidyverse) <span class="co" style="color: #5E5E5E;"># Cargar, limpiar y preparar datos</span></span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;">library</span>(ggimage)   <span class="co" style="color: #5E5E5E;"># Para usar imágenes en las visualizaciones</span></span>
+<span id="cb1-4"></span>
+<span id="cb1-5"><span class="co" style="color: #5E5E5E;"># Datos</span></span>
+<span id="cb1-6">clones <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">read_delim</span>(<span class="st" style="color: #20794D;">"https://raw.githubusercontent.com/chechoid/silliest-use-of-r/main/source.csv"</span>, <span class="at" style="color: #657422;">delim =</span> <span class="st" style="color: #20794D;">";"</span>)</span>
+<span id="cb1-7"></span>
+<span id="cb1-8"></span>
+<span id="cb1-9">comentarios <span class="ot" style="color: #003B4F;">&lt;-</span> clones <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb1-10">  <span class="fu" style="color: #4758AB;">select</span>(<span class="at" style="color: #657422;">comentarios =</span> <span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Poné lo que quieras... parecidos, chistes, comentarios, etc...</span><span class="st" style="color: #20794D;">`</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb1-11">  <span class="fu" style="color: #4758AB;">filter</span>(<span class="sc" style="color: #5E5E5E;">!</span><span class="fu" style="color: #4758AB;">is.na</span>(comentarios))</span>
+<span id="cb1-12"></span>
+<span id="cb1-13"><span class="co" style="color: #5E5E5E;"># Exploremos los datos</span></span>
+<span id="cb1-14"><span class="fu" style="color: #4758AB;">head</span>(clones)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 24
+  `Marca temporal`    Facha de…¹ Copad…² Facha…³ Copad…⁴ Facha…⁵ Copad…⁶ Facha…⁷
+  &lt;dttm&gt;                   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1 2021-06-23 12:37:28         10      10       7      10       1       1       1
+2 2021-06-23 12:39:12          4      10       5       9       1       1       1
+3 2021-06-23 12:42:21          8       9       8       9       5       4       3
+4 2021-06-23 12:43:24         10      10       1       1       1       1       1
+5 2021-06-23 12:45:03         10       8       4       9       6       9       1
+6 2021-06-23 12:45:12          5       9       1       8      10       8       1
+# … with 16 more variables: `Copadez de Roberto` &lt;dbl&gt;, `Facha de Jeff` &lt;dbl&gt;,
+#   `Copadez de Jeff` &lt;dbl&gt;, `Facha de Brad` &lt;dbl&gt;, `Copadez de Brad` &lt;dbl&gt;,
+#   `Facha del Mono` &lt;dbl&gt;, `Copadez del Mono` &lt;dbl&gt;, `Facha de Sergio` &lt;dbl&gt;,
+#   `Copadez de Sergio` &lt;dbl&gt;, `Facha de Ricky` &lt;dbl&gt;,
+#   `Copadez de Ricky` &lt;dbl&gt;, `Facha de Ben` &lt;dbl&gt;, `Copadez de Ben` &lt;dbl&gt;,
+#   `Facha de Javier` &lt;dbl&gt;, `Copadez de Javier` &lt;dbl&gt;,
+#   `Poné lo que quieras... parecidos, chistes, comentarios, etc...` &lt;chr&gt;, …
+# ℹ Use `colnames()` to see all variable names</code></pre>
+</div>
+</div>
+<p>Ahí podemos ver que para cada personaje tenemos una columna con el puntaje de su facha y su puntaje de copadez.</p>
+<p>El siguiente paso consiste en eliminar algunas columnas que no son relevantes para el análisis, y agregamos una columna de <code>id</code>. Y luego tenemos que “pivotear” la tabla para que nos queden todas las columnas de puntajes de los personajes en dos columnas:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;"># Eliminar columnas innecesarias</span></span>
+<span id="cb3-2">clones <span class="ot" style="color: #003B4F;">&lt;-</span> clones <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb3-3">  <span class="fu" style="color: #4758AB;">select</span>(<span class="sc" style="color: #5E5E5E;">-</span><span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Marca temporal</span><span class="st" style="color: #20794D;">`</span>, <span class="sc" style="color: #5E5E5E;">-</span><span class="st" style="color: #20794D;">`</span><span class="at" style="color: #657422;">Poné lo que quieras... parecidos, chistes, comentarios, etc...</span><span class="st" style="color: #20794D;">`</span>)</span>
+<span id="cb3-4"></span>
+<span id="cb3-5"><span class="co" style="color: #5E5E5E;"># Agregar columna de id</span></span>
+<span id="cb3-6">clones <span class="ot" style="color: #003B4F;">&lt;-</span> clones <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb3-7">  <span class="fu" style="color: #4758AB;">rowid_to_column</span>(<span class="at" style="color: #657422;">var =</span> <span class="st" style="color: #20794D;">"id"</span>)</span>
+<span id="cb3-8"></span>
+<span id="cb3-9"><span class="co" style="color: #5E5E5E;"># Pivotear variables</span></span>
+<span id="cb3-10">clones <span class="ot" style="color: #003B4F;">&lt;-</span> clones <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb3-11">  <span class="fu" style="color: #4758AB;">pivot_longer</span>(<span class="at" style="color: #657422;">cols =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"Facha de Keanu"</span><span class="sc" style="color: #5E5E5E;">:</span> <span class="st" style="color: #20794D;">"Copadez de Javier"</span>),</span>
+<span id="cb3-12">               <span class="at" style="color: #657422;">names_to =</span> <span class="st" style="color: #20794D;">"personaje"</span>,</span>
+<span id="cb3-13">               <span class="at" style="color: #657422;">values_to =</span> <span class="st" style="color: #20794D;">"puntaje"</span>)</span>
+<span id="cb3-14"></span>
+<span id="cb3-15"><span class="co" style="color: #5E5E5E;"># Veamos como queda el dataset ahora</span></span>
+<span id="cb3-16"><span class="fu" style="color: #4758AB;">head</span>(clones)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+     id personaje          puntaje
+  &lt;int&gt; &lt;chr&gt;                &lt;dbl&gt;
+1     1 Facha de Keanu          10
+2     1 Copadez de Keanu        10
+3     1 Facha de Russell         7
+4     1 Copadez de Russell      10
+5     1 Facha de Nico            1
+6     1 Copadez de Nico          1</code></pre>
+</div>
+</div>
+<p>Habíamos comenzado con un dataset de 66 filas y 24 columnas. Ahora terminamos con un data frame de 1.452 filas en 3 columnas. Ahora necesitamos eliminar las palabras intermedias <code>de</code> y <code>del</code> de los nombres en la columna <code>personaje</code> así después podemos crear una columna para <code>facha</code>, y otra para <code>copadez</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="co" style="color: #5E5E5E;"># Separar variables categóricas</span></span>
+<span id="cb5-2">clones <span class="ot" style="color: #003B4F;">&lt;-</span> clones <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb5-3">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="at" style="color: #657422;">personaje =</span> <span class="fu" style="color: #4758AB;">str_remove</span>(personaje, <span class="st" style="color: #20794D;">"de "</span>),</span>
+<span id="cb5-4">         <span class="at" style="color: #657422;">personaje =</span> <span class="fu" style="color: #4758AB;">str_remove</span>(personaje, <span class="st" style="color: #20794D;">"del "</span>))</span>
+<span id="cb5-5"></span>
+<span id="cb5-6"><span class="co" style="color: #5E5E5E;"># Veamos el puntaje promedio de cada personaje y sus caraceterísticas</span></span>
+<span id="cb5-7">clones <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb5-8">  <span class="fu" style="color: #4758AB;">group_by</span>(personaje) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb5-9">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">valor_promedio =</span> <span class="fu" style="color: #4758AB;">mean</span>(puntaje)) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb5-10">  <span class="fu" style="color: #4758AB;">ggplot</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> valor_promedio, <span class="at" style="color: #657422;">y =</span> personaje)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb5-11">  <span class="fu" style="color: #4758AB;">geom_point</span>(<span class="at" style="color: #657422;">size =</span> <span class="dv" style="color: #AD0000;">2</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://zippy-chebakia-b3bbe3.netlify.app/posts/haciendo-boludeces-en-r/index_files/figure-html/preproceso2-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;"># Dividimos la columna 'personaje' en dos columnas, una para la métrica y otra para el nombre</span></span>
+<span id="cb6-2">clones <span class="ot" style="color: #003B4F;">&lt;-</span> clones <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb6-3">  <span class="fu" style="color: #4758AB;">separate</span>(personaje,  <span class="at" style="color: #657422;">into =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"metrica"</span>, <span class="st" style="color: #20794D;">"persona"</span>))</span>
+<span id="cb6-4"></span>
+<span id="cb6-5"></span>
+<span id="cb6-6"><span class="co" style="color: #5E5E5E;"># Pivotear ancho </span></span>
+<span id="cb6-7">clones <span class="ot" style="color: #003B4F;">&lt;-</span> clones <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb6-8">  <span class="fu" style="color: #4758AB;">pivot_wider</span>(<span class="at" style="color: #657422;">id_cols =</span> <span class="fu" style="color: #4758AB;">c</span>(id, persona),</span>
+<span id="cb6-9">              <span class="at" style="color: #657422;">names_from =</span> metrica,</span>
+<span id="cb6-10">              <span class="at" style="color: #657422;">values_from =</span> puntaje)</span>
+<span id="cb6-11"></span>
+<span id="cb6-12"><span class="co" style="color: #5E5E5E;"># Veamos como queda el data frame ahora</span></span>
+<span id="cb6-13"><span class="fu" style="color: #4758AB;">head</span>(clones)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+     id persona Facha Copadez
+  &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1     1 Keanu      10      10
+2     1 Russell     7      10
+3     1 Nico        1       1
+4     1 Roberto     1       1
+5     1 Jeff        5       5
+6     1 Brad       10      10</code></pre>
+</div>
+</div>
+<p>Luego de estos pasos quedamos con un data frame de 726 filas, una para cada votación para cada personaje, y con 4 columnas, <code>id</code>, <code>persona</code>, <code>Facha</code> y <code>Copadez</code>. Con estos datos podemos ver los resultados de cada persona:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="co" style="color: #5E5E5E;"># Calculamos los resultados promedios para cada persona y graficamos los resultados</span></span>
+<span id="cb8-2">resultados <span class="ot" style="color: #003B4F;">&lt;-</span> clones <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb8-3">  <span class="fu" style="color: #4758AB;">group_by</span>(persona) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb8-4">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="at" style="color: #657422;">facha_promedio =</span> <span class="fu" style="color: #4758AB;">mean</span>(Facha),</span>
+<span id="cb8-5">            <span class="at" style="color: #657422;">copadez_promedio =</span> <span class="fu" style="color: #4758AB;">mean</span>(Copadez))</span>
+<span id="cb8-6"></span>
+<span id="cb8-7"><span class="fu" style="color: #4758AB;">ggplot</span>(resultados, <span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> copadez_promedio, <span class="at" style="color: #657422;">y =</span> facha_promedio, <span class="at" style="color: #657422;">color =</span> persona)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb8-8">  <span class="fu" style="color: #4758AB;">geom_point</span>(<span class="at" style="color: #657422;">size =</span> <span class="dv" style="color: #AD0000;">3</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://zippy-chebakia-b3bbe3.netlify.app/posts/haciendo-boludeces-en-r/index_files/figure-html/resultados_promedios-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>En esencia, este es el gráfico al que queremos llegar. Así como está es medio aburrido, así que vamos a enchular este gráfico con imágenes.</p>
+</section>
+<section id="trabajando-con-las-imágenes" class="level2">
+<h2 class="anchored" data-anchor-id="trabajando-con-las-imágenes">Trabajando con las imágenes</h2>
+<p>Como contaba antes, primero armé una presentación en Canva y pegué todas las imágenes de cada personaje para que queden más o menos del mismo tamaño. Luego guardé cada imagen en un archivo separado, y en este caso las guardé en una carpeta que se llama <code>clones</code>.</p>
+<p>Podría haber hecho la carga de las fotos una por una, pero quería hacer este trabajo lo más eficiente posible tratando de repetir pasos. Para eso tenemos que crear un data frame que tenga por un lado el nombre de la persona <strong>tal cual</strong> lo tenemos en la tabla de las votaciones, y que incluya la dirección a la imagen.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;"># Creamos un vector con los nombres de las personas</span></span>
+<span id="cb9-2">persona <span class="ot" style="color: #003B4F;">&lt;-</span> resultados <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb9-3">  <span class="fu" style="color: #4758AB;">select</span>(persona) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb9-4">  <span class="fu" style="color: #4758AB;">pull</span>()</span>
+<span id="cb9-5"></span>
+<span id="cb9-6"><span class="co" style="color: #5E5E5E;"># Creo un vector de imágenes</span></span>
+<span id="cb9-7">ruta <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="st" style="color: #20794D;">"pics"</span>        <span class="co" style="color: #5E5E5E;"># Ruta de las fotos</span></span>
+<span id="cb9-8">extension <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="st" style="color: #20794D;">"png"</span>   <span class="co" style="color: #5E5E5E;"># Extensión de los archivos de imágenes</span></span>
+<span id="cb9-9"></span>
+<span id="cb9-10"><span class="co" style="color: #5E5E5E;"># nombres de los archivos</span></span>
+<span id="cb9-11">imagen <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"Ben"</span>, <span class="st" style="color: #20794D;">"Brad"</span>, <span class="st" style="color: #20794D;">"Javier"</span>, <span class="st" style="color: #20794D;">"jeff"</span>, <span class="st" style="color: #20794D;">"keanu"</span>, <span class="st" style="color: #20794D;">"mono"</span>, <span class="st" style="color: #20794D;">"nico"</span>, </span>
+<span id="cb9-12">            <span class="st" style="color: #20794D;">"ricky"</span>, <span class="st" style="color: #20794D;">"roberto"</span>, <span class="st" style="color: #20794D;">"russell"</span>, <span class="st" style="color: #20794D;">"sergio"</span>)</span>
+<span id="cb9-13"></span>
+<span id="cb9-14"><span class="co" style="color: #5E5E5E;"># Creo el vector de fotos con dirección y extensión completa</span></span>
+<span id="cb9-15">foto <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">str_c</span>(ruta, imagen, <span class="at" style="color: #657422;">sep =</span> <span class="st" style="color: #20794D;">"/"</span>)</span>
+<span id="cb9-16">foto <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">str_c</span>(foto, extension, <span class="at" style="color: #657422;">sep =</span> <span class="st" style="color: #20794D;">"."</span>)</span>
+<span id="cb9-17"></span>
+<span id="cb9-18"><span class="co" style="color: #5E5E5E;"># Creo el dataframe y lo agrego al dataframe resultados</span></span>
+<span id="cb9-19">pics <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">data.frame</span>(persona, foto)</span>
+<span id="cb9-20"></span>
+<span id="cb9-21"><span class="co" style="color: #5E5E5E;"># Ver el resultado de este proceso</span></span>
+<span id="cb9-22">pics</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   persona             foto
+1      Ben     pics/Ben.png
+2     Brad    pics/Brad.png
+3   Javier  pics/Javier.png
+4     Jeff    pics/jeff.png
+5    Keanu   pics/keanu.png
+6     Mono    pics/mono.png
+7     Nico    pics/nico.png
+8    Ricky   pics/ricky.png
+9  Roberto pics/roberto.png
+10 Russell pics/russell.png
+11  Sergio  pics/sergio.png</code></pre>
+</div>
+</div>
+<p>Ahora tenemos un data frame de 11 filas y dos columnas, con el nombre de cada persona, y la dirección al archivo que contiene las imágenes de cada una. Estos datos lo podemos integrar al data frame que veníamos trabajando con los resultados de Facha y Copadez promedio de cada personaje.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="co" style="color: #5E5E5E;"># Unimos los datasets</span></span>
+<span id="cb11-2">resultados <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">left_join</span>(resultados, pics)</span>
+<span id="cb11-3"></span>
+<span id="cb11-4"><span class="fu" style="color: #4758AB;">head</span>(resultados)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  persona facha_promedio copadez_promedio foto           
+  &lt;chr&gt;            &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;          
+1 Ben               8.23             6.47 pics/Ben.png   
+2 Brad              8.52             7.55 pics/Brad.png  
+3 Javier            6.89             6.56 pics/Javier.png
+4 Jeff              5.06             6.45 pics/jeff.png  
+5 Keanu             7.77             8.74 pics/keanu.png 
+6 Mono              3.30             6.30 pics/mono.png  </code></pre>
+</div>
+</div>
+</section>
+<section id="poniendo-imágenes-al-gráfico" class="level2">
+<h2 class="anchored" data-anchor-id="poniendo-imágenes-al-gráfico">Poniendo imágenes al gráfico</h2>
+<p>Y ahora si, a lo que venimos: incluir las fotos en el gráfico</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="co" style="color: #5E5E5E;"># El gráfico final</span></span>
+<span id="cb13-2"><span class="fu" style="color: #4758AB;">ggplot</span>(resultados, <span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">x =</span> copadez_promedio, <span class="at" style="color: #657422;">y =</span> facha_promedio)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb13-3">  <span class="fu" style="color: #4758AB;">geom_image</span>(<span class="fu" style="color: #4758AB;">aes</span>(<span class="at" style="color: #657422;">image=</span>foto), <span class="at" style="color: #657422;">size =</span> <span class="fl" style="color: #AD0000;">0.08</span>) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb13-4">  <span class="fu" style="color: #4758AB;">theme_minimal</span>() <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb13-5">  <span class="fu" style="color: #4758AB;">scale_x_continuous</span>(<span class="at" style="color: #657422;">limits =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">1</span>,<span class="dv" style="color: #AD0000;">10</span>)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb13-6">  <span class="fu" style="color: #4758AB;">scale_y_continuous</span>(<span class="at" style="color: #657422;">limits =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">1</span>,<span class="dv" style="color: #AD0000;">10</span>)) <span class="sc" style="color: #5E5E5E;">+</span></span>
+<span id="cb13-7">  <span class="fu" style="color: #4758AB;">labs</span>(<span class="at" style="color: #657422;">title =</span> <span class="st" style="color: #20794D;">"Facha y Copadez Promedio de cada Personaje"</span>,</span>
+<span id="cb13-8">       <span class="at" style="color: #657422;">x =</span> <span class="st" style="color: #20794D;">"Copadez Promedio"</span>, </span>
+<span id="cb13-9">       <span class="at" style="color: #657422;">y =</span> <span class="st" style="color: #20794D;">"Facha Promedio"</span>,</span>
+<span id="cb13-10">       <span class="at" style="color: #657422;">caption =</span> <span class="st" style="color: #20794D;">"n = 66</span><span class="sc" style="color: #5E5E5E;">\n</span><span class="st" style="color: #20794D;">Ninguna tía participó del relevamiento"</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<p><img src="https://zippy-chebakia-b3bbe3.netlify.app/posts/haciendo-boludeces-en-r/index_files/figure-html/grafico_final-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<p>Como conclusión del análisis <strong>los datos dicen</strong> que estoy alejado de las características de Nicolás del Caño y Roberto Baradel por ejemplo y <strong>tengo características muy similares que Keanu Reeves</strong>. O sea que los datos indican que me parezco a Keany. Dato, no opinión 😎.</p>
+</section>
+<section id="qué-saqué-de-todo-esto" class="level2">
+<h2 class="anchored" data-anchor-id="qué-saqué-de-todo-esto">¿Qué saqué de todo esto?</h2>
+<p>En primer lugar aprender a usar un paquete nuevo, <code>ggimage</code> que permite incluir imágenes en los gráficos. Por otro lado hubo un error en el diseño del formulario (poner “Facha del Mono”) lo que implicó un paso extra en la limpieza de los datos. Ese error en este proyecto me ayudó a prevenir un potencial problema con una encuesta de diversidad para un cliente.</p>
+<p>Otro tema fue la manipulación de los datos, pivotearlos de un formato “ancho” a uno “largo” y después nuevamente a uno “ancho” otra vez. Una vez que logré eso el cálculo de los resultados salió de manera muy simple.</p>
+<p>Todo esto llevó dos días de trabajo, mirar tutoriales y documentación y mucha prueba y error. La verdad es que fue mucho trabajo, pero el hecho de ser un proyecto medio delirante le sacó mucha presión y me dió la motivación para aprender algo nuevo y superar las barreras y errores que me fui encontrando. Creo que el hecho que sea un proyecto divertido me liberó para tratar interpretar los mensajes de error y buscar la solución apropiada.</p>
+<p>Este tipo de proyecto me parece ideal para realizar apenas terminás un tutorial o un curso. Los datos que usamos en un tutorial siempre están bastante limpios, controlados, divinos y cuando trabajás con tus propios datos te encontrás con barreras. Realizar este tipo de análisis sin la presión de “agregar valor” al negocio y pone a prueba las habilidades que tenés.</p>
+<p>Así que te invito a que hagas un proyecto ridículo y que lo compartas con el mundo.</p>
+<section id="final" class="level3">
+<h3 class="anchored" data-anchor-id="final">Final</h3>
+<p>Si querés ver el script final de este post, lo podés encontrar en el repositorio <a href="https://github.com/chechoid/chechoid-blog/blob/main/posts/haciendo-boludeces-en-r/index.qmd">en este link</a>.</p>
+<p>Y como regalo final, me reí mucho con los comentarios que hicieron las personas que participaron del relevamiento de datos así que los comparto con ustedes:</p>
+<div class="cell">
+<div class="cell-output-display">
+
+<div id="ikcjvrwkpn" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#ikcjvrwkpn .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#ikcjvrwkpn .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ikcjvrwkpn .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#ikcjvrwkpn .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#ikcjvrwkpn .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ikcjvrwkpn .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#ikcjvrwkpn .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#ikcjvrwkpn .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#ikcjvrwkpn .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#ikcjvrwkpn .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#ikcjvrwkpn .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#ikcjvrwkpn .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ikcjvrwkpn .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#ikcjvrwkpn .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#ikcjvrwkpn .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#ikcjvrwkpn .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#ikcjvrwkpn .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikcjvrwkpn .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#ikcjvrwkpn .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#ikcjvrwkpn .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikcjvrwkpn .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#ikcjvrwkpn .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#ikcjvrwkpn .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ikcjvrwkpn .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikcjvrwkpn .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#ikcjvrwkpn .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#ikcjvrwkpn .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#ikcjvrwkpn .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ikcjvrwkpn .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikcjvrwkpn .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#ikcjvrwkpn .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#ikcjvrwkpn .gt_left {
+  text-align: left;
+}
+
+#ikcjvrwkpn .gt_center {
+  text-align: center;
+}
+
+#ikcjvrwkpn .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#ikcjvrwkpn .gt_font_normal {
+  font-weight: normal;
+}
+
+#ikcjvrwkpn .gt_font_bold {
+  font-weight: bold;
+}
+
+#ikcjvrwkpn .gt_font_italic {
+  font-style: italic;
+}
+
+#ikcjvrwkpn .gt_super {
+  font-size: 65%;
+}
+
+#ikcjvrwkpn .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#ikcjvrwkpn .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#ikcjvrwkpn .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#ikcjvrwkpn .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#ikcjvrwkpn .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#ikcjvrwkpn .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#ikcjvrwkpn .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Comentarios</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">te rompí los patrones a la merd</td></tr>
+    <tr><td class="gt_row gt_left">jaja me rei mucho!</td></tr>
+    <tr><td class="gt_row gt_left">Caruso a la Final!</td></tr>
+    <tr><td class="gt_row gt_left">Johnny Depp, 8/8</td></tr>
+    <tr><td class="gt_row gt_left">Hajajja</td></tr>
+    <tr><td class="gt_row gt_left">De Brad Pitt te copiaste el peinado, no?</td></tr>
+    <tr><td class="gt_row gt_left">¿es requisito tener pelo largo para parecer fachero?  mostrame indicadores</td></tr>
+    <tr><td class="gt_row gt_left">Sergio vos no estas bien haciendo esto!!!  Jajaja</td></tr>
+    <tr><td class="gt_row gt_left">Falta Denicolay</td></tr>
+    <tr><td class="gt_row gt_left">Jajaj muy bueno</td></tr>
+    <tr><td class="gt_row gt_left">Haces todo esto para levantarte minas Mora, lo sabemos!!!</td></tr>
+    <tr><td class="gt_row gt_left">ME ENCANTÓ! curiosa, dinámica y original iniciativa como siempre!!</td></tr>
+    <tr><td class="gt_row gt_left">Copado el test!!</td></tr>
+    <tr><td class="gt_row gt_left">¿todos hombres?</td></tr>
+    <tr><td class="gt_row gt_left">Hajajja</td></tr>
+    <tr><td class="gt_row gt_left">WTH??</td></tr>
+    <tr><td class="gt_row gt_left">Sos un capo!!! me divertí mucho!!!</td></tr>
+    <tr><td class="gt_row gt_left">Falta el test de mujeres.....</td></tr>
+    <tr><td class="gt_row gt_left">Bronn, de game of thrones.</td></tr>
+    <tr><td class="gt_row gt_left">Muy buen ejercicio!  A algunos personajes el 1 le quedaba grande! habiliten el 0 jaja Éxitos!</td></tr>
+    <tr><td class="gt_row gt_left">Un genio Sergio 😂😂😂 Podría ser también a la versión adulta del niño del sexto sentido, el que dice"veo gente muerta" ¿? 🤔</td></tr>
+    <tr><td class="gt_row gt_left">Puedo decir que la foto que te sacaste, es muy de MA de instagram</td></tr>
+    <tr><td class="gt_row gt_left">Jaja me hiciste reír. Cómo no soy de Argentina tuve que googlear algunos, pero todo bien. Super entretenido</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+<p>Muchas gracias por leer!</p>
+<p><img src="https://zippy-chebakia-b3bbe3.netlify.app/posts/haciendo-boludeces-en-r/https:/media.giphy.com/media/QAsBwSjx9zVKoGp9nr/giphy.gif" class="img-fluid"></p>
+
+
+</section>
+</section>
+</section>
+
+ ]]></description>
+  <category>fun</category>
+  <category>ggplot2</category>
+  <category>proyectos</category>
+  <guid>https://zippy-chebakia-b3bbe3.netlify.app/posts/haciendo-boludeces-en-r/index.html</guid>
+  <pubDate>Thu, 01 Sep 2022 16:22:57 GMT</pubDate>
+  <media:content url="https://zippy-chebakia-b3bbe3.netlify.app/posts/haciendo-boludeces-en-r/archivos/sergio.jpg" medium="image" type="image/jpeg"/>
+</item>
+</channel>
+</rss>
