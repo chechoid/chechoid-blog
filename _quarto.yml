@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "chechoid-blog"
+  title: "chechoid"
   navbar:
     right:
       - about.qmd
@@ -15,9 +15,10 @@ website:
 format:
   html:
     theme:
-      light: cosmo
-      dark: darkly
+      light: minty
+      dark: slate
     css: styles.css
+    highlight-style: nord
 
 editor: visual
 

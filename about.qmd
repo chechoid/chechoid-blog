@@ -2,7 +2,7 @@
 title: "Sergio Garcia Mora aka Checho"
 image: profile.jpg
 about:
-  template: jolla
+  template: trestles
   links:
     - icon: twitter
       text: Twitter
@@ -15,4 +15,14 @@ about:
       href: https://github.com/chechoid
 ---
 
-About this blog
+## ¿De qué va este blog?
+
+Este blog va a ser un espacio en donde centraré contenido sobre programación en R, mayormente orientado a temas relacionados con Recursos Humanos y People Analytics.
+
+Honestamente, a esta altura del partido no me interesa hacer algo solemne para *"parecer profesional"*, lo que busco más que nada es generar contenido que le sirva a principiantes y a los que están permanentemente aprendiendo.
+
+Todo el contenido de este blog se puede compartir de manera abierta y libre, citando por supuesto la fuente.
+
+En este blog te vas a encontrar con contenido relacionado con R y otros más generales y "conceptuales" sobre People Analytics.
+
+Para contactarme o saber más de mí podés hacerlo a través de mis redes sociales o las redes de [R4HR - Club de R para RRHH](https://linktr.ee/r4hrclub).

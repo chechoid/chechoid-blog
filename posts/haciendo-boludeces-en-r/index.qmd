@@ -1,7 +1,7 @@
 ---
-title: "Haciendo boludeces en R"
+title: "Haciendo pavadas en R"
 author: "Checho"
-categories: [fun, ggplot2]
+categories: [fun, ggplot2, proyectos]
 ---
 
 # ¿Por qué elegí esto como mi primer post?
@@ -252,6 +252,10 @@ head(resultados)
 Y ahora si, a lo que venimos: incluir las fotos en el gráfico
 
 ```{r grafico_final}
+#| fig.retina: 3
+#| fig.height: 10
+#| fig.width: 10
+
 
 # El gráfico final
 ggplot(resultados, aes(x = copadez_promedio, y = facha_promedio)) +
@@ -264,3 +268,34 @@ ggplot(resultados, aes(x = copadez_promedio, y = facha_promedio)) +
        y = "Facha Promedio",
        caption = "n = 66\nNinguna tía participó del relevamiento")
 ```
+
+Como conclusión del análisis **los datos dicen** que estoy alejado de las características de Nicolás del Caño y Roberto Baradel por ejemplo y **tengo características muy similares que Keanu Reeves**. O sea que los datos indican que me parezco a Keany. Dato, no opinión 😎.
+
+## ¿Qué saqué de todo esto?
+
+En primer lugar aprender a usar un paquete nuevo, `ggimage` que permite incluir imágenes en los gráficos. Por otro lado hubo un error en el diseño del formulario (poner "Facha del Mono") lo que implicó un paso extra en la limpieza de los datos. Ese error en este proyecto me ayudó a prevenir un potencial problema con una encuesta de diversidad para un cliente.
+
+Otro tema fue la manipulación de los datos, pivotearlos de un formato "ancho" a uno "largo" y después nuevamente a uno "ancho" otra vez. Una vez que logré eso el cálculo de los resultados salió de manera muy simple.
+
+Todo esto llevó dos días de trabajo, mirar tutoriales y documentación y mucha prueba y error. La verdad es que fue mucho trabajo, pero el hecho de ser un proyecto medio delirante le sacó mucha presión y me dió la motivación para aprender algo nuevo y superar las barreras y errores que me fui encontrando. Creo que el hecho que sea un proyecto divertido me liberó para tratar interpretar los mensajes de error y buscar la solución apropiada.
+
+Este tipo de proyecto me parece ideal para realizar apenas terminás un tutorial o un curso. Los datos que usamos en un tutorial siempre están bastante limpios, controlados, divinos y cuando trabajás con tus propios datos te encontrás con barreras. Realizar este tipo de análisis sin la presión de "agregar valor" al negocio y pone a prueba las habilidades que tenés.
+
+Así que te invito a que hagas un proyecto ridículo y que lo compartas con el mundo.
+
+### Final
+
+Si querés ver el script final de este post, lo podés encontrar en el repositorio [en este link](https://github.com/chechoid/chechoid-blog/blob/main/posts/haciendo-boludeces-en-r/index.qmd).
+
+Y como regalo final, me reí mucho con los comentarios que hicieron las personas que participaron del relevamiento de datos así que los comparto con ustedes:
+
+```{r}
+#| echo: false
+gt::gt(comentarios %>% 
+         filter(comentarios != "Vale y Yesi ortivas! jaja")) %>% 
+  gt::cols_label(comentarios = "Comentarios")
+```
+
+Muchas gracias por leer!
+
+![](https://media.giphy.com/media/QAsBwSjx9zVKoGp9nr/giphy.gif)
