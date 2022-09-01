@@ -253,7 +253,7 @@ Y ahora si, a lo que venimos: incluir las fotos en el gráfico
 
 ```{r grafico_final}
 #| fig.retina: 3
-#| fig.height: 10
+#| fig.height: 8
 #| fig.width: 10
 
 
