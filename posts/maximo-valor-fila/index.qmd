@@ -1,14 +1,15 @@
 ---
 title: "Extraer el máximo valor de una fila"
 author: "Checho"
+date: "10/13/2022"
 categories: [tipitos, tip, análisis, dplyr, data wrangling]
 ---
 
 # Extraer el máximo valor de una fila
 
-En este pequeño tutorial (por eso el tag de `tipitos`, o sea un tip chiquito, voy a contar cómo resolví un problema que me encontré en el trabajo y me trajo más de un dolor de cabeza.
+En este pequeño tutorial (por eso el tag de `tipitos`, o sea un tip chiquito), voy a contar cómo resolví un problema que me encontré en el trabajo y me trajo más de un dolor de cabeza.
 
-Estaba trabajando con una tabla en la que tenía varios cursos, con sus fechas de finalización, y para el análisis que estaba haciendo necesitaba extraer la fecha del último curso (el valor más alto).
+Estaba trabajando con una tabla en la que tenía varios cursos, con sus fechas de finalización, y para el análisis que estaba haciendo necesitaba extraer la fecha del último curso completado por cada persona (el valor más alto).
 
 El problema es que cuando estaba ejecutando la función `max()` en vez de obtener el valor más alto de la fila, obtenía el valor más alto de la columna. Así que en este post vamos a ver la función `rowwise()` que permite resolver este inconveniente.
 
@@ -16,7 +17,7 @@ En este ejemplo vamos a reemplazar las fechas por un número, que a los fines pr
 
 ## Datos de ejemplo
 
-Primero carguemos la librería `dplyr` que además de contener la función `rowwise()` nos permite trabajar con el *pipe* `%>%`. Luego crearemos un data frame de ejemplo con datos inventados
+Primero carguemos la librería `dplyr` que además de contener la función `rowwise()` nos permite trabajar con el *pipe* `%>%` para simplificar la lectura del código. Luego crearemos un data frame de ejemplo con datos inventados
 
 ```{r}
 #| message: false
@@ -42,7 +43,7 @@ ejemplo
 
 Lo que necesitaba lograr (en un archivo con muchas más columnas que en este ejemplo) es poner en una columna nueva el valor más alto para cada persona. Entonces para `Carla` esperaba que el resultado fuera `100`, para `Daniela` `200` y así sucesivamente.
 
-Instintivamente lo que hice fue dentro de una función `mutate()` (para crear una columna nueva) pasar la función `max()` a un vector con los nombres de las 4 columnas.
+Instintivamente lo que hice para intentar obtener el valor más alto de cada caso, fue usar dentro de una función `mutate()` (para crear una columna nueva) la función `max()` a un vector con los nombres de las 4 columnas.
 
 ```{r}
 ejemplo %>% 
@@ -55,7 +56,7 @@ Claramente no es es el resultado que esperaba, así que mi reacción fue la sigu
 
 ## La solución
 
-El problema del enfoque anterior es que la función `max()` busca entre todos los datos que le pasamos, las 4 columnas con valores numéricos, y nos devuelve el valor máximo de entre todas las celdas. **En esencia R está haciendo lo que le pedimos que haga, no lo que estábamos queriendo que haga**.
+El problema del enfoque anterior es que la función `max()` busca entre todos los datos que le pasamos, las 4 columnas con los valores numéricos, y lo que nos devuelve el valor máximo de entre todas las celdas. **Este es un claro ejemplo de que R está haciendo lo que le dijimos que haga, no lo que estábamos queriendo que haga**.
 
 Para resolver esto, antes de crear una columna nueva con `mutate()`, usamos la función `rowwise()`.
 
@@ -72,11 +73,17 @@ Este enfoque sería así:
 ```{r}
 library(tidyr)
 
-ejemplo %>% 
+ejemplo_largo <- ejemplo %>% 
   # Pivoteamos los datos a un formato 'largo'
   pivot_longer(cols = c("Valor.A", "Valor.B", "Valor.C", "Valor.D"), 
                names_to = "Variable",
-               values_to = "Valor") %>% 
+               values_to = "Valor")
+
+# Veamos el dataset transformado
+ejemplo_largo
+
+# Ahora hacemos el cálculo combinando 'group_by' y 'summarise'
+ejemplo_largo %>% 
   group_by(Nombre) %>% 
   summarise("Valor Máximo" = max(Valor))
   
@@ -84,6 +91,6 @@ ejemplo %>%
 
 Claramente este es otro enfoque, y depende de la necesidad es una opción válida. Pero en este caso particular necesitaba mantener una fila para cada persona porque después iba a exportar esta tabla a un archivo que luego es cargado en un tablero en Power BI.
 
-Así que, una vez logrado mi objetivo, me dispongo a celebrar como corresponde.
+Así que, una vez logrado mi objetivo, me dispuse a celebrar como corresponde.
 
 ![](https://media.giphy.com/media/lhwgeqN0pLPBMlFNnn/giphy.gif)

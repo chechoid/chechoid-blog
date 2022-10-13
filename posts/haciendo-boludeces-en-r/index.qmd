@@ -1,6 +1,7 @@
 ---
 title: "Haciendo pavadas en R"
 author: "Checho"
+date: "09/01/2022"
 categories: [fun, ggplot2, proyectos]
 ---
 

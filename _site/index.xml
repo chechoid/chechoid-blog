@@ -10,7 +10,123 @@
 <atom:link href="https://chechoid.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Un blog sobre R y People Analytics</description>
 <generator>quarto-1.0.38</generator>
-<lastBuildDate>Thu, 13 Oct 2022 22:50:58 GMT</lastBuildDate>
+<lastBuildDate>Thu, 13 Oct 2022 03:00:00 GMT</lastBuildDate>
+<item>
+  <title>Extraer el máximo valor de una fila</title>
+  <dc:creator>Checho</dc:creator>
+  <link>https://chechoid.netlify.app/posts/maximo-valor-fila/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="extraer-el-máximo-valor-de-una-fila" class="level1">
+<h1>Extraer el máximo valor de una fila</h1>
+<p>En este pequeño tutorial (por eso el tag de <code>tipitos</code>, o sea un tip chiquito, voy a contar cómo resolví un problema que me encontré en el trabajo.</p>
+<p>Estaba trabajando con una tabla en la que tenía varios cursos, con sus fechas de finalización, y para el análisis que estaba haciendo necesitaba extraer la fecha del último curso (el valor más alto).</p>
+<p>El problema es que cuando estaba ejecutando la función <code>max()</code> en vez de obtener el valor más alto de la fila, obtenía el valor más alto de la columna. Así que en este post vamos a ver la función <code>rowwise()</code> que permite resolver este inconveniente.</p>
+<p>En este ejemplo vamos a reemplazar las fechas por un número, que a los fines prácticos plantea el mismo problema.</p>
+<section id="datos-de-ejemplo" class="level2">
+<h2 class="anchored" data-anchor-id="datos-de-ejemplo">Datos de ejemplo</h2>
+<p>Primero carguemos la librería <code>dplyr</code> que además de contener la función <code>rowwise()</code> nos permite trabajar con el <em>pipe</em> <code>%&gt;%</code>. Luego crearemos un data frame de ejemplo con datos inventados</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;"># En caso que no esté instalado 'dplyr' primero ejecutar install.package("dplyr")</span></span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;">library</span>(dplyr)</span>
+<span id="cb1-3"></span>
+<span id="cb1-4"><span class="co" style="color: #5E5E5E;"># Creación de datos</span></span>
+<span id="cb1-5">ejemplo <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">data.frame</span>(<span class="st" style="color: #20794D;">"Nombre"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"Carla"</span>, <span class="st" style="color: #20794D;">"Daniela"</span>, <span class="st" style="color: #20794D;">"Sergio"</span>, <span class="st" style="color: #20794D;">"Yanel"</span>),</span>
+<span id="cb1-6">                    <span class="st" style="color: #20794D;">"Valor A"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">12</span>, <span class="dv" style="color: #AD0000;">8</span>, <span class="dv" style="color: #AD0000;">300</span>, <span class="dv" style="color: #AD0000;">17</span>),</span>
+<span id="cb1-7">                    <span class="st" style="color: #20794D;">"Valor B"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">5</span>, <span class="dv" style="color: #AD0000;">21</span>, <span class="dv" style="color: #AD0000;">18</span>, <span class="dv" style="color: #AD0000;">400</span>),</span>
+<span id="cb1-8">                    <span class="st" style="color: #20794D;">"Valor C"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">39</span>, <span class="dv" style="color: #AD0000;">200</span>, <span class="dv" style="color: #AD0000;">26</span>, <span class="dv" style="color: #AD0000;">64</span>), </span>
+<span id="cb1-9">                    <span class="st" style="color: #20794D;">"Valor D"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">100</span>, <span class="dv" style="color: #AD0000;">43</span>, <span class="dv" style="color: #AD0000;">86</span>, <span class="dv" style="color: #AD0000;">12</span>))</span></code></pre></div>
+</div>
+<p>Ahora veamos cómo quedan los datos</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;"># Ejecutar para ver el contenido del data frame</span></span>
+<span id="cb2-2">ejemplo</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Nombre Valor.A Valor.B Valor.C Valor.D
+1   Carla      12       5      39     100
+2 Daniela       8      21     200      43
+3  Sergio     300      18      26      86
+4   Yanel      17     400      64      12</code></pre>
+</div>
+</div>
+<p>Lo que necesitaba lograr (en un archivo con muchas más columnas que en este ejemplo) es poner en una columna nueva el valor más alto para cada persona. Entonces para <code>Carla</code> esperaba que el resultado fuera <code>100</code>, para <code>Daniela</code> <code>200</code> y así sucesivamente.</p>
+<p>Instintivamente lo que hice fue dentro de una función <code>mutate()</code> (para crear una columna nueva) pasar la función <code>max()</code> a un vector con los nombres de las 4 columnas.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">ejemplo <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb4-2">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="st" style="color: #20794D;">"Valor Máximo"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">max</span>(<span class="fu" style="color: #4758AB;">c</span>(Valor.A, Valor.B, Valor.C, Valor.D)))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Nombre Valor.A Valor.B Valor.C Valor.D Valor Máximo
+1   Carla      12       5      39     100          400
+2 Daniela       8      21     200      43          400
+3  Sergio     300      18      26      86          400
+4   Yanel      17     400      64      12          400</code></pre>
+</div>
+</div>
+<p>Claramente no es es el resultado que esperaba, así que mi reacción fue la siguiente:</p>
+<p><img src="https://chechoid.netlify.app/posts/maximo-valor-fila/https:/media.giphy.com/media/PmRgaD2xj0KH2pPrVF/giphy.gif" class="img-fluid" width="286"></p>
+</section>
+<section id="la-solución" class="level2">
+<h2 class="anchored" data-anchor-id="la-solución">La solución</h2>
+<p>El problema del enfoque anterior es que la función <code>max()</code> busca entre todos los datos que le pasamos, las 4 columnas con valores numéricos, y nos devuelve el valor máximo de entre todas las celdas. <strong>En esencia R está haciendo lo que le pedimos que haga, no lo que estábamos queriendo que haga</strong>.</p>
+<p>Para resolver esto, antes de crear una columna nueva con <code>mutate()</code>, usamos la función <code>rowwise()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">ejemplo <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb6-2">  <span class="fu" style="color: #4758AB;">rowwise</span>() <span class="sc" style="color: #5E5E5E;">%&gt;%</span>   <span class="co" style="color: #5E5E5E;"># Con esta función indicamos que queremos los cálculos sobre las filas</span></span>
+<span id="cb6-3">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="st" style="color: #20794D;">"Valor Máximo"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">max</span>(<span class="fu" style="color: #4758AB;">c</span>(Valor.A, Valor.B, Valor.C, Valor.D)))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 6
+# Rowwise: 
+  Nombre  Valor.A Valor.B Valor.C Valor.D `Valor Máximo`
+  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;
+1 Carla        12       5      39     100            100
+2 Daniela       8      21     200      43            200
+3 Sergio      300      18      26      86            300
+4 Yanel        17     400      64      12            400</code></pre>
+</div>
+</div>
+<p>La función <code>rowwise()</code> lo que nos permite hacer es cálculos sobre las filas. Dependiendo el caso de uso se puede usar esta alternativa, o <em>“pivotear”</em> o <em>transponer</em> la tabla para que las columnas queden dentro de las filas y luego combinar <code>group_by()</code> y <code>summarise()</code> para calcular el valor máximo para cada persona.</p>
+<p>Este enfoque sería así:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">library</span>(tidyr)</span>
+<span id="cb8-2"></span>
+<span id="cb8-3">ejemplo <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb8-4">  <span class="co" style="color: #5E5E5E;"># Pivoteamos los datos a un formato 'largo'</span></span>
+<span id="cb8-5">  <span class="fu" style="color: #4758AB;">pivot_longer</span>(<span class="at" style="color: #657422;">cols =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"Valor.A"</span>, <span class="st" style="color: #20794D;">"Valor.B"</span>, <span class="st" style="color: #20794D;">"Valor.C"</span>, <span class="st" style="color: #20794D;">"Valor.D"</span>), </span>
+<span id="cb8-6">               <span class="at" style="color: #657422;">names_to =</span> <span class="st" style="color: #20794D;">"Variable"</span>,</span>
+<span id="cb8-7">               <span class="at" style="color: #657422;">values_to =</span> <span class="st" style="color: #20794D;">"Valor"</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb8-8">  <span class="fu" style="color: #4758AB;">group_by</span>(Nombre) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
+<span id="cb8-9">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="st" style="color: #20794D;">"Valor Máximo"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">max</span>(Valor))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  Nombre  `Valor Máximo`
+  &lt;chr&gt;            &lt;dbl&gt;
+1 Carla              100
+2 Daniela            200
+3 Sergio             300
+4 Yanel              400</code></pre>
+</div>
+</div>
+<p>Claramente este es otro enfoque, y depende de la necesidad es una opción válida. Pero en este caso particular necesitaba mantener una fila para cada persona porque después iba a exportar esta tabla a un archivo que luego es cargado en un tablero en Power BI.</p>
+<p>Así que, una vez logrado mi objetivo, me dispongo a celebrar como corresponde.</p>
+<p><img src="https://chechoid.netlify.app/posts/maximo-valor-fila/https:/media.giphy.com/media/lhwgeqN0pLPBMlFNnn/giphy.gif" class="img-fluid"></p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>tipitos</category>
+  <category>tip</category>
+  <category>análisis</category>
+  <category>dplyr</category>
+  <category>data wrangling</category>
+  <guid>https://chechoid.netlify.app/posts/maximo-valor-fila/index.html</guid>
+  <pubDate>Thu, 13 Oct 2022 03:00:00 GMT</pubDate>
+  <media:content url="https://media.giphy.com/media/PmRgaD2xj0KH2pPrVF/giphy.gif" medium="image" type="image/gif"/>
+</item>
 <item>
   <title>Haciendo pavadas en R</title>
   <dc:creator>Checho</dc:creator>
@@ -780,124 +896,8 @@
   <category>ggplot2</category>
   <category>proyectos</category>
   <guid>https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/index.html</guid>
-  <pubDate>Thu, 13 Oct 2022 22:50:58 GMT</pubDate>
+  <pubDate>Thu, 01 Sep 2022 03:00:00 GMT</pubDate>
   <media:content url="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/archivos/sergio.jpg" medium="image" type="image/jpeg"/>
-</item>
-<item>
-  <title>Extraer el máximo valor de una fila</title>
-  <dc:creator>Checho</dc:creator>
-  <link>https://chechoid.netlify.app/posts/maximo-valor-fila/index.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<section id="extraer-el-máximo-valor-de-una-fila" class="level1">
-<h1>Extraer el máximo valor de una fila</h1>
-<p>En este pequeño tutorial (por eso el tag de <code>tipitos</code>, o sea un tip chiquito, voy a contar cómo resolví un problema que me encontré en el trabajo.</p>
-<p>Estaba trabajando con una tabla en la que tenía varios cursos, con sus fechas de finalización, y para el análisis que estaba haciendo necesitaba extraer la fecha del último curso (el valor más alto).</p>
-<p>El problema es que cuando estaba ejecutando la función <code>max()</code> en vez de obtener el valor más alto de la fila, obtenía el valor más alto de la columna. Así que en este post vamos a ver la función <code>rowwise()</code> que permite resolver este inconveniente.</p>
-<p>En este ejemplo vamos a reemplazar las fechas por un número, que a los fines prácticos plantea el mismo problema.</p>
-<section id="datos-de-ejemplo" class="level2">
-<h2 class="anchored" data-anchor-id="datos-de-ejemplo">Datos de ejemplo</h2>
-<p>Primero carguemos la librería <code>dplyr</code> que además de contener la función <code>rowwise()</code> nos permite trabajar con el <em>pipe</em> <code>%&gt;%</code>. Luego crearemos un data frame de ejemplo con datos inventados</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;"># En caso que no esté instalado 'dplyr' primero ejecutar install.package("dplyr")</span></span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;">library</span>(dplyr)</span>
-<span id="cb1-3"></span>
-<span id="cb1-4"><span class="co" style="color: #5E5E5E;"># Creación de datos</span></span>
-<span id="cb1-5">ejemplo <span class="ot" style="color: #003B4F;">&lt;-</span> <span class="fu" style="color: #4758AB;">data.frame</span>(<span class="st" style="color: #20794D;">"Nombre"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"Carla"</span>, <span class="st" style="color: #20794D;">"Daniela"</span>, <span class="st" style="color: #20794D;">"Sergio"</span>, <span class="st" style="color: #20794D;">"Yanel"</span>),</span>
-<span id="cb1-6">                    <span class="st" style="color: #20794D;">"Valor A"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">12</span>, <span class="dv" style="color: #AD0000;">8</span>, <span class="dv" style="color: #AD0000;">300</span>, <span class="dv" style="color: #AD0000;">17</span>),</span>
-<span id="cb1-7">                    <span class="st" style="color: #20794D;">"Valor B"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">5</span>, <span class="dv" style="color: #AD0000;">21</span>, <span class="dv" style="color: #AD0000;">18</span>, <span class="dv" style="color: #AD0000;">400</span>),</span>
-<span id="cb1-8">                    <span class="st" style="color: #20794D;">"Valor C"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">39</span>, <span class="dv" style="color: #AD0000;">200</span>, <span class="dv" style="color: #AD0000;">26</span>, <span class="dv" style="color: #AD0000;">64</span>), </span>
-<span id="cb1-9">                    <span class="st" style="color: #20794D;">"Valor D"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="dv" style="color: #AD0000;">100</span>, <span class="dv" style="color: #AD0000;">43</span>, <span class="dv" style="color: #AD0000;">86</span>, <span class="dv" style="color: #AD0000;">12</span>))</span></code></pre></div>
-</div>
-<p>Ahora veamos cómo quedan los datos</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;"># Ejecutar para ver el contenido del data frame</span></span>
-<span id="cb2-2">ejemplo</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Nombre Valor.A Valor.B Valor.C Valor.D
-1   Carla      12       5      39     100
-2 Daniela       8      21     200      43
-3  Sergio     300      18      26      86
-4   Yanel      17     400      64      12</code></pre>
-</div>
-</div>
-<p>Lo que necesitaba lograr (en un archivo con muchas más columnas que en este ejemplo) es poner en una columna nueva el valor más alto para cada persona. Entonces para <code>Carla</code> esperaba que el resultado fuera <code>100</code>, para <code>Daniela</code> <code>200</code> y así sucesivamente.</p>
-<p>Instintivamente lo que hice fue dentro de una función <code>mutate()</code> (para crear una columna nueva) pasar la función <code>max()</code> a un vector con los nombres de las 4 columnas.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">ejemplo <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb4-2">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="st" style="color: #20794D;">"Valor Máximo"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">max</span>(<span class="fu" style="color: #4758AB;">c</span>(Valor.A, Valor.B, Valor.C, Valor.D)))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   Nombre Valor.A Valor.B Valor.C Valor.D Valor Máximo
-1   Carla      12       5      39     100          400
-2 Daniela       8      21     200      43          400
-3  Sergio     300      18      26      86          400
-4   Yanel      17     400      64      12          400</code></pre>
-</div>
-</div>
-<p>Claramente no es es el resultado que esperaba, así que mi reacción fue la siguiente:</p>
-<p><img src="https://chechoid.netlify.app/posts/maximo-valor-fila/https:/media.giphy.com/media/PmRgaD2xj0KH2pPrVF/giphy.gif" class="img-fluid" width="286"></p>
-</section>
-<section id="la-solución" class="level2">
-<h2 class="anchored" data-anchor-id="la-solución">La solución</h2>
-<p>El problema del enfoque anterior es que la función <code>max()</code> busca entre todos los datos que le pasamos, las 4 columnas con valores numéricos, y nos devuelve el valor máximo de entre todas las celdas. <strong>En esencia R está haciendo lo que le pedimos que haga, no lo que estábamos queriendo que haga</strong>.</p>
-<p>Para resolver esto, antes de crear una columna nueva con <code>mutate()</code>, usamos la función <code>rowwise()</code>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">ejemplo <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb6-2">  <span class="fu" style="color: #4758AB;">rowwise</span>() <span class="sc" style="color: #5E5E5E;">%&gt;%</span>   <span class="co" style="color: #5E5E5E;"># Con esta función indicamos que queremos los cálculos sobre las filas</span></span>
-<span id="cb6-3">  <span class="fu" style="color: #4758AB;">mutate</span>(<span class="st" style="color: #20794D;">"Valor Máximo"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">max</span>(<span class="fu" style="color: #4758AB;">c</span>(Valor.A, Valor.B, Valor.C, Valor.D)))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 6
-# Rowwise: 
-  Nombre  Valor.A Valor.B Valor.C Valor.D `Valor Máximo`
-  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;
-1 Carla        12       5      39     100            100
-2 Daniela       8      21     200      43            200
-3 Sergio      300      18      26      86            300
-4 Yanel        17     400      64      12            400</code></pre>
-</div>
-</div>
-<p>La función <code>rowwise()</code> lo que nos permite hacer es cálculos sobre las filas. Dependiendo el caso de uso se puede usar esta alternativa, o <em>“pivotear”</em> o <em>transponer</em> la tabla para que las columnas queden dentro de las filas y luego combinar <code>group_by()</code> y <code>summarise()</code> para calcular el valor máximo para cada persona.</p>
-<p>Este enfoque sería así:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;">library</span>(tidyr)</span>
-<span id="cb8-2"></span>
-<span id="cb8-3">ejemplo <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb8-4">  <span class="co" style="color: #5E5E5E;"># Pivoteamos los datos a un formato 'largo'</span></span>
-<span id="cb8-5">  <span class="fu" style="color: #4758AB;">pivot_longer</span>(<span class="at" style="color: #657422;">cols =</span> <span class="fu" style="color: #4758AB;">c</span>(<span class="st" style="color: #20794D;">"Valor.A"</span>, <span class="st" style="color: #20794D;">"Valor.B"</span>, <span class="st" style="color: #20794D;">"Valor.C"</span>, <span class="st" style="color: #20794D;">"Valor.D"</span>), </span>
-<span id="cb8-6">               <span class="at" style="color: #657422;">names_to =</span> <span class="st" style="color: #20794D;">"Variable"</span>,</span>
-<span id="cb8-7">               <span class="at" style="color: #657422;">values_to =</span> <span class="st" style="color: #20794D;">"Valor"</span>) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb8-8">  <span class="fu" style="color: #4758AB;">group_by</span>(Nombre) <span class="sc" style="color: #5E5E5E;">%&gt;%</span> </span>
-<span id="cb8-9">  <span class="fu" style="color: #4758AB;">summarise</span>(<span class="st" style="color: #20794D;">"Valor Máximo"</span> <span class="ot" style="color: #003B4F;">=</span> <span class="fu" style="color: #4758AB;">max</span>(Valor))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
-  Nombre  `Valor Máximo`
-  &lt;chr&gt;            &lt;dbl&gt;
-1 Carla              100
-2 Daniela            200
-3 Sergio             300
-4 Yanel              400</code></pre>
-</div>
-</div>
-<p>Claramente este es otro enfoque, y depende de la necesidad es una opción válida. Pero en este caso particular necesitaba mantener una fila para cada persona porque después iba a exportar esta tabla a un archivo que luego es cargado en un tablero en Power BI.</p>
-<p>Así que, una vez logrado mi objetivo, me dispongo a celebrar como corresponde.</p>
-<p><img src="https://chechoid.netlify.app/posts/maximo-valor-fila/https:/media.giphy.com/media/lhwgeqN0pLPBMlFNnn/giphy.gif" class="img-fluid"></p>
-
-
-</section>
-</section>
-
- ]]></description>
-  <category>tipitos</category>
-  <category>tip</category>
-  <category>análisis</category>
-  <category>dplyr</category>
-  <category>data wrangling</category>
-  <guid>https://chechoid.netlify.app/posts/maximo-valor-fila/index.html</guid>
-  <pubDate>Thu, 13 Oct 2022 22:50:58 GMT</pubDate>
-  <media:content url="https://media.giphy.com/media/PmRgaD2xj0KH2pPrVF/giphy.gif" medium="image" type="image/gif"/>
 </item>
 </channel>
 </rss>
