@@ -385,7 +385,6 @@ font-style: inherit;"># Ver los resultados</span></span>
   <category>análisis</category>
   <category>date</category>
   <category>fecha</category>
-  <category>lubridate</category>
   <guid>https://chechoid.netlify.app/posts/cargar_fechas_desde_excel/index.html</guid>
   <pubDate>Sat, 09 Dec 2023 03:00:00 GMT</pubDate>
 </item>
@@ -718,14 +717,14 @@ font-style: inherit;">max</span>(Valor))</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/archivos/sergio.jpg" class="img-fluid figure-img" alt="Foto de Sergio, sosteniendo una copa de vino" width="372"></p>
-<p></p><figcaption class="figure-caption">En mi luna de miel en Mendoza</figcaption><p></p>
+<figcaption class="figure-caption">En mi luna de miel en Mendoza</figcaption>
 </figure>
 </div>
 <p>Como verán, tengo el pelo más o menos largo, con flequillo y barba candado. Mucha gente dice que me parezco a Nicolás del Caño 🤷, un diputado del Partido de los Trabajadores Socialistas de Argentina y que tiene un corte de pelo parecido al mío y también usa barba.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/https:/www.izquierdadiario.es/IMG/auton3.jpg?1605455691" class="img-fluid figure-img" width="221"></p>
-<p></p><figcaption class="figure-caption">Nicolás del Caño</figcaption><p></p>
+<figcaption class="figure-caption">Nicolás del Caño</figcaption>
 </figure>
 </div>
 <p>En estas fotos no nos vemos tan parecidos, pero déjenme contarles una anécdota. Cuando mi hija tenía 3 años aproximadamente estábamos en campaña electoral de diputados y había afiches de todos los partidos políticos pegados por todos lados, incluyendo claro está los del PTS y Nicolás del Caño obviamente.</p>
@@ -735,19 +734,19 @@ font-style: inherit;">max</span>(Valor))</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/https:/www.cronica.com.ar/export/sites/cronica/img/2019/05/06/gigolo_2.jpg_343233968.jpg" class="img-fluid figure-img" width="184"></p>
-<p></p><figcaption class="figure-caption">El Gigoló</figcaption><p></p>
+<figcaption class="figure-caption">El Gigoló</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/https:/cdn.cnn.com/cnnnext/dam/assets/190306231108-pba-baradel-large-169.jpg" class="img-fluid figure-img" width="339"></p>
-<p></p><figcaption class="figure-caption">Roberto Baradel</figcaption><p></p>
+<figcaption class="figure-caption">Roberto Baradel</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/https:/upload.wikimedia.org/wikipedia/commons/b/b7/Germ%25C3%25A1n_Burgos_-_01.jpg" class="img-fluid figure-img" width="213"></p>
-<p></p><figcaption class="figure-caption">El Mono Burgos</figcaption><p></p>
+<figcaption class="figure-caption">El Mono Burgos</figcaption>
 </figure>
 </div>
 <p>Ya sé lo que están pensando: <em>Con amigos así quién necesita enemigos</em>. Pero igual se hacen querer.</p>
@@ -1810,41 +1809,86 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   text-indent: 25px;
 }
 </style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Comentarios</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">te rompí los patrones a la merd</td></tr>
-    <tr><td class="gt_row gt_left">jaja me rei mucho!</td></tr>
-    <tr><td class="gt_row gt_left">Caruso a la Final!</td></tr>
-    <tr><td class="gt_row gt_left">Johnny Depp, 8/8</td></tr>
-    <tr><td class="gt_row gt_left">Hajajja</td></tr>
-    <tr><td class="gt_row gt_left">De Brad Pitt te copiaste el peinado, no?</td></tr>
-    <tr><td class="gt_row gt_left">¿es requisito tener pelo largo para parecer fachero?  mostrame indicadores</td></tr>
-    <tr><td class="gt_row gt_left">Sergio vos no estas bien haciendo esto!!!  Jajaja</td></tr>
-    <tr><td class="gt_row gt_left">Falta Denicolay</td></tr>
-    <tr><td class="gt_row gt_left">Jajaj muy bueno</td></tr>
-    <tr><td class="gt_row gt_left">Haces todo esto para levantarte minas Mora, lo sabemos!!!</td></tr>
-    <tr><td class="gt_row gt_left">ME ENCANTÓ! curiosa, dinámica y original iniciativa como siempre!!</td></tr>
-    <tr><td class="gt_row gt_left">Copado el test!!</td></tr>
-    <tr><td class="gt_row gt_left">¿todos hombres?</td></tr>
-    <tr><td class="gt_row gt_left">Hajajja</td></tr>
-    <tr><td class="gt_row gt_left">WTH??</td></tr>
-    <tr><td class="gt_row gt_left">Sos un capo!!! me divertí mucho!!!</td></tr>
-    <tr><td class="gt_row gt_left">Falta el test de mujeres.....</td></tr>
-    <tr><td class="gt_row gt_left">Bronn, de game of thrones.</td></tr>
-    <tr><td class="gt_row gt_left">Muy buen ejercicio!  A algunos personajes el 1 le quedaba grande! habiliten el 0 jaja Éxitos!</td></tr>
-    <tr><td class="gt_row gt_left">Un genio Sergio 😂😂😂 Podría ser también a la versión adulta del niño del sexto sentido, el que dice"veo gente muerta" ¿? 🤔</td></tr>
-    <tr><td class="gt_row gt_left">Puedo decir que la foto que te sacaste, es muy de MA de instagram</td></tr>
-    <tr><td class="gt_row gt_left">Jaja me hiciste reír. Cómo no soy de Argentina tuve que googlear algunos, pero todo bien. Super entretenido</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true">
+<thead class="gt_col_headings">
+<tr class="header">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Comentarios</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left">te rompí los patrones a la merd</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left">jaja me rei mucho!</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left">Caruso a la Final!</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left">Johnny Depp, 8/8</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left">Hajajja</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left">De Brad Pitt te copiaste el peinado, no?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left">¿es requisito tener pelo largo para parecer fachero? mostrame indicadores</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left">Sergio vos no estas bien haciendo esto!!! Jajaja</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left">Falta Denicolay</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left">Jajaj muy bueno</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left">Haces todo esto para levantarte minas Mora, lo sabemos!!!</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left">ME ENCANTÓ! curiosa, dinámica y original iniciativa como siempre!!</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left">Copado el test!!</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left">¿todos hombres?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left">Hajajja</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left">WTH??</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left">Sos un capo!!! me divertí mucho!!!</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left">Falta el test de mujeres.....</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left">Bronn, de game of thrones.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left">Muy buen ejercicio! A algunos personajes el 1 le quedaba grande! habiliten el 0 jaja Éxitos!</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left">Un genio Sergio 😂😂😂 Podría ser también a la versión adulta del niño del sexto sentido, el que dice"veo gente muerta" ¿? 🤔</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left">Puedo decir que la foto que te sacaste, es muy de MA de instagram</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left">Jaja me hiciste reír. Cómo no soy de Argentina tuve que googlear algunos, pero todo bien. Super entretenido</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>

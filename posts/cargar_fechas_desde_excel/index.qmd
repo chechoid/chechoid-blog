@@ -2,7 +2,7 @@
 title: "Cargar Campos de Fecha desde Excel Sin Errores"
 author: "Checho"
 date: "12/09/2023"
-categories: [tipito, tip, análisis, date, fecha, lubridate]
+categories: [tipito, tip, análisis, date, fecha]
 ---
 
 ¿A quién no le pasó esto alguna vez?

@@ -2,22 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://chechoid.netlify.app/about.html</loc>
-    <lastmod>2022-10-13T23:22:59.741Z</lastmod>
+    <lastmod>2023-09-14T21:28:07.558Z</lastmod>
   </url>
   <url>
     <loc>https://chechoid.netlify.app/index.html</loc>
-    <lastmod>2023-09-12T22:52:30.052Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/index.html</loc>
-    <lastmod>2022-10-13T23:23:01.283Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chechoid.netlify.app/posts/maximo-valor-fila/index.html</loc>
-    <lastmod>2023-09-12T22:52:29.274Z</lastmod>
+    <lastmod>2023-09-14T21:30:16.290Z</lastmod>
   </url>
   <url>
     <loc>https://chechoid.netlify.app/posts/cargar_fechas_desde_excel/index.html</loc>
-    <lastmod>2023-09-12T22:52:35.155Z</lastmod>
+    <lastmod>2023-09-14T21:30:18.870Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/index.html</loc>
+    <lastmod>2023-09-14T21:28:11.516Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chechoid.netlify.app/posts/maximo-valor-fila/index.html</loc>
+    <lastmod>2023-09-14T21:28:12.361Z</lastmod>
   </url>
 </urlset>
