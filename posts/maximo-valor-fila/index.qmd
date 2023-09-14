@@ -2,12 +2,12 @@
 title: "Extraer el máximo valor de una fila"
 author: "Checho"
 date: "10/13/2022"
-categories: [tipitos, tip, análisis, dplyr, data wrangling]
+categories: [tipito, tip, análisis, dplyr, data wrangling]
 ---
 
 # Extraer el máximo valor de una fila
 
-En este pequeño tutorial (por eso el tag de `tipitos`, o sea un tip chiquito), voy a contar cómo resolví un problema que me encontré en el trabajo y me trajo más de un dolor de cabeza.
+En este pequeño tutorial (por eso el tag de `tipito`, o sea un tip chiquito), voy a contar cómo resolví un problema que me encontré en el trabajo y me trajo más de un dolor de cabeza.
 
 Estaba trabajando con una tabla en la que tenía varios cursos, con sus fechas de finalización, y para el análisis que estaba haciendo necesitaba extraer la fecha del último curso completado por cada persona (el valor más alto).
 

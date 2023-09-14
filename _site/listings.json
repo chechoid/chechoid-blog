@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/cargar_fechas_desde_excel/index.html",
       "/posts/maximo-valor-fila/index.html",
       "/posts/haciendo-boludeces-en-r/index.html"
     ]
