@@ -7,7 +7,7 @@ categories: [code free, people analytics, kpi, capacitación]
 
 # Indicadores de Capacitación
 
-![](posts/indicadores_capacitacion/16251.jpg){width="670"}
+![](https://github.com/chechoid/chechoid-blog/blob/main/posts/indicadores_capacitacion/16251.jpg?raw=true)
 
 Con la Capacitación en las empresas pasa algo curioso: hace unos años atrás, entre mis compañeros de la Maestría de Data Mining hice una encuesta sobre beneficios, y una de las preguntas que hacía era *\"¿Qué beneficio que no tenés hoy te gustaría tener?\"*. Y 1 de cada 4 respuestas estaba relacionada con Capacitación (capacitación in company, desde cuotas en posgrados, certificaciones, etc.). Y yo pensaba por dentro *\"Pero... la capacitación no es un beneficio\"*. Sin embargo las personas perciben a la capacitación como un beneficio.
 
