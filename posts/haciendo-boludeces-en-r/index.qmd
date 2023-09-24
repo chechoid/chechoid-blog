@@ -270,7 +270,7 @@ ggplot(resultados, aes(x = copadez_promedio, y = facha_promedio)) +
        caption = "n = 66\nNinguna tía participó del relevamiento")
 ```
 
-Como conclusión del análisis **los datos dicen** que estoy alejado de las características de Nicolás del Caño y Roberto Baradel por ejemplo y **tengo características muy similares que Keanu Reeves**. O sea que los datos indican que me parezco a Keany. Dato, no opinión 😎.
+Como conclusión del análisis **los datos dicen** que estoy alejado de las características de Nicolás del Caño y Roberto Baradel por ejemplo y **tengo características muy similares que Keanu Reeves**. O sea que los datos indican que me parezco a Keanu. Dato, no opinión 😎.
 
 ## ¿Qué saqué de todo esto?
 

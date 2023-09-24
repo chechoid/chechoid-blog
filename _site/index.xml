@@ -849,22 +849,21 @@ background-color: null;
 font-style: inherit;">head</span>(clones)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 24
-  `Marca temporal`    Facha de…¹ Copad…² Facha…³ Copad…⁴ Facha…⁵ Copad…⁶ Facha…⁷
-  &lt;dttm&gt;                   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1 2021-06-23 12:37:28         10      10       7      10       1       1       1
-2 2021-06-23 12:39:12          4      10       5       9       1       1       1
-3 2021-06-23 12:42:21          8       9       8       9       5       4       3
-4 2021-06-23 12:43:24         10      10       1       1       1       1       1
-5 2021-06-23 12:45:03         10       8       4       9       6       9       1
-6 2021-06-23 12:45:12          5       9       1       8      10       8       1
-# … with 16 more variables: `Copadez de Roberto` &lt;dbl&gt;, `Facha de Jeff` &lt;dbl&gt;,
-#   `Copadez de Jeff` &lt;dbl&gt;, `Facha de Brad` &lt;dbl&gt;, `Copadez de Brad` &lt;dbl&gt;,
-#   `Facha del Mono` &lt;dbl&gt;, `Copadez del Mono` &lt;dbl&gt;, `Facha de Sergio` &lt;dbl&gt;,
+  `Marca temporal`    `Facha de Keanu` `Copadez de Keanu` `Facha de Russell`
+  &lt;dttm&gt;                         &lt;dbl&gt;              &lt;dbl&gt;              &lt;dbl&gt;
+1 2021-06-23 12:37:28               10                 10                  7
+2 2021-06-23 12:39:12                4                 10                  5
+3 2021-06-23 12:42:21                8                  9                  8
+4 2021-06-23 12:43:24               10                 10                  1
+5 2021-06-23 12:45:03               10                  8                  4
+6 2021-06-23 12:45:12                5                  9                  1
+# ℹ 20 more variables: `Copadez de Russell` &lt;dbl&gt;, `Facha de Nico` &lt;dbl&gt;,
+#   `Copadez de Nico` &lt;dbl&gt;, `Facha de Roberto` &lt;dbl&gt;,
+#   `Copadez de Roberto` &lt;dbl&gt;, `Facha de Jeff` &lt;dbl&gt;, `Copadez de Jeff` &lt;dbl&gt;,
+#   `Facha de Brad` &lt;dbl&gt;, `Copadez de Brad` &lt;dbl&gt;, `Facha del Mono` &lt;dbl&gt;,
+#   `Copadez del Mono` &lt;dbl&gt;, `Facha de Sergio` &lt;dbl&gt;,
 #   `Copadez de Sergio` &lt;dbl&gt;, `Facha de Ricky` &lt;dbl&gt;,
-#   `Copadez de Ricky` &lt;dbl&gt;, `Facha de Ben` &lt;dbl&gt;, `Copadez de Ben` &lt;dbl&gt;,
-#   `Facha de Javier` &lt;dbl&gt;, `Copadez de Javier` &lt;dbl&gt;,
-#   `Poné lo que quieras... parecidos, chistes, comentarios, etc...` &lt;chr&gt;, …
-# ℹ Use `colnames()` to see all variable names</code></pre>
+#   `Copadez de Ricky` &lt;dbl&gt;, `Facha de Ben` &lt;dbl&gt;, `Copadez de Ben` &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
 <p>Ahí podemos ver que para cada personaje tenemos una columna con el puntaje de su facha y su puntaje de copadez.</p>
@@ -1388,7 +1387,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
 <p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/index_files/figure-html/grafico_final-1.png" class="img-fluid" width="960"></p>
 </div>
 </div>
-<p>Como conclusión del análisis <strong>los datos dicen</strong> que estoy alejado de las características de Nicolás del Caño y Roberto Baradel por ejemplo y <strong>tengo características muy similares que Keanu Reeves</strong>. O sea que los datos indican que me parezco a Keany. Dato, no opinión 😎.</p>
+<p>Como conclusión del análisis <strong>los datos dicen</strong> que estoy alejado de las características de Nicolás del Caño y Roberto Baradel por ejemplo y <strong>tengo características muy similares que Keanu Reeves</strong>. O sea que los datos indican que me parezco a Keanu. Dato, no opinión 😎.</p>
 </section>
 <section id="qué-saqué-de-todo-esto" class="level2">
 <h2 class="anchored" data-anchor-id="qué-saqué-de-todo-esto">¿Qué saqué de todo esto?</h2>
@@ -1404,14 +1403,26 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="ikcjvrwkpn" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+<div id="yxfdcuulvs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yxfdcuulvs table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#ikcjvrwkpn .gt_table {
+#yxfdcuulvs thead, #yxfdcuulvs tbody, #yxfdcuulvs tfoot, #yxfdcuulvs tr, #yxfdcuulvs td, #yxfdcuulvs th {
+  border-style: none;
+}
+
+#yxfdcuulvs p {
+  margin: 0;
+  padding: 0;
+}
+
+#yxfdcuulvs .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -1434,19 +1445,12 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-left-color: #D3D3D3;
 }
 
-#ikcjvrwkpn .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
+#yxfdcuulvs .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-#ikcjvrwkpn .gt_title {
+#yxfdcuulvs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1458,25 +1462,37 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-bottom-width: 0;
 }
 
-#ikcjvrwkpn .gt_subtitle {
+#yxfdcuulvs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#ikcjvrwkpn .gt_bottom_border {
+#yxfdcuulvs .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yxfdcuulvs .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ikcjvrwkpn .gt_col_headings {
+#yxfdcuulvs .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1491,7 +1507,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-right-color: #D3D3D3;
 }
 
-#ikcjvrwkpn .gt_col_heading {
+#yxfdcuulvs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1511,7 +1527,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   overflow-x: hidden;
 }
 
-#ikcjvrwkpn .gt_column_spanner_outer {
+#yxfdcuulvs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1523,15 +1539,15 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   padding-right: 4px;
 }
 
-#ikcjvrwkpn .gt_column_spanner_outer:first-child {
+#yxfdcuulvs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ikcjvrwkpn .gt_column_spanner_outer:last-child {
+#yxfdcuulvs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ikcjvrwkpn .gt_column_spanner {
+#yxfdcuulvs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1543,7 +1559,11 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   width: 100%;
 }
 
-#ikcjvrwkpn .gt_group_heading {
+#yxfdcuulvs .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#yxfdcuulvs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1566,9 +1586,10 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-right-width: 1px;
   border-right-color: #D3D3D3;
   vertical-align: middle;
+  text-align: left;
 }
 
-#ikcjvrwkpn .gt_empty_group_heading {
+#yxfdcuulvs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1583,15 +1604,15 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   vertical-align: middle;
 }
 
-#ikcjvrwkpn .gt_from_md > :first-child {
+#yxfdcuulvs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ikcjvrwkpn .gt_from_md > :last-child {
+#yxfdcuulvs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ikcjvrwkpn .gt_row {
+#yxfdcuulvs .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1610,7 +1631,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   overflow-x: hidden;
 }
 
-#ikcjvrwkpn .gt_stub {
+#yxfdcuulvs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1623,7 +1644,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   padding-right: 5px;
 }
 
-#ikcjvrwkpn .gt_stub_row_group {
+#yxfdcuulvs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1637,11 +1658,15 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   vertical-align: top;
 }
 
-#ikcjvrwkpn .gt_row_group_first td {
+#yxfdcuulvs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ikcjvrwkpn .gt_summary_row {
+#yxfdcuulvs .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#yxfdcuulvs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1651,16 +1676,16 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   padding-right: 5px;
 }
 
-#ikcjvrwkpn .gt_first_summary_row {
+#yxfdcuulvs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ikcjvrwkpn .gt_first_summary_row.thick {
+#yxfdcuulvs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ikcjvrwkpn .gt_last_summary_row {
+#yxfdcuulvs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1670,7 +1695,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-bottom-color: #D3D3D3;
 }
 
-#ikcjvrwkpn .gt_grand_summary_row {
+#yxfdcuulvs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1680,7 +1705,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   padding-right: 5px;
 }
 
-#ikcjvrwkpn .gt_first_grand_summary_row {
+#yxfdcuulvs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1690,11 +1715,21 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-top-color: #D3D3D3;
 }
 
-#ikcjvrwkpn .gt_striped {
+#yxfdcuulvs .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yxfdcuulvs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ikcjvrwkpn .gt_table_body {
+#yxfdcuulvs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1703,7 +1738,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-bottom-color: #D3D3D3;
 }
 
-#ikcjvrwkpn .gt_footnotes {
+#yxfdcuulvs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1717,30 +1752,8 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-right-color: #D3D3D3;
 }
 
-#ikcjvrwkpn .gt_footnote {
+#yxfdcuulvs .gt_footnote {
   margin: 0px;
-  font-size: 90%;
-  padding-left: 4px;
-  padding-right: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ikcjvrwkpn .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#ikcjvrwkpn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1748,147 +1761,123 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   padding-right: 5px;
 }
 
-#ikcjvrwkpn .gt_left {
+#yxfdcuulvs .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yxfdcuulvs .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yxfdcuulvs .gt_left {
   text-align: left;
 }
 
-#ikcjvrwkpn .gt_center {
+#yxfdcuulvs .gt_center {
   text-align: center;
 }
 
-#ikcjvrwkpn .gt_right {
+#yxfdcuulvs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ikcjvrwkpn .gt_font_normal {
+#yxfdcuulvs .gt_font_normal {
   font-weight: normal;
 }
 
-#ikcjvrwkpn .gt_font_bold {
+#yxfdcuulvs .gt_font_bold {
   font-weight: bold;
 }
 
-#ikcjvrwkpn .gt_font_italic {
+#yxfdcuulvs .gt_font_italic {
   font-style: italic;
 }
 
-#ikcjvrwkpn .gt_super {
+#yxfdcuulvs .gt_super {
   font-size: 65%;
 }
 
-#ikcjvrwkpn .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
+#yxfdcuulvs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
+  position: initial;
 }
 
-#ikcjvrwkpn .gt_asterisk {
+#yxfdcuulvs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ikcjvrwkpn .gt_indent_1 {
+#yxfdcuulvs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ikcjvrwkpn .gt_indent_2 {
+#yxfdcuulvs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ikcjvrwkpn .gt_indent_3 {
+#yxfdcuulvs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ikcjvrwkpn .gt_indent_4 {
+#yxfdcuulvs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ikcjvrwkpn .gt_indent_5 {
+#yxfdcuulvs .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true">
-<thead class="gt_col_headings">
-<tr class="header">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Comentarios</th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left">te rompí los patrones a la merd</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">jaja me rei mucho!</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Caruso a la Final!</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Johnny Depp, 8/8</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Hajajja</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">De Brad Pitt te copiaste el peinado, no?</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">¿es requisito tener pelo largo para parecer fachero? mostrame indicadores</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Sergio vos no estas bien haciendo esto!!! Jajaja</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Falta Denicolay</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Jajaj muy bueno</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Haces todo esto para levantarte minas Mora, lo sabemos!!!</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">ME ENCANTÓ! curiosa, dinámica y original iniciativa como siempre!!</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Copado el test!!</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">¿todos hombres?</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Hajajja</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">WTH??</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Sos un capo!!! me divertí mucho!!!</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Falta el test de mujeres.....</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Bronn, de game of thrones.</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Muy buen ejercicio! A algunos personajes el 1 le quedaba grande! habiliten el 0 jaja Éxitos!</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Un genio Sergio 😂😂😂 Podría ser también a la versión adulta del niño del sexto sentido, el que dice"veo gente muerta" ¿? 🤔</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left">Puedo decir que la foto que te sacaste, es muy de MA de instagram</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left">Jaja me hiciste reír. Cómo no soy de Argentina tuve que googlear algunos, pero todo bien. Super entretenido</td>
-</tr>
-</tbody>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Comentarios">Comentarios</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="comentarios" class="gt_row gt_left">te rompí los patrones a la merd</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">jaja me rei mucho!</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Caruso a la Final!</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Johnny Depp, 8/8</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Hajajja</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">De Brad Pitt te copiaste el peinado, no?</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">¿es requisito tener pelo largo para parecer fachero?  mostrame indicadores</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Sergio vos no estas bien haciendo esto!!!  Jajaja</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Falta Denicolay</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Jajaj muy bueno</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Haces todo esto para levantarte minas Mora, lo sabemos!!!</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">ME ENCANTÓ! curiosa, dinámica y original iniciativa como siempre!!</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Copado el test!!</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">¿todos hombres?</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Hajajja</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">WTH??</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Sos un capo!!! me divertí mucho!!!</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Falta el test de mujeres.....</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Bronn, de game of thrones.</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Muy buen ejercicio!  A algunos personajes el 1 le quedaba grande! habiliten el 0 jaja Éxitos!</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Un genio Sergio 😂😂😂 Podría ser también a la versión adulta del niño del sexto sentido, el que dice"veo gente muerta" ¿? 🤔</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Puedo decir que la foto que te sacaste, es muy de MA de instagram</td></tr>
+    <tr><td headers="comentarios" class="gt_row gt_left">Jaja me hiciste reír. Cómo no soy de Argentina tuve que googlear algunos, pero todo bien. Super entretenido</td></tr>
+  </tbody>
+  
+  
 </table>
-
 </div>
 </div>
 </div>
@@ -1906,6 +1895,84 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   <category>proyectos</category>
   <guid>https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/index.html</guid>
   <pubDate>Thu, 01 Sep 2022 03:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Indicadores de Capacitación</title>
+  <dc:creator>Checho </dc:creator>
+  <link>https://chechoid.netlify.app/posts/indicadores_capacitacion/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="indicadores-de-capacitación" class="level1">
+<h1>Indicadores de Capacitación</h1>
+<p><img src="https://chechoid.netlify.app/posts/indicadores_capacitacion/posts/indicadores_capacitacion/16251.jpg" class="img-fluid" width="670"></p>
+<p>Con la Capacitación en las empresas pasa algo curioso: hace unos años atrás, entre mis compañeros de la Maestría de Data Mining hice una encuesta sobre beneficios, y una de las preguntas que hacía era&nbsp;<em>"¿Qué beneficio que no tenés hoy te gustaría tener?"</em>. Y 1 de cada 4 respuestas estaba relacionada con Capacitación (capacitación in company, desde cuotas en posgrados, certificaciones, etc.). Y yo pensaba por dentro <em>"Pero… la capacitación no es un beneficio"</em>. Sin embargo las personas perciben a la capacitación como un beneficio.</p>
+<p>Los cambios que impone la tecnología, y la rapidez con la que avanza, hacen que, como dijo&nbsp;<a href="https://www.linkedin.com/in/diegobekerman/">Diego Bekerman</a>, las empresas dejen de buscar&nbsp;<em>"graduados de"</em>&nbsp;para buscar&nbsp;<em>"personas que saben de"</em>. Esto plantea una nueva necesidad de Planificación Estratégica de Capital Humano en donde se plantean las capacidades que hoy tienen las personas y se las contrasta con las capacidades futuras que requiere la empresa. Y acá surge una de las primeras cuestiones: Estas capacidades, ¿las desarrollamos internamente o las salimos a buscar al mercado?</p>
+<p>Después tenemos variables de contexto. No debe haber ni un sólo CEO, Gerente General o Dueño de una empresa que desconozca el valor y la importancia de la capacitación de sus empleados. Sin embargo, es uno de los primeros presupuestos que se corta en épocas de vacas flacas. Y uno de los principales factores que determinan estas decisiones seguramente se relaciona con que no cuentan con suficiente información sobre el impacto de la capacitación en los resultados de la empresa.</p>
+<p>Nótese que escribí impacto en los resultados, no ROI. Ampliaremos.</p>
+<p>Entonces tenemos empleados que demandan capacitación, negocios que necesitan nuevas capacidades, y una constante tensión presupuestaria. Sin mencionar el contexto económico recesivo. ¿Cómo podemos usar indicadores para administrar, planificar y conseguir presupuesto para gestionar la capacitación en este contexto?</p>
+<p>En primer lugar conociendo las necesidades del negocio.Y para esto es necesario entender qué es lo que demandan las personas que dirigen las empresas.</p>
+<p>En&nbsp;<em>Learning Analytics</em>, John R Mattox II, Mark Van Buren y Jean Martin, plantean que los CEO's pretenden que midamos:</p>
+<ul>
+<li><p><strong>Aplicación</strong>: ¿Cómo Podemos aumentar la aplicación de nuevas habilidades en el trabajo</p></li>
+<li><p><strong>Resultados</strong>: ¿En qué grado un programa de capacitación mejorará un resultado de negocio específico?</p></li>
+<li><p><strong>Valor</strong>: ¿Cuál será el Retorno de Inversión?</p></li>
+</ul>
+<p>¿Qué es lo que usualmente medimos en gestión de capacitación?</p>
+<ul>
+<li><p>Costo de capacitación por empleado</p></li>
+<li><p>Satisfacción con la capacitación.</p></li>
+<li><p>Horas de Capacitación por Empleado</p></li>
+<li><p>Gastos de Capacitación Externa.</p></li>
+</ul>
+<p>Evidentemente hay un mismatch entre la información que <strong>demandan</strong> las personas que dirigen las empresas y la información que proveemos desde Recursos Humanos.</p>
+<p><a href="https://www.linkedin.com/in/alec-levenson-8915475/">Alec Levenson</a>, uno de los autores más "hardcore evidence" de People Analytics que sigo, de formación en Economía, plantea en una podcast que el ROI no siempre es medible, por ejemplo,de una capacitación en empatía para líderes. Alec explica que el ROI se mide fundamentalmente en cashflow, y que no todo es traducible en términos económicos.</p>
+<p>Un punto interesante que plantea Levenson es dice que si encontramos vínculos entre cómo las personas operan en el negocio, en cómo se comunican, se hacen cargo y se comprometen, y en cómo enfocan su tiempo y energía en alcanzar la estrategia del negocio, y haciendo lo que es necesario hacer para <strong>crear ventajas competitivas</strong>, es todo lo que necesitamos mostrar. Si logramos establecer una relación consistente entre los comportamientos de las personas y las ventajas competitivas, generamos información más valiosa y expresiva (agrego yo) que el ROI.</p>
+<section id="de-vuelta-a-la-universidad" class="level2">
+<h2 class="anchored" data-anchor-id="de-vuelta-a-la-universidad"><strong>De vuelta a la Universidad</strong></h2>
+<p>Si buscamos en nuestros apuntes y libros de la universidad como medir la gestión de capacitación, seguramente nos vamos a encontrar con los modelos de&nbsp;<strong>Donald Kirkpatrick</strong>&nbsp;y de&nbsp;<a href="https://www.linkedin.com/in/roiinstituteinc/"><strong>Jack Phillips</strong></a>.</p>
+<p>El <strong>Modelo de 4 Niveles de Evaluación</strong> de Kirkpatrick propone un enfoque para medir el impacto de la capacitación en los siguientes niveles:</p>
+<p>El primer nivel apunta a medir la satisfacción de los colaboradores con el curso y con el facilitador. Muchas empresas sólo están midiendo este nivel. El aprendizaje busca medir si las personas adquirieron nuevos conocimientos y habilidades.</p>
+<p>Respecto al nivel 3, de medir conductas, Kirkpatrick plantea analizar si hubo un cambio de comportamiento luego de la capacitación. Volvamos a la entrevista de Alec Levenson, ¿cuáles son los comportamientos que crean ventajas competitivas?</p>
+<p>Finalmente el 4° nivel es el de resultados, que ahí buscaremos ver el impacto de las acciones de capacitación en resultados tanto operativos como de clima laboral por ejemplo.</p>
+<p><strong>Jack Phillips</strong> desarrolló la&nbsp;<strong>Metodología ROI</strong>&nbsp;que en gran parte se sustenta en el modelo de Kirkpatrick, cambiando ligeramente los primeros 4 niveles, y añadiendo el del ROI.</p>
+<ol type="1">
+<li><p>Reacción y acción planificada.</p></li>
+<li><p>Aprendizaje.</p></li>
+<li><p>Aplicación.</p></li>
+<li><p>Impacto.</p></li>
+<li><p>Retorno de Inversión.</p></li>
+</ol>
+<p>Estos 5 niveles son parte de la Metodología ROI que incluye además la planificación, la recolección de datos, su análisis y reporte.</p>
+<p>Mi postura es que si hoy sólo estamos midiendo horas de capacitación y costos, lograr avanzar al nivel 3 (Conductas o Aplicación), ya es un enorme salto de calidad de las métricas del área. Si logramos eso, será más fácil medir resultados, y ya habrá tiempo para medir el ROI.</p>
+<p>Kirkpatrick desarrolló su modelo en la década del '50, mientras que Phillips lo hizo a principios de los '80. En 2007 <a href="https://www.linkedin.com/in/bersin/">Josh Bersin</a> publicó&nbsp;<em>The Training Measurement Book</em>, en donde se enfoca principalmente en la planificación y en el alineamiento de la capacitación con las necesidades del negocio.</p>
+<p>El modelo de Bersin propone 9 métricas críticas para su&nbsp;<strong>Modelo de Medición de Impacto</strong>. Estas métricas son:</p>
+<ol type="1">
+<li><p>Satisfacción.</p></li>
+<li><p>Aprendizaje.</p></li>
+<li><p>Adopción (tasa del público target que completó el proceso de aprendizaje).</p></li>
+<li><p>Utilidad.</p></li>
+<li><p>Eficiencia.</p></li>
+<li><p>Alineamiento.</p></li>
+<li><p>Logros de objetivos desde la perspectiva de los clientes.</p></li>
+<li><p>Desempeño Individual.</p></li>
+<li><p>Desempeño del Negocio.</p></li>
+</ol>
+<p>Si logramos incorporar métricas que incluyan los aspectos de cualquiera de estos modelos, más nuevas tendencias como el&nbsp;<a href="https://data-4hr.com/2017/11/08/scrap-learning-la-capacitacion-desaprovechada/">Scrap Learning</a>&nbsp;(incluyendo la perspectiva de los jefes) podemos construir un set de información muy valiosa para los stakeholders de la organización. Correr el foco del ROI y enfocarlo en las ventajas competitivas (eso que la empresa hace bien y que la distingue de otras empresas) también nos permite canalizar los esfuerzos de gestión y de análisis en donde más valor aportamos a la rentabilidad del negocio.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>code free</category>
+  <category>people analytics</category>
+  <category>kpi</category>
+  <category>capacitación</category>
+  <guid>https://chechoid.netlify.app/posts/indicadores_capacitacion/index.html</guid>
+  <pubDate>Sun, 01 Mar 2020 03:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
