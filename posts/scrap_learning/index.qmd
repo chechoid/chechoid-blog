@@ -1,0 +1,14 @@
+---
+title: "Scrap Learning: La Capacitación Desaprovechada"
+author: "Checho"
+date: "08/11/2017"
+categories: [code free, people analytics, kpi, capacitación]
+---
+
+# **SCRAP LEARNING -- LA CAPACITACIÓN  DESAPROVECHADA**
+
+*En Recursos Humanos una de las obsesiones principales es medir el Retorno de la Inversión (ROI) de la capacitación, lo cual, si bien es posible de medir, requiere un esfuerzo enorme. En cambio, poder medir cuánta plata se desperdicia por la **no aplicación** del conocimiento adquirido en las capacitaciones es mucho más sencillo, y también es una métrica muy valiosa para utilizar.*
+
+El ***Scrap Learning*** es una forma de medir cuántos de los conocimientos adquiridos en las capacitaciones **no se trasladan** al trabajo, lo cual es mucho más sencillo y tan valioso de medir como el ROI.
+
+La investigación indica el promedio de mercado de Scrap Learning entre las empresas que no lo miden es del 45%. Es decir que si tenemos un presupuesto anual de \$ 500.000 para las capacitaciones, \$ 225.000 es dinero mal invertido y por ende, la capacitación deja de ser una inversión para convertirse en un costo.
