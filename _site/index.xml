@@ -745,7 +745,7 @@ font-style: inherit;">max</span>(Valor))</span></code></pre></div>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/https:/upload.wikimedia.org/wikipedia/commons/b/b7/Germ%25C3%25A1n_Burgos_-_01.jpg" class="img-fluid figure-img" width="213"></p>
+<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/https:/phantom-elmundo.unidadeditorial.es/6744bff920f7004ccfe5c7f23aefac88/crop/0x29/1972x1340/resize/1200/f/webp/assets/multimedia/imagenes/2020/06/03/15912134233683.jpg" class="img-fluid figure-img"></p>
 <figcaption class="figure-caption">El Mono Burgos</figcaption>
 </figure>
 </div>
@@ -1403,23 +1403,23 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="yxfdcuulvs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#yxfdcuulvs table {
+<div id="qnclmewjof" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qnclmewjof table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yxfdcuulvs thead, #yxfdcuulvs tbody, #yxfdcuulvs tfoot, #yxfdcuulvs tr, #yxfdcuulvs td, #yxfdcuulvs th {
+#qnclmewjof thead, #qnclmewjof tbody, #qnclmewjof tfoot, #qnclmewjof tr, #qnclmewjof td, #qnclmewjof th {
   border-style: none;
 }
 
-#yxfdcuulvs p {
+#qnclmewjof p {
   margin: 0;
   padding: 0;
 }
 
-#yxfdcuulvs .gt_table {
+#qnclmewjof .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1445,12 +1445,12 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-left-color: #D3D3D3;
 }
 
-#yxfdcuulvs .gt_caption {
+#qnclmewjof .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yxfdcuulvs .gt_title {
+#qnclmewjof .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1462,7 +1462,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-bottom-width: 0;
 }
 
-#yxfdcuulvs .gt_subtitle {
+#qnclmewjof .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1474,7 +1474,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-top-width: 0;
 }
 
-#yxfdcuulvs .gt_heading {
+#qnclmewjof .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1486,13 +1486,13 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-right-color: #D3D3D3;
 }
 
-#yxfdcuulvs .gt_bottom_border {
+#qnclmewjof .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#yxfdcuulvs .gt_col_headings {
+#qnclmewjof .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1507,7 +1507,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-right-color: #D3D3D3;
 }
 
-#yxfdcuulvs .gt_col_heading {
+#qnclmewjof .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1527,7 +1527,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   overflow-x: hidden;
 }
 
-#yxfdcuulvs .gt_column_spanner_outer {
+#qnclmewjof .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1539,15 +1539,15 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   padding-right: 4px;
 }
 
-#yxfdcuulvs .gt_column_spanner_outer:first-child {
+#qnclmewjof .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yxfdcuulvs .gt_column_spanner_outer:last-child {
+#qnclmewjof .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yxfdcuulvs .gt_column_spanner {
+#qnclmewjof .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1559,11 +1559,11 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   width: 100%;
 }
 
-#yxfdcuulvs .gt_spanner_row {
+#qnclmewjof .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yxfdcuulvs .gt_group_heading {
+#qnclmewjof .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1589,7 +1589,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   text-align: left;
 }
 
-#yxfdcuulvs .gt_empty_group_heading {
+#qnclmewjof .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1604,15 +1604,15 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   vertical-align: middle;
 }
 
-#yxfdcuulvs .gt_from_md > :first-child {
+#qnclmewjof .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yxfdcuulvs .gt_from_md > :last-child {
+#qnclmewjof .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yxfdcuulvs .gt_row {
+#qnclmewjof .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1631,7 +1631,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   overflow-x: hidden;
 }
 
-#yxfdcuulvs .gt_stub {
+#qnclmewjof .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1644,7 +1644,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   padding-right: 5px;
 }
 
-#yxfdcuulvs .gt_stub_row_group {
+#qnclmewjof .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1658,15 +1658,15 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   vertical-align: top;
 }
 
-#yxfdcuulvs .gt_row_group_first td {
+#qnclmewjof .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yxfdcuulvs .gt_row_group_first th {
+#qnclmewjof .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yxfdcuulvs .gt_summary_row {
+#qnclmewjof .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1676,16 +1676,16 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   padding-right: 5px;
 }
 
-#yxfdcuulvs .gt_first_summary_row {
+#qnclmewjof .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#yxfdcuulvs .gt_first_summary_row.thick {
+#qnclmewjof .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yxfdcuulvs .gt_last_summary_row {
+#qnclmewjof .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1695,7 +1695,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-bottom-color: #D3D3D3;
 }
 
-#yxfdcuulvs .gt_grand_summary_row {
+#qnclmewjof .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1705,7 +1705,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   padding-right: 5px;
 }
 
-#yxfdcuulvs .gt_first_grand_summary_row {
+#qnclmewjof .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1715,7 +1715,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-top-color: #D3D3D3;
 }
 
-#yxfdcuulvs .gt_last_grand_summary_row_top {
+#qnclmewjof .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1725,11 +1725,11 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-bottom-color: #D3D3D3;
 }
 
-#yxfdcuulvs .gt_striped {
+#qnclmewjof .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#yxfdcuulvs .gt_table_body {
+#qnclmewjof .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1738,7 +1738,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-bottom-color: #D3D3D3;
 }
 
-#yxfdcuulvs .gt_footnotes {
+#qnclmewjof .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1752,7 +1752,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-right-color: #D3D3D3;
 }
 
-#yxfdcuulvs .gt_footnote {
+#qnclmewjof .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1761,7 +1761,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   padding-right: 5px;
 }
 
-#yxfdcuulvs .gt_sourcenotes {
+#qnclmewjof .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1775,7 +1775,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   border-right-color: #D3D3D3;
 }
 
-#yxfdcuulvs .gt_sourcenote {
+#qnclmewjof .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1783,63 +1783,63 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   padding-right: 5px;
 }
 
-#yxfdcuulvs .gt_left {
+#qnclmewjof .gt_left {
   text-align: left;
 }
 
-#yxfdcuulvs .gt_center {
+#qnclmewjof .gt_center {
   text-align: center;
 }
 
-#yxfdcuulvs .gt_right {
+#qnclmewjof .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yxfdcuulvs .gt_font_normal {
+#qnclmewjof .gt_font_normal {
   font-weight: normal;
 }
 
-#yxfdcuulvs .gt_font_bold {
+#qnclmewjof .gt_font_bold {
   font-weight: bold;
 }
 
-#yxfdcuulvs .gt_font_italic {
+#qnclmewjof .gt_font_italic {
   font-style: italic;
 }
 
-#yxfdcuulvs .gt_super {
+#qnclmewjof .gt_super {
   font-size: 65%;
 }
 
-#yxfdcuulvs .gt_footnote_marks {
+#qnclmewjof .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yxfdcuulvs .gt_asterisk {
+#qnclmewjof .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yxfdcuulvs .gt_indent_1 {
+#qnclmewjof .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yxfdcuulvs .gt_indent_2 {
+#qnclmewjof .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yxfdcuulvs .gt_indent_3 {
+#qnclmewjof .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yxfdcuulvs .gt_indent_4 {
+#qnclmewjof .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yxfdcuulvs .gt_indent_5 {
+#qnclmewjof .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1908,13 +1908,13 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
 <section id="indicadores-de-capacitación" class="level1">
 <h1>Indicadores de Capacitación</h1>
 <p><img src="https://chechoid.netlify.app/posts/indicadores_capacitacion/https:/github.com/chechoid/chechoid-blog/blob/main/posts/indicadores_capacitacion/16251.jpg?raw=true" class="img-fluid"></p>
-<p>Con la Capacitación en las empresas pasa algo curioso: hace unos años atrás, entre mis compañeros de la Maestría de Data Mining hice una encuesta sobre beneficios, y una de las preguntas que hacía era&nbsp;<em>"¿Qué beneficio que no tenés hoy te gustaría tener?"</em>. Y 1 de cada 4 respuestas estaba relacionada con Capacitación (capacitación in company, desde cuotas en posgrados, certificaciones, etc.). Y yo pensaba por dentro <em>"Pero… la capacitación no es un beneficio"</em>. Sin embargo las personas perciben a la capacitación como un beneficio.</p>
-<p>Los cambios que impone la tecnología, y la rapidez con la que avanza, hacen que, como dijo&nbsp;<a href="https://www.linkedin.com/in/diegobekerman/">Diego Bekerman</a>, las empresas dejen de buscar&nbsp;<em>"graduados de"</em>&nbsp;para buscar&nbsp;<em>"personas que saben de"</em>. Esto plantea una nueva necesidad de Planificación Estratégica de Capital Humano en donde se plantean las capacidades que hoy tienen las personas y se las contrasta con las capacidades futuras que requiere la empresa. Y acá surge una de las primeras cuestiones: Estas capacidades, ¿las desarrollamos internamente o las salimos a buscar al mercado?</p>
+<p>Con la Capacitación en las empresas pasa algo curioso: hace unos años atrás, entre mis compañeros de la Maestría de Data Mining hice una encuesta sobre beneficios, y una de las preguntas que hacía era&nbsp;<em>“¿Qué beneficio que no tenés hoy te gustaría tener?”</em>. Y 1 de cada 4 respuestas estaba relacionada con Capacitación (capacitación in company, desde cuotas en posgrados, certificaciones, etc.). Y yo pensaba por dentro <em>“Pero… la capacitación no es un beneficio”</em>. Sin embargo las personas perciben a la capacitación como un beneficio.</p>
+<p>Los cambios que impone la tecnología, y la rapidez con la que avanza, hacen que, como dijo&nbsp;<a href="https://www.linkedin.com/in/diegobekerman/">Diego Bekerman</a>, las empresas dejen de buscar&nbsp;<em>“graduados de”</em>&nbsp;para buscar&nbsp;<em>“personas que saben de”</em>. Esto plantea una nueva necesidad de Planificación Estratégica de Capital Humano en donde se plantean las capacidades que hoy tienen las personas y se las contrasta con las capacidades futuras que requiere la empresa. Y acá surge una de las primeras cuestiones: Estas capacidades, ¿las desarrollamos internamente o las salimos a buscar al mercado?</p>
 <p>Después tenemos variables de contexto. No debe haber ni un sólo CEO, Gerente General o Dueño de una empresa que desconozca el valor y la importancia de la capacitación de sus empleados. Sin embargo, es uno de los primeros presupuestos que se corta en épocas de vacas flacas. Y uno de los principales factores que determinan estas decisiones seguramente se relaciona con que no cuentan con suficiente información sobre el impacto de la capacitación en los resultados de la empresa.</p>
 <p>Nótese que escribí impacto en los resultados, no ROI. Ampliaremos.</p>
 <p>Entonces tenemos empleados que demandan capacitación, negocios que necesitan nuevas capacidades, y una constante tensión presupuestaria. Sin mencionar el contexto económico recesivo. ¿Cómo podemos usar indicadores para administrar, planificar y conseguir presupuesto para gestionar la capacitación en este contexto?</p>
 <p>En primer lugar conociendo las necesidades del negocio.Y para esto es necesario entender qué es lo que demandan las personas que dirigen las empresas.</p>
-<p>En&nbsp;<em>Learning Analytics</em>, John R Mattox II, Mark Van Buren y Jean Martin, plantean que los CEO's pretenden que midamos:</p>
+<p>En&nbsp;<em>Learning Analytics</em>, John R Mattox II, Mark Van Buren y Jean Martin, plantean que los CEO’s pretenden que midamos:</p>
 <ul>
 <li><p><strong>Aplicación</strong>: ¿Cómo Podemos aumentar la aplicación de nuevas habilidades en el trabajo</p></li>
 <li><p><strong>Resultados</strong>: ¿En qué grado un programa de capacitación mejorará un resultado de negocio específico?</p></li>
@@ -1928,7 +1928,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
 <li><p>Gastos de Capacitación Externa.</p></li>
 </ul>
 <p>Evidentemente hay un mismatch entre la información que <strong>demandan</strong> las personas que dirigen las empresas y la información que proveemos desde Recursos Humanos.</p>
-<p><a href="https://www.linkedin.com/in/alec-levenson-8915475/">Alec Levenson</a>, uno de los autores más "hardcore evidence" de People Analytics que sigo, de formación en Economía, plantea en una podcast que el ROI no siempre es medible, por ejemplo,de una capacitación en empatía para líderes. Alec explica que el ROI se mide fundamentalmente en cashflow, y que no todo es traducible en términos económicos.</p>
+<p><a href="https://www.linkedin.com/in/alec-levenson-8915475/">Alec Levenson</a>, uno de los autores más “hardcore evidence” de People Analytics que sigo, de formación en Economía, plantea en una podcast que el ROI no siempre es medible, por ejemplo,de una capacitación en empatía para líderes. Alec explica que el ROI se mide fundamentalmente en cashflow, y que no todo es traducible en términos económicos.</p>
 <p>Un punto interesante que plantea Levenson es dice que si encontramos vínculos entre cómo las personas operan en el negocio, en cómo se comunican, se hacen cargo y se comprometen, y en cómo enfocan su tiempo y energía en alcanzar la estrategia del negocio, y haciendo lo que es necesario hacer para <strong>crear ventajas competitivas</strong>, es todo lo que necesitamos mostrar. Si logramos establecer una relación consistente entre los comportamientos de las personas y las ventajas competitivas, generamos información más valiosa y expresiva (agrego yo) que el ROI.</p>
 <section id="de-vuelta-a-la-universidad" class="level2">
 <h2 class="anchored" data-anchor-id="de-vuelta-a-la-universidad"><strong>De vuelta a la Universidad</strong></h2>
@@ -1947,7 +1947,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
 </ol>
 <p>Estos 5 niveles son parte de la Metodología ROI que incluye además la planificación, la recolección de datos, su análisis y reporte.</p>
 <p>Mi postura es que si hoy sólo estamos midiendo horas de capacitación y costos, lograr avanzar al nivel 3 (Conductas o Aplicación), ya es un enorme salto de calidad de las métricas del área. Si logramos eso, será más fácil medir resultados, y ya habrá tiempo para medir el ROI.</p>
-<p>Kirkpatrick desarrolló su modelo en la década del '50, mientras que Phillips lo hizo a principios de los '80. En 2007 <a href="https://www.linkedin.com/in/bersin/">Josh Bersin</a> publicó&nbsp;<em>The Training Measurement Book</em>, en donde se enfoca principalmente en la planificación y en el alineamiento de la capacitación con las necesidades del negocio.</p>
+<p>Kirkpatrick desarrolló su modelo en la década del ’50, mientras que Phillips lo hizo a principios de los ’80. En 2007 <a href="https://www.linkedin.com/in/bersin/">Josh Bersin</a> publicó&nbsp;<em>The Training Measurement Book</em>, en donde se enfoca principalmente en la planificación y en el alineamiento de la capacitación con las necesidades del negocio.</p>
 <p>El modelo de Bersin propone 9 métricas críticas para su&nbsp;<strong>Modelo de Medición de Impacto</strong>. Estas métricas son:</p>
 <ol type="1">
 <li><p>Satisfacción.</p></li>
@@ -1990,7 +1990,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
 <p>La investigación indica el promedio de mercado de Scrap Learning entre las empresas que no lo miden es del 45%. Es decir que si tenemos un presupuesto anual de $ 500.000 para las capacitaciones, $ 225.000 es dinero mal invertido y por ende, la capacitación deja de ser una inversión para convertirse en un costo.</p>
 <p><img src="https://chechoid.netlify.app/posts/scrap_learning/https:/i.pinimg.com/originals/5b/85/0a/5b850afdf51756a3b48667d9acbee743.jpg" class="img-fluid"></p>
 <section id="para-muestra-basta-con-un-botón" class="level2">
-<h2 class="anchored" data-anchor-id="para-muestra-basta-con-un-botón"><strong>"Para muestra basta con un botón”</strong></h2>
+<h2 class="anchored" data-anchor-id="para-muestra-basta-con-un-botón"><strong>“Para muestra basta con un botón”</strong></h2>
 <p>Una forma sencilla de medir el Scrap Learning es preguntando a los participantes de un curso cuánto del conocimiento adquirido se aplicará al trabajo. El porcentaje de contenido que <strong>NO</strong> aplicarán al trabajo forma parte del Scrap Learning.</p>
 <p><em>Ejemplo</em>: Le preguntamos a un participante cuántos de los conocimientos adquiridos en una capacitación estima aplicar en sus tareas cotidianas. Si dice que piensa aplicar el 60% del contenido a su trabajo, el scrap learning es del 40%.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -2001,13 +2001,13 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
 </section>
 <section id="capacitar-sobre-capacitar" class="level2">
 <h2 class="anchored" data-anchor-id="capacitar-sobre-capacitar">Capacitar sobre Capacitar</h2>
-<p>Una de las primeras cosas que debemos hacer los Responsables de Capacitación y Desarrollo es aclarar <strong>para qué sirve</strong> una capacitación. ¿Cuántas veces hemos escuchado "<em>Fulano está desmotivado… mándalo a hacer un curso</em>"? ¿O cuántas veces acordamos con un empleado conflictivo o de bajo desempeño pagarle un posgrado? ¿Hemos enviado alguna vez a una persona a una capacitación sobre una tecnología que no usamos en nuestras empresas?</p>
-<p>Incluso de parte de los colaboradores hay una percepción imprecisa sobre la capacitación. Una encuesta que hicimos a empleados de nuestros clientes, frente a la pregunta "<em>¿Qué beneficio que no tenés hoy, te gustaría tener?</em>", prácticamente 1 de cada 4 respuestas estaba relacionada con capacitación o beneficios en posgrados.</p>
-<p>Esto deja entrever, que lo primero que necesitamos hacer desde Capacitación y Desarrollo es "<em>re-educar</em>" a la empresa sobre cuál es la utilidad y finalidad de las capacitaciones y en qué casos usarlas.</p>
+<p>Una de las primeras cosas que debemos hacer los Responsables de Capacitación y Desarrollo es aclarar <strong>para qué sirve</strong> una capacitación. ¿Cuántas veces hemos escuchado “<em>Fulano está desmotivado… mándalo a hacer un curso</em>”? ¿O cuántas veces acordamos con un empleado conflictivo o de bajo desempeño pagarle un posgrado? ¿Hemos enviado alguna vez a una persona a una capacitación sobre una tecnología que no usamos en nuestras empresas?</p>
+<p>Incluso de parte de los colaboradores hay una percepción imprecisa sobre la capacitación. Una encuesta que hicimos a empleados de nuestros clientes, frente a la pregunta “<em>¿Qué beneficio que no tenés hoy, te gustaría tener?</em>”, prácticamente 1 de cada 4 respuestas estaba relacionada con capacitación o beneficios en posgrados.</p>
+<p>Esto deja entrever, que lo primero que necesitamos hacer desde Capacitación y Desarrollo es “<em>re-educar</em>” a la empresa sobre cuál es la utilidad y finalidad de las capacitaciones y en qué casos usarlas.</p>
 </section>
 <section id="las-preguntas-clave" class="level2">
 <h2 class="anchored" data-anchor-id="las-preguntas-clave">Las Preguntas Clave</h2>
-<p><em>"Una capacitación efectiva <strong>mejorará el desempeño</strong> del participante y del área donde trabaja."</em></p>
+<p><em>“Una capacitación efectiva <strong>mejorará el desempeño</strong> del participante y del área donde trabaja.”</em></p>
 <p>Por el contrario, cuando las capacitaciones no son efectivas y el scrap learning es alto, la performance del colaborador y del sector no mejorarán aún cuando asistan al mejor curso del mundo.&nbsp;Una actividad de formación debe aportar valor al participante y a su área. Para ello, hay 3 preguntas claves para hacer:</p>
 <ol type="1">
 <li><p>¿Cuánto espera que su performance mejore relacionado con el contexto del curso relacionado con todos los factores, incluido el programa de desarrollo?</p></li>
@@ -2050,7 +2050,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
 <section id="conclusión" class="level2">
 <h2 class="anchored" data-anchor-id="conclusión">Conclusión</h2>
 <p>El Retorno de Inversión (ROI) de una capacitación es una medida compleja de estimar, en cambio, el Scrap Learning es más sencillo de medir y de solucionar.</p>
-<p>Mantener un bajo nivel de Scrap Learning, no sólo se materializa en resultados en la organización, sino que además aumenta la confianza sobre el proceso de capacitación generando un "círculo virtuoso" que contribuye a mantenerlo en ese estado.</p>
+<p>Mantener un bajo nivel de Scrap Learning, no sólo se materializa en resultados en la organización, sino que además aumenta la confianza sobre el proceso de capacitación generando un “círculo virtuoso” que contribuye a mantenerlo en ese estado.</p>
 <p>Ésta es una métrica poderosa para evaluar la efectividad de las capacitaciones que realizamos dentro de una organización. Como Responsables de Capacitación y Desarrollo, es nuestro deber asegurar la calidad de la capacitación (del instructor, del contenido, y la alineación con necesidades de negocio), pero <strong>los jefes juegan un rol clave</strong> a la hora de trasladar los conocimientos de la formación al trabajo cotidiano. De esto surge la necesidad de trabajar codo a codo con las áreas para involucrar a sus jefaturas y gerencias, dándoles el soporte necesario para <strong>mejorar el impacto de las capacitaciones, mejorar el rendimiento de sus equipos e incrementar sus propios resultados e imagen.</strong></p>
 
 

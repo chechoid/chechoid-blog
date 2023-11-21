@@ -5,7 +5,7 @@ date: "08/11/2017"
 categories: [code free, people analytics, kpi, capacitación]
 ---
 
-# **SCRAP LEARNING -- LA CAPACITACIÓN  DESAPROVECHADA**
+# **SCRAP LEARNING -- LA CAPACITACIÓN DESAPROVECHADA**
 
 *En Recursos Humanos una de las obsesiones principales es medir el Retorno de la Inversión (ROI) de la capacitación, lo cual, si bien es posible de medir, requiere un esfuerzo enorme. En cambio, poder medir cuánta plata se desperdicia por la **no aplicación** del conocimiento adquirido en las capacitaciones es mucho más sencillo, y también es una métrica muy valiosa para utilizar.*
 
@@ -15,7 +15,7 @@ La investigación indica el promedio de mercado de Scrap Learning entre las empr
 
 ![](https://i.pinimg.com/originals/5b/85/0a/5b850afdf51756a3b48667d9acbee743.jpg)
 
-## **\"Para muestra basta con un botón"**
+## **"Para muestra basta con un botón"**
 
 Una forma sencilla de medir el Scrap Learning es preguntando a los participantes de un curso cuánto del conocimiento adquirido se aplicará al trabajo. El porcentaje de contenido que **NO** aplicarán al trabajo forma parte del Scrap Learning.
 
@@ -25,15 +25,15 @@ Una forma sencilla de medir el Scrap Learning es preguntando a los participantes
 
 ## Capacitar sobre Capacitar
 
-Una de las primeras cosas que debemos hacer los Responsables de Capacitación y Desarrollo es aclarar **para qué sirve** una capacitación. ¿Cuántas veces hemos escuchado \"*Fulano está desmotivado... mándalo a hacer un curso*\"? ¿O cuántas veces acordamos con un empleado conflictivo o de bajo desempeño pagarle un posgrado? ¿Hemos enviado alguna vez a una persona a una capacitación sobre una tecnología que no usamos en nuestras empresas?
+Una de las primeras cosas que debemos hacer los Responsables de Capacitación y Desarrollo es aclarar **para qué sirve** una capacitación. ¿Cuántas veces hemos escuchado "*Fulano está desmotivado... mándalo a hacer un curso*"? ¿O cuántas veces acordamos con un empleado conflictivo o de bajo desempeño pagarle un posgrado? ¿Hemos enviado alguna vez a una persona a una capacitación sobre una tecnología que no usamos en nuestras empresas?
 
-Incluso de parte de los colaboradores hay una percepción imprecisa sobre la capacitación. Una encuesta que hicimos a empleados de nuestros clientes, frente a la pregunta \"*¿Qué beneficio que no tenés hoy, te gustaría tener?*\", prácticamente 1 de cada 4 respuestas estaba relacionada con capacitación o beneficios en posgrados.
+Incluso de parte de los colaboradores hay una percepción imprecisa sobre la capacitación. Una encuesta que hicimos a empleados de nuestros clientes, frente a la pregunta "*¿Qué beneficio que no tenés hoy, te gustaría tener?*", prácticamente 1 de cada 4 respuestas estaba relacionada con capacitación o beneficios en posgrados.
 
-Esto deja entrever, que lo primero que necesitamos hacer desde Capacitación y Desarrollo es \"*re-educar*\" a la empresa sobre cuál es la utilidad y finalidad de las capacitaciones y en qué casos usarlas.
+Esto deja entrever, que lo primero que necesitamos hacer desde Capacitación y Desarrollo es "*re-educar*" a la empresa sobre cuál es la utilidad y finalidad de las capacitaciones y en qué casos usarlas.
 
 ## Las Preguntas Clave
 
-*\"Una capacitación efectiva **mejorará el desempeño** del participante y del área donde trabaja.\"*
+*"Una capacitación efectiva **mejorará el desempeño** del participante y del área donde trabaja."*
 
 Por el contrario, cuando las capacitaciones no son efectivas y el scrap learning es alto, la performance del colaborador y del sector no mejorarán aún cuando asistan al mejor curso del mundo. Una actividad de formación debe aportar valor al participante y a su área. Para ello, hay 3 preguntas claves para hacer:
 
@@ -83,6 +83,6 @@ Otro dato clave es que, si el conocimiento adquirido durante una capacitación n
 
 El Retorno de Inversión (ROI) de una capacitación es una medida compleja de estimar, en cambio, el Scrap Learning es más sencillo de medir y de solucionar.
 
-Mantener un bajo nivel de Scrap Learning, no sólo se materializa en resultados en la organización, sino que además aumenta la confianza sobre el proceso de capacitación generando un \"círculo virtuoso\" que contribuye a mantenerlo en ese estado.
+Mantener un bajo nivel de Scrap Learning, no sólo se materializa en resultados en la organización, sino que además aumenta la confianza sobre el proceso de capacitación generando un "círculo virtuoso" que contribuye a mantenerlo en ese estado.
 
 Ésta es una métrica poderosa para evaluar la efectividad de las capacitaciones que realizamos dentro de una organización. Como Responsables de Capacitación y Desarrollo, es nuestro deber asegurar la calidad de la capacitación (del instructor, del contenido, y la alineación con necesidades de negocio), pero **los jefes juegan un rol clave** a la hora de trasladar los conocimientos de la formación al trabajo cotidiano. De esto surge la necesidad de trabajar codo a codo con las áreas para involucrar a sus jefaturas y gerencias, dándoles el soporte necesario para **mejorar el impacto de las capacitaciones, mejorar el rendimiento de sus equipos e incrementar sus propios resultados e imagen.**
