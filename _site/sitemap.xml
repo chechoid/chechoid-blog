@@ -2,30 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://chechoid.netlify.app/about.html</loc>
-    <lastmod>2023-09-24T20:24:16.340Z</lastmod>
+    <lastmod>2023-12-08T04:39:31.397Z</lastmod>
   </url>
   <url>
     <loc>https://chechoid.netlify.app/index.html</loc>
-    <lastmod>2023-11-21T11:57:55.661Z</lastmod>
+    <lastmod>2023-12-08T04:39:32.541Z</lastmod>
   </url>
   <url>
     <loc>https://chechoid.netlify.app/posts/cargar_fechas_desde_excel/index.html</loc>
-    <lastmod>2023-09-24T20:24:19.092Z</lastmod>
+    <lastmod>2023-12-08T04:39:33.578Z</lastmod>
   </url>
   <url>
     <loc>https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/index.html</loc>
-    <lastmod>2023-11-21T11:58:00.901Z</lastmod>
+    <lastmod>2023-12-08T04:39:34.925Z</lastmod>
   </url>
   <url>
     <loc>https://chechoid.netlify.app/posts/indicadores_capacitacion/index.html</loc>
-    <lastmod>2023-11-21T11:57:53.295Z</lastmod>
+    <lastmod>2023-12-08T04:39:35.576Z</lastmod>
   </url>
   <url>
     <loc>https://chechoid.netlify.app/posts/maximo-valor-fila/index.html</loc>
-    <lastmod>2023-09-24T20:24:22.848Z</lastmod>
+    <lastmod>2023-12-08T04:39:36.418Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chechoid.netlify.app/posts/microaprendizajes/index.html</loc>
+    <lastmod>2023-12-08T04:39:37.839Z</lastmod>
   </url>
   <url>
     <loc>https://chechoid.netlify.app/posts/scrap_learning/index.html</loc>
-    <lastmod>2023-11-21T11:57:54.248Z</lastmod>
+    <lastmod>2023-12-08T04:39:38.526Z</lastmod>
   </url>
 </urlset>
