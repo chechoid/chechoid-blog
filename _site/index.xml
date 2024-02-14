@@ -9,7 +9,7 @@
 <link>https://chechoid.netlify.app/index.html</link>
 <atom:link href="https://chechoid.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Un blog sobre R y People Analytics</description>
-<generator>quarto-1.3.353</generator>
+<generator>quarto-1.3.450</generator>
 <lastBuildDate>Sat, 09 Dec 2023 03:00:00 GMT</lastBuildDate>
 <item>
   <title>Cargar Campos de Fecha desde Excel Sin Errores</title>
@@ -3775,7 +3775,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
 <li><p>Gastos de Capacitación Externa.</p></li>
 </ul>
 <p>Evidentemente hay un mismatch entre la información que <strong>demandan</strong> las personas que dirigen las empresas y la información que proveemos desde Recursos Humanos.</p>
-<p><a href="https://www.linkedin.com/in/alec-levenson-8915475/">Alec Levenson</a>, uno de los autores más “hardcore evidence” de People Analytics que sigo, de formación en Economía, plantea en una podcast que el ROI no siempre es medible, por ejemplo,de una capacitación en empatía para líderes. Alec explica que el ROI se mide fundamentalmente en cashflow, y que no todo es traducible en términos económicos.</p>
+<p><a href="https://www.linkedin.com/in/alec-levenson-8915475/">Alec Levenson</a>, uno de los autores más <em>“hardcore evidence”</em> de People Analytics que sigo, de formación en Economía, plantea en una podcast que el ROI no siempre es medible, por ejemplo,de una capacitación en empatía para líderes. Alec explica que el ROI se mide fundamentalmente en cashflow, y que no todo es traducible en términos económicos.</p>
 <p>Un punto interesante que plantea Levenson es dice que si encontramos vínculos entre cómo las personas operan en el negocio, en cómo se comunican, se hacen cargo y se comprometen, y en cómo enfocan su tiempo y energía en alcanzar la estrategia del negocio, y haciendo lo que es necesario hacer para <strong>crear ventajas competitivas</strong>, es todo lo que necesitamos mostrar. Si logramos establecer una relación consistente entre los comportamientos de las personas y las ventajas competitivas, generamos información más valiosa y expresiva (agrego yo) que el ROI.</p>
 <section id="de-vuelta-a-la-universidad" class="level2">
 <h2 class="anchored" data-anchor-id="de-vuelta-a-la-universidad"><strong>De vuelta a la Universidad</strong></h2>
@@ -3807,7 +3807,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
 <li><p>Desempeño Individual.</p></li>
 <li><p>Desempeño del Negocio.</p></li>
 </ol>
-<p>Si logramos incorporar métricas que incluyan los aspectos de cualquiera de estos modelos, más nuevas tendencias como el&nbsp;<a href="https://data-4hr.com/2017/11/08/scrap-learning-la-capacitacion-desaprovechada/">Scrap Learning</a>&nbsp;(incluyendo la perspectiva de los jefes) podemos construir un set de información muy valiosa para los stakeholders de la organización. Correr el foco del ROI y enfocarlo en las ventajas competitivas (eso que la empresa hace bien y que la distingue de otras empresas) también nos permite canalizar los esfuerzos de gestión y de análisis en donde más valor aportamos a la rentabilidad del negocio.</p>
+<p>Si logramos incorporar métricas que incluyan los aspectos de cualquiera de estos modelos, más nuevas tendencias como el&nbsp;<a href="https://chechoid.netlify.app/posts/scrap_learning/">Scrap Learning</a>&nbsp;(incluyendo la perspectiva de los jefes) podemos construir un set de información muy valiosa para los stakeholders de la organización. Correr el foco del ROI y enfocarlo en las ventajas competitivas (eso que la empresa hace bien y que la distingue de otras empresas) también nos permite canalizar los esfuerzos de gestión y de análisis en donde más valor aportamos a la rentabilidad del negocio.</p>
 
 
 </section>
