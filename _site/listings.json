@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/animando_graficos/index.html",
       "/posts/cargar_fechas_desde_excel/index.html",
       "/posts/maximo-valor-fila/index.html",
       "/posts/microaprendizajes/index.html",

@@ -6,16 +6,702 @@
       version="2.0">
 <channel>
 <title>chechoid.netlify.app</title>
-<link>https://chechoid.netlify.app/index.html</link>
+<link>https://chechoid.netlify.app/</link>
 <atom:link href="https://chechoid.netlify.app/index.xml" rel="self" type="application/rss+xml"/>
 <description>Un blog sobre R y People Analytics</description>
-<generator>quarto-1.3.450</generator>
-<lastBuildDate>Sat, 09 Dec 2023 03:00:00 GMT</lastBuildDate>
+<generator>quarto-1.4.553</generator>
+<lastBuildDate>Wed, 22 May 2024 03:00:00 GMT</lastBuildDate>
+<item>
+  <title>Animando gráficos con gganimate</title>
+  <dc:creator>Checho </dc:creator>
+  <link>https://chechoid.netlify.app/posts/animando_graficos/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="dale-a-tu-gráfico-alegría-macarena" class="level1">
+<h1>Dale a tu gráfico alegría Macarena</h1>
+<p>Hace rato que no hacía boludeces, así que mientras pensaba un fin de semana qué podía hacer, Boca jugaba un nuevo partido en el cual empezó perdiendo y terminó ganando, y me dí cuenta que nunca había usado el paquete <code>gganimate</code> para animar una visualización, así que qué mejor que usar un partido de Boca para transmitir las sensaciones del partido a través de un gráfico animado.</p>
+</section>
+<section id="gganimate" class="level1">
+<h1>gganimate</h1>
+<p>Para este caso, vamos a necesitar los siguientes paquetes:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(readxl)     <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Leer archivos de excel</span></span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(tidyverse)  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Procesar los datos</span></span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggplot2)    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Hacer gráficos</span></span>
+<span id="cb1-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(gganimate)  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># A lo que vinimos, a animar los gráficos</span></span></code></pre></div>
+</details>
+</div>
+<section id="bocaaa-bocaaaa-bocaaaaaa" class="level2">
+<h2 class="anchored" data-anchor-id="bocaaa-bocaaaa-bocaaaaaa">Bocaaa, Bocaaaa, Bocaaaaaa… 💙💛💙</h2>
+<p>Desde que Diego Martinez, el actual DT de Boca, asumió su cargo en Diciembre de 2023, una de las características que tiene su gestión (además de jugar mejor), es que varios partidos los comenzó perdiendo, y terminó ganando. Al día de hoy, (22 de mayo de 2024), <strong>ganó 12 partidos, de los cuales en 5 el primer gol lo hizo el rival</strong>.</p>
+<p>Así que qué mejor ejemplo para graficar este caso de uso que aprovechando el vendaval de sensaciones que es mirar un partido de Boca Jrs. en la era Martinez.</p>
+<p>En la fecha 2 del torneo local, Boca enfrentó como visitante a Central Córdoba de Santiago del Estero, que <strong>convirtieron el primer gol a los 3’ de comenzado el partido</strong>, y luego hicieron el 2-0 en el tiempo añadido al final del primer tiempo.</p>
+<p>Apenas comenzó el 2° tiempo, Equi Fernandez hizo el 2-1, la Bestia Merentiel lo empató y lo dió vuelta a los 52’ y 80’ respectivamente. Cuando el partido estaba en tiempo añadido, Equi Fernandez puso el 2-4 final.</p>
+<p>Acompáñenme a experimentar el vendaval de sensaciones que es vivir un partido de Boca en un gráfico.</p>
+<p>Vamos a usar el siguiente dataset:</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Carga de datos</span></span>
+<span id="cb2-2">boca <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_excel</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"boca_vibes.xlsx"</span>)</span>
+<span id="cb2-3"></span>
+<span id="cb2-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Explora las primeras 6 filas</span></span>
+<span id="cb2-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(boca)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  minuto central_cordoba  boca diferencia resultado  
+   &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;      
+1      1               0     0          0 Empata Boca
+2      2               0     0          0 Empata Boca
+3      3               1     0         -1 Pierde Boca
+4      4               1     0         -1 Pierde Boca
+5      5               1     0         -1 Pierde Boca
+6      6               1     0         -1 Pierde Boca</code></pre>
+</div>
+</div>
+<p>El dataset contiene un detalle de los resultados minuto a minuto, podemos observar el primer gol de Central Córdoba convertido por Rodrigo Uriel Atencio a los 3 minutos que deja a Boca abajo en el marcador.</p>
+<p>Para hacer el primer gráfico necesitamos transformar un poco los datos para que los goles de <code>central_cordoba</code> y de <code>boca</code> nos queden en una misma columna.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">partido <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> boca <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb4-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_longer</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cols =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(central_cordoba, boca), </span>
+<span id="cb4-3">               <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"equipo"</span>, </span>
+<span id="cb4-4">               <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values_to =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"goles"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb4-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">equipo =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(equipo, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"central_cordoba"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Central Córdoba"</span>),</span>
+<span id="cb4-6">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">equipo =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">str_replace</span>(equipo, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"boca"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Boca Jrs."</span>))</span>
+<span id="cb4-7"></span>
+<span id="cb4-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Ver cómo quedó el dataset</span></span>
+<span id="cb4-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(partido)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  minuto diferencia resultado   equipo          goles
+   &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;           &lt;dbl&gt;
+1      1          0 Empata Boca Central Córdoba     0
+2      1          0 Empata Boca Boca Jrs.           0
+3      2          0 Empata Boca Central Córdoba     0
+4      2          0 Empata Boca Boca Jrs.           0
+5      3         -1 Pierde Boca Central Córdoba     1
+6      3         -1 Pierde Boca Boca Jrs.           0</code></pre>
+</div>
+</div>
+<p>Usemos un gráfico de líneas para visualizar el partido.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(partido) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>                                           <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Datos</span></span>
+<span id="cb6-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_line</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> minuto, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> goles, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> equipo),      <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Tipo de gráfico y variables</span></span>
+<span id="cb6-3">            <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>                               <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Ancho de la línea</span></span>
+<span id="cb6-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_color_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#103f79"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#EA0838"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>     <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Colores custom</span></span>
+<span id="cb6-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_minimal</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>                                          <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Estilo del gráfico</span></span>
+<span id="cb6-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Central Córdoba vs. Boca"</span>,</span>
+<span id="cb6-7">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Goles"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Minuto"</span>,</span>
+<span id="cb6-8">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Equipo"</span>)</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/animando_graficos/index_files/figure-html/boca grafico base-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Le podemos incorporar una línea adicional para visualizar cómo iba el partido para Boca, en el cual podemos apreciar cómo arranca perdiendo, cerca del minuto ’50 lo empata, y en el final lo da vuelta.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Guardamos el gráfico en un objeto llamado 'p'</span></span>
+<span id="cb7-2">p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(partido) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>                                           <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Datos</span></span>
+<span id="cb7-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_line</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> minuto, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> goles, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> equipo),      <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Tipo de gráfico y variables</span></span>
+<span id="cb7-4">            <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>                               <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Ancho de la línea</span></span>
+<span id="cb7-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_color_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#103f79"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#EA0838"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>         <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Colores custom</span></span>
+<span id="cb7-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_minimal</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>                                          <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Estilo del gráfico</span></span>
+<span id="cb7-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">title =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Central Córdoba vs. Boca"</span>,</span>
+<span id="cb7-8">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Minuto"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Goles"</span>,</span>
+<span id="cb7-9">       <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Equipo"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_line</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> boca, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> minuto, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> diferencia), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.3</span>,</span>
+<span id="cb7-11">            <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linetype =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span>
+<span id="cb7-12"></span>
+<span id="cb7-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Veamos el gráfico</span></span>
+<span id="cb7-14">p</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/animando_graficos/index_files/figure-html/primer grafico-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Pero venimos a ver un gráfico animado, así que demosle movimiento al gráfico.</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Animemos el gráfico</span></span>
+<span id="cb8-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># transition_reveal funciona con gráficos de líneas</span></span>
+<span id="cb8-3">p <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb8-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">transition_reveal</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">along =</span> minuto) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># MAGIA!!!!</span></span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/animando_graficos/index_files/figure-html/boca primera animacion-1.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Y manipulando un poco los datos podemos hacer cosas gloriosas…</p>
+<div class="cell">
+<details open="" class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Añadir una columna para agregar un emoji en función de la diferencia y los goles</span></span>
+<span id="cb9-2">boca <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> boca <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb9-3">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Arranca el partido</span></span>
+<span id="cb9-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">estado =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(diferencia <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> , <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"meh"</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>( </span>
+<span id="cb9-5">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Primer gol de Central Córdoba</span></span>
+<span id="cb9-6">    diferencia <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> central_cordoba <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cry"</span>,  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(</span>
+<span id="cb9-7">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Segundo gol de Central Córdoba</span></span>
+<span id="cb9-8">      diferencia <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> central_cordoba <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"angry"</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(</span>
+<span id="cb9-9">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Primer gol de Boca</span></span>
+<span id="cb9-10">        diferencia <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> boca <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"fear"</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(</span>
+<span id="cb9-11">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Segundo gol de Boca</span></span>
+<span id="cb9-12">          diferencia <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> boca <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"biceps"</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">if_else</span>(</span>
+<span id="cb9-13">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Tercer gol de Boca y cuarto gol</span></span>
+<span id="cb9-14">            diferencia <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"smile"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"lol"</span>)</span>
+<span id="cb9-15">          )</span>
+<span id="cb9-16">        )</span>
+<span id="cb9-17">      ))))</span>
+<span id="cb9-18"></span>
+<span id="cb9-19"></span>
+<span id="cb9-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Mapear cada nombre de emoji a un emoji</span></span>
+<span id="cb9-21"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Link al paquete de emoji: https://github.com/hadley/emo</span></span>
+<span id="cb9-22">boca <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> boca <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb9-23">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">emoji =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">map_chr</span>(estado, emo<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span>ji))</span>
+<span id="cb9-24"></span>
+<span id="cb9-25"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Veamos como quedan los datos</span></span>
+<span id="cb9-26"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">head</span>(boca)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 7
+  minuto central_cordoba  boca diferencia resultado   estado emoji       
+   &lt;dbl&gt;           &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;       
+1      1               0     0          0 Empata Boca meh    "\U0001f612"
+2      2               0     0          0 Empata Boca meh    "\U0001f612"
+3      3               1     0         -1 Pierde Boca cry    "\U0001f622"
+4      4               1     0         -1 Pierde Boca cry    "\U0001f622"
+5      5               1     0         -1 Pierde Boca cry    "\U0001f622"
+6      6               1     0         -1 Pierde Boca cry    "\U0001f622"</code></pre>
+</div>
+<details open="" class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Hagamos el gráfico final con anotaciones</span></span>
+<span id="cb11-2">p <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb11-3">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Añadimos anotaciones en función de los goles</span></span>
+<span id="cb11-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> boca, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.5</span>, </span>
+<span id="cb11-5">                             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Central Córdoba: "</span>, central_cordoba,</span>
+<span id="cb11-6">                                            <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">\n</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">Boca: "</span>, boca)),</span>
+<span id="cb11-7">            <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>,        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Tamaño de la letra</span></span>
+<span id="cb11-8">            <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hjust =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span>     <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Alinea a la izquierda</span></span>
+<span id="cb11-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Añadimos anotaciones usando emojis</span></span>
+<span id="cb11-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> boca, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.5</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> emoji), </span>
+<span id="cb11-11">            <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">15</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb11-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Añadimos un "subtítulo"</span></span>
+<span id="cb11-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_text</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> boca, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4.5</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">label =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste0</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Resultado: "</span>, resultado)), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hjust =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb11-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Animemos el gráfico</span></span>
+<span id="cb11-15">   <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">transition_reveal</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">along =</span> minuto)</span></code></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/animando_graficos/index_files/figure-html/boca_full_experience-1.gif" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Si quieren ver cómo fue el partido, pueden ver el siguiente resumen. Después me cuentan qué transmite más emoción, si mi gráfico o el video 🧐</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/lVcTxBZfPNg" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>fun</category>
+  <category>ggplot2</category>
+  <category>proyectos</category>
+  <guid>https://chechoid.netlify.app/posts/animando_graficos/</guid>
+  <pubDate>Wed, 22 May 2024 03:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Cargar Campos de Fecha desde Excel Sin Errores</title>
   <dc:creator>Checho </dc:creator>
-  <link>https://chechoid.netlify.app/posts/cargar_fechas_desde_excel/index.html</link>
+  <link>https://chechoid.netlify.app/posts/cargar_fechas_desde_excel/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -23,7 +709,7 @@
 <p>¿A quién no le pasó esto alguna vez?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://chechoid.netlify.app/posts/cargar_fechas_desde_excel/data/phoebe_joey.jpg" class="img-fluid figure-img" width="452"></p>
+<p><img src="https://chechoid.netlify.app/posts/cargar_fechas_desde_excel/data/phoebe_joey.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="452"></p>
 </figure>
 </div>
 <p>Esto en R muchas veces también nos trae dolores de cabeza así que en esto post vamos a ver cómo podemos solucionar esto.</p>
@@ -385,14 +1071,15 @@ font-style: inherit;"># Ver los resultados</span></span>
   <category>análisis</category>
   <category>date</category>
   <category>fecha</category>
-  <guid>https://chechoid.netlify.app/posts/cargar_fechas_desde_excel/index.html</guid>
+  <guid>https://chechoid.netlify.app/posts/cargar_fechas_desde_excel/</guid>
   <pubDate>Sat, 09 Dec 2023 03:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Extraer el máximo valor de una fila</title>
   <dc:creator>Checho </dc:creator>
-  <link>https://chechoid.netlify.app/posts/maximo-valor-fila/index.html</link>
+  <link>https://chechoid.netlify.app/posts/maximo-valor-fila/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -537,7 +1224,7 @@ font-style: inherit;">c</span>(Valor.A, Valor.B, Valor.C, Valor.D)))</span></cod
 </div>
 </div>
 <p>Claramente no es es el resultado que esperaba, así que mi reacción fue la siguiente:</p>
-<p><img src="https://chechoid.netlify.app/posts/maximo-valor-fila/https:/media.giphy.com/media/PmRgaD2xj0KH2pPrVF/giphy.gif" class="img-fluid" width="286"></p>
+<p><img src="https://media.giphy.com/media/PmRgaD2xj0KH2pPrVF/giphy.gif" class="img-fluid" width="286"></p>
 </section>
 <section id="la-solución" class="level2">
 <h2 class="anchored" data-anchor-id="la-solución">La solución</h2>
@@ -674,7 +1361,7 @@ font-style: inherit;">max</span>(Valor))</span></code></pre></div>
 </div>
 <p>Claramente este es otro enfoque, y depende de la necesidad es una opción válida. Pero en este caso particular necesitaba mantener una fila para cada persona porque después iba a exportar esta tabla a un archivo que luego es cargado en un tablero en Power BI.</p>
 <p>Así que, una vez logrado mi objetivo, me dispuse a celebrar como corresponde.</p>
-<p><img src="https://chechoid.netlify.app/posts/maximo-valor-fila/https:/media.giphy.com/media/lhwgeqN0pLPBMlFNnn/giphy.gif" class="img-fluid"></p>
+<p><img src="https://media.giphy.com/media/lhwgeqN0pLPBMlFNnn/giphy.gif" class="img-fluid"></p>
 
 
 </section>
@@ -686,14 +1373,15 @@ font-style: inherit;">max</span>(Valor))</span></code></pre></div>
   <category>análisis</category>
   <category>dplyr</category>
   <category>data wrangling</category>
-  <guid>https://chechoid.netlify.app/posts/maximo-valor-fila/index.html</guid>
+  <guid>https://chechoid.netlify.app/posts/maximo-valor-fila/</guid>
   <pubDate>Thu, 13 Oct 2022 03:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Microaprendizajes de un proyecto</title>
   <dc:creator>Checho </dc:creator>
-  <link>https://chechoid.netlify.app/posts/microaprendizajes/index.html</link>
+  <link>https://chechoid.netlify.app/posts/microaprendizajes/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -705,15 +1393,15 @@ font-style: inherit;">max</span>(Valor))</span></code></pre></div>
 <p>Voy a usar una encuesta simulada para no violar la confidencialidad de los datos, pero va a ser algo análogo a lo que estuve usando en el proyecto.</p>
 <p>Para explotar al máximo esta sesión conviene saber un poco de hacer informes con RMarkdown. Si necesitás un tutorial sobre ese tema te comparto el <a href="https://youtu.be/KT4UfTqAYoU">video que hicimos el año pasado</a>.</p>
 <section id="section" class="level3">
-<h3 class="anchored" data-anchor-id="section"><img src="https://chechoid.netlify.app/posts/microaprendizajes/https:/media.npr.org/assets/img/2023/05/26/honest-work-meme-cb0f0fb2227fb84b77b3c9a851ac09b095ab74d8-s1100-c50.jpg" class="img-fluid" width="395"></h3>
+<h3 class="anchored" data-anchor-id="section"><img src="https://media.npr.org/assets/img/2023/05/26/honest-work-meme-cb0f0fb2227fb84b77b3c9a851ac09b095ab74d8-s1100-c50.jpg" class="img-fluid" width="395"></h3>
 </section>
 <section id="repo" class="level3">
 <h3 class="anchored" data-anchor-id="repo"> <a href="https://github.com/r4hr/r4hr_microaprendizajes">Repo</a></h3>
 <p>Este material se puede utilizar y compartir sin fines comerciales y citando la fuente.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/https:/upload.wikimedia.org/wikipedia/commons/thumb/9/99/Cc-by-nc_icon.svg/1200px-Cc-by-nc_icon.svg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Licencia</figcaption>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Cc-by-nc_icon.svg/1200px-Cc-by-nc_icon.svg" class="img-fluid figure-img"></p>
+<figcaption>Licencia</figcaption>
 </figure>
 </div>
 </section>
@@ -1272,7 +1960,11 @@ font-style: inherit;">""</span>,</span>
 background-color: null;
 font-style: inherit;">caption =</span> fuente)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/grafico1-1.png" class="img-fluid" style="width:80.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/grafico1-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Puede ocurrir que necesitemos reutilizar el gráfico. Hacer la gran <em>stackoverflow</em> (copiar y pegar el código) es una opción, pero puede generar errores y por otro lado implica tiempo de procesamiento.</p>
@@ -1347,7 +2039,11 @@ font-style: inherit;">""</span>,</span>
 background-color: null;
 font-style: inherit;">caption =</span> fuente)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" style="width:80.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -1440,7 +2136,11 @@ font-style: inherit;">""</span>,</span>
 background-color: null;
 font-style: inherit;">caption =</span> fuente)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/etiq-largas-1.png" class="img-fluid" style="width:80.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/etiq-largas-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Queda hermoso, no? 😱</p>
@@ -1567,7 +2267,11 @@ font-style: inherit;">""</span>,</span>
 background-color: null;
 font-style: inherit;">caption =</span> fuente)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/etiq-largas2-1.png" class="img-fluid" style="width:80.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/etiq-largas2-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Ahora queda mucho mejor 👍</p>
@@ -1669,7 +2373,11 @@ font-style: inherit;">caption =</span> fuente)</span>
 <span id="cb11-13"></span>
 <span id="cb11-14">ranking</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/etiq-largas3-1.png" class="img-fluid" style="width:80.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/etiq-largas3-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -1718,7 +2426,11 @@ font-style: inherit;">family =</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Ubuntu Mono"</span>) </span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/texto1-1.png" class="img-fluid" style="width:80.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/texto1-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Miremos lo que pasa cuando queremos agregar más información al gráfico, por ejemplo, con los resultados por país.</p>
@@ -1869,7 +2581,11 @@ font-style: inherit;">"Ubuntu Mono"</span>)             <span class="co" style="
 background-color: null;
 font-style: inherit;"># Modifica la fuente</span></span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/texto2-1.png" class="img-fluid" style="width:80.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/texto2-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>El problema es que todas las etiquetas de cada barra están centradas con la etiqueta del eje <em>y</em>. En la guía de <code>geom_text</code> en la documentación de <code>ggplot2</code> <a href="https://ggplot2.tidyverse.org/reference/geom_text.html">encontramos como solucionar el problema</a> usando el parámetro <code>position_dodge()</code>.</p>
@@ -1930,7 +2646,11 @@ font-style: inherit;"># Modifica la fuente</span></span>
 <span id="cb14-8"></span>
 <span id="cb14-9">ranking</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/text3-1.png" class="img-fluid" style="width:80.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/text3-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Otra mejora que podemos hacer al gráfico es acomodar los colores en la leyenda (la referencia de los colores) para que tengan la misma secuencia que tiene en el gráfico, es decir que el verde oscuro aparezca primero al igual que la barra con el verde más oscuro en el gráfico.</p>
@@ -1962,7 +2682,11 @@ font-style: inherit;">axis.text.x =</span> <span class="fu" style="color: #4758A
 background-color: null;
 font-style: inherit;">element_blank</span>())</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/texto4-1.png" class="img-fluid" style="width:80.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/texto4-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Cuando estamos mapeando una variable categórica en el eje <em>y</em>, R lo ordena alfabéticamente desde <em>abajo</em> <strong>hacia</strong> <em>arriba</em>.</p>
@@ -2048,7 +2772,11 @@ font-style: inherit;">""</span>,</span>
 background-color: null;
 font-style: inherit;">caption =</span> fuente)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/textoy-1.png" class="img-fluid" style="width:80.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/textoy-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Podemos usar la función <code>fct_rev</code> del paquete <em>forcats</em> para poner al revés las etiquetas del eje <em>y</em> cuando estamos mapeando las variables dentro de <code>ggplot</code></p>
@@ -2138,7 +2866,11 @@ font-style: inherit;">""</span>,</span>
 background-color: null;
 font-style: inherit;">caption =</span> fuente)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/textoy2-1.png" class="img-fluid" style="width:80.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/textoy2-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -2294,7 +3026,11 @@ font-style: inherit;">"Resultado"</span>,</span>
 background-color: null;
 font-style: inherit;">caption =</span> fuente)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/fun3-1.png" class="img-fluid" style="width:80.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/index_files/figure-html/fun3-1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Todavía estoy resolviendo como crear funciones usando cualquier tipo de variable en la función. Por ahora, lo estoy resolviendo creando una función para cada combinación de variables que agrupo. No es lo ideal, pero es lo que hay. 🤷</p>
@@ -2366,7 +3102,7 @@ font-style: inherit;"># Error in is.finite(x) : default method not implemented f
 <p><em>Lo barato sale caro</em></p>
 <p>Dicho popular</p>
 </blockquote>
-<p><img src="https://chechoid.netlify.app/posts/microaprendizajes/https:/linternasybosques.files.wordpress.com/2018/10/meme-no-creas.png" class="img-fluid" width="300"></p>
+<p><img src="https://linternasybosques.files.wordpress.com/2018/10/meme-no-creas.png" class="img-fluid" width="300"></p>
 <p>La encuesta que estábamos analizando era anónima, lo cual hacía imposible poder cruzar datos contra el listado de empleados.</p>
 <p>Pero, sí podíamos calcular los resultados según la composición del liderazgo. Para eso teníamos que calcular el porcentaje de líderes hombres y mujeres por sector.</p>
 <div class="cell">
@@ -2533,14 +3269,15 @@ font-style: inherit;">-</span>lider)</span></code></pre></div>
   <category>tip</category>
   <category>visualización</category>
   <category>rmarkdown</category>
-  <guid>https://chechoid.netlify.app/posts/microaprendizajes/index.html</guid>
+  <guid>https://chechoid.netlify.app/posts/microaprendizajes/</guid>
   <pubDate>Wed, 05 Oct 2022 03:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Haciendo pavadas en R</title>
   <dc:creator>Checho </dc:creator>
-  <link>https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/index.html</link>
+  <link>https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2563,15 +3300,15 @@ font-style: inherit;">-</span>lider)</span></code></pre></div>
 <p>Este soy yo:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/archivos/sergio.jpg" class="img-fluid figure-img" alt="Foto de Sergio, sosteniendo una copa de vino" width="372"></p>
-<figcaption class="figure-caption">En mi luna de miel en Mendoza</figcaption>
+<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/archivos/sergio.jpg" class="img-fluid figure-img" width="372"></p>
+<figcaption>En mi luna de miel en Mendoza</figcaption>
 </figure>
 </div>
 <p>Como verán, tengo el pelo más o menos largo, con flequillo y barba candado. Mucha gente dice que me parezco a Nicolás del Caño 🤷, un diputado del Partido de los Trabajadores Socialistas de Argentina y que tiene un corte de pelo parecido al mío y también usa barba.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/https:/www.izquierdadiario.es/IMG/auton3.jpg?1605455691" class="img-fluid figure-img" width="221"></p>
-<figcaption class="figure-caption">Nicolás del Caño</figcaption>
+<p><img src="https://www.izquierdadiario.es/IMG/auton3.jpg?1605455691" class="img-fluid figure-img" width="221"></p>
+<figcaption>Nicolás del Caño</figcaption>
 </figure>
 </div>
 <p>En estas fotos no nos vemos tan parecidos, pero déjenme contarles una anécdota. Cuando mi hija tenía 3 años aproximadamente estábamos en campaña electoral de diputados y había afiches de todos los partidos políticos pegados por todos lados, incluyendo claro está los del PTS y Nicolás del Caño obviamente.</p>
@@ -2580,20 +3317,20 @@ font-style: inherit;">-</span>lider)</span></code></pre></div>
 <p>Otros personajes con los que mis amigos suelen bromear que somos parecidos son el Gigoló, Roberto Baradel, o el Mono Burgos.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/https:/www.cronica.com.ar/export/sites/cronica/img/2019/05/06/gigolo_2.jpg_343233968.jpg" class="img-fluid figure-img" width="184"></p>
-<figcaption class="figure-caption">El Gigoló</figcaption>
+<p><img src="https://www.cronica.com.ar/export/sites/cronica/img/2019/05/06/gigolo_2.jpg_343233968.jpg" class="img-fluid figure-img" width="184"></p>
+<figcaption>El Gigoló</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/https:/cdn.cnn.com/cnnnext/dam/assets/190306231108-pba-baradel-large-169.jpg" class="img-fluid figure-img" width="339"></p>
-<figcaption class="figure-caption">Roberto Baradel</figcaption>
+<p><img src="https://cdn.cnn.com/cnnnext/dam/assets/190306231108-pba-baradel-large-169.jpg" class="img-fluid figure-img" width="339"></p>
+<figcaption>Roberto Baradel</figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/https:/phantom-elmundo.unidadeditorial.es/6744bff920f7004ccfe5c7f23aefac88/crop/0x29/1972x1340/resize/1200/f/webp/assets/multimedia/imagenes/2020/06/03/15912134233683.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">El Mono Burgos</figcaption>
+<p><img src="https://phantom-elmundo.unidadeditorial.es/6744bff920f7004ccfe5c7f23aefac88/crop/0x29/1972x1340/resize/1200/f/webp/assets/multimedia/imagenes/2020/06/03/15912134233683.jpg" class="img-fluid figure-img"></p>
+<figcaption>El Mono Burgos</figcaption>
 </figure>
 </div>
 <p>Ya sé lo que están pensando: <em>Con amigos así quién necesita enemigos</em>. Pero igual se hacen querer.</p>
@@ -2605,7 +3342,7 @@ font-style: inherit;">-</span>lider)</span></code></pre></div>
 <p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/archivos/clones_paint.jpg" class="img-fluid"></p>
 <p>La explicación es que yo, dentro de ese conjunto de datos, estoy más cerca de pertenecer al cluster del Mono Burgos y de Nicolás del Caño, más que del cluster de Keanu Reeves, Jeff Bridges y Brad Pitt.</p>
 <p>Y después tuve una idea. <strong>¿Y si hago esto con datos?</strong></p>
-<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/https:/media1.giphy.com/media/3oz8xP6SaSkSU9dhcI/200w.gif?cid=82a1493b6dys6v5sl1wm0y65sc1ej72nglv6y40cwx6rrtw2&amp;rid=200w.gif&amp;ct=g" class="img-fluid"></p>
+<p><img src="https://media1.giphy.com/media/3oz8xP6SaSkSU9dhcI/200w.gif?cid=82a1493b6dys6v5sl1wm0y65sc1ej72nglv6y40cwx6rrtw2&amp;rid=200w.gif&amp;ct=g" class="img-fluid"></p>
 </section>
 </section>
 <section id="haciendo-cosas-raras-para-gente-normal-en-r" class="level1">
@@ -2876,7 +3613,11 @@ font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">2</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/index_files/figure-html/preproceso2-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/index_files/figure-html/preproceso2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -2988,7 +3729,11 @@ font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">3</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/index_files/figure-html/resultados_promedios-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/index_files/figure-html/resultados_promedios-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>En esencia, este es el gráfico al que queremos llegar. Así como está es medio aburrido, así que vamos a enchular este gráfico con imágenes.</p>
@@ -3231,7 +3976,11 @@ font-style: inherit;">\n</span><span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></code></pre></div>
 <div class="cell-output-display">
-<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/index_files/figure-html/grafico_final-1.png" class="img-fluid" width="960"></p>
+<div>
+<figure class="figure">
+<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/index_files/figure-html/grafico_final-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Como conclusión del análisis <strong>los datos dicen</strong> que estoy alejado de las características de Nicolás del Caño y Roberto Baradel por ejemplo y <strong>tengo características muy similares que Keanu Reeves</strong>. O sea que los datos indican que me parezco a Keanu. Dato, no opinión 😎.</p>
@@ -3249,7 +3998,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
 <p>Y como regalo final, me reí mucho con los comentarios que hicieron las personas que participaron del relevamiento de datos así que los comparto con ustedes:</p>
 <div class="cell">
 <div class="cell-output-display">
-
+<div>
 <div id="qnclmewjof" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#qnclmewjof table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -3690,46 +4439,92 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   text-indent: 25px;
 }
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Comentarios">Comentarios</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="comentarios" class="gt_row gt_left">te rompí los patrones a la merd</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">jaja me rei mucho!</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Caruso a la Final!</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Johnny Depp, 8/8</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Hajajja</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">De Brad Pitt te copiaste el peinado, no?</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">¿es requisito tener pelo largo para parecer fachero?  mostrame indicadores</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Sergio vos no estas bien haciendo esto!!!  Jajaja</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Falta Denicolay</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Jajaj muy bueno</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Haces todo esto para levantarte minas Mora, lo sabemos!!!</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">ME ENCANTÓ! curiosa, dinámica y original iniciativa como siempre!!</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Copado el test!!</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">¿todos hombres?</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Hajajja</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">WTH??</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Sos un capo!!! me divertí mucho!!!</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Falta el test de mujeres.....</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Bronn, de game of thrones.</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Muy buen ejercicio!  A algunos personajes el 1 le quedaba grande! habiliten el 0 jaja Éxitos!</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Un genio Sergio 😂😂😂 Podría ser también a la versión adulta del niño del sexto sentido, el que dice"veo gente muerta" ¿? 🤔</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Puedo decir que la foto que te sacaste, es muy de MA de instagram</td></tr>
-    <tr><td headers="comentarios" class="gt_row gt_left">Jaja me hiciste reír. Cómo no soy de Argentina tuve que googlear algunos, pero todo bien. Super entretenido</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="Comentarios" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Comentarios</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">te rompí los patrones a la merd</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">jaja me rei mucho!</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Caruso a la Final!</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">Johnny Depp, 8/8</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Hajajja</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">De Brad Pitt te copiaste el peinado, no?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">¿es requisito tener pelo largo para parecer fachero? mostrame indicadores</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">Sergio vos no estas bien haciendo esto!!! Jajaja</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Falta Denicolay</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">Jajaj muy bueno</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Haces todo esto para levantarte minas Mora, lo sabemos!!!</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">ME ENCANTÓ! curiosa, dinámica y original iniciativa como siempre!!</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Copado el test!!</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">¿todos hombres?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Hajajja</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">WTH??</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Sos un capo!!! me divertí mucho!!!</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">Falta el test de mujeres.....</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Bronn, de game of thrones.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">Muy buen ejercicio! A algunos personajes el 1 le quedaba grande! habiliten el 0 jaja Éxitos!</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Un genio Sergio 😂😂😂 Podría ser también a la versión adulta del niño del sexto sentido, el que dice"veo gente muerta" ¿? 🤔</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">Puedo decir que la foto que te sacaste, es muy de MA de instagram</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Jaja me hiciste reír. Cómo no soy de Argentina tuve que googlear algunos, pero todo bien. Super entretenido</td>
+</tr>
+</tbody>
 </table>
+
+</div>
 </div>
 </div>
 </div>
 <p>Muchas gracias por leer!</p>
-<p><img src="https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/https:/media.giphy.com/media/QAsBwSjx9zVKoGp9nr/giphy.gif" class="img-fluid"></p>
+<p><img src="https://media.giphy.com/media/QAsBwSjx9zVKoGp9nr/giphy.gif" class="img-fluid"></p>
 
 
 </section>
@@ -3740,21 +4535,22 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   <category>fun</category>
   <category>ggplot2</category>
   <category>proyectos</category>
-  <guid>https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/index.html</guid>
+  <guid>https://chechoid.netlify.app/posts/haciendo-boludeces-en-r/</guid>
   <pubDate>Thu, 01 Sep 2022 03:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Indicadores de Capacitación</title>
   <dc:creator>Checho </dc:creator>
-  <link>https://chechoid.netlify.app/posts/indicadores_capacitacion/index.html</link>
+  <link>https://chechoid.netlify.app/posts/indicadores_capacitacion/</link>
   <description><![CDATA[ 
+
 
 
 
 
 <section id="indicadores-de-capacitación" class="level1">
 <h1>Indicadores de Capacitación</h1>
-<p><img src="https://chechoid.netlify.app/posts/indicadores_capacitacion/https:/github.com/chechoid/chechoid-blog/blob/main/posts/indicadores_capacitacion/16251.jpg?raw=true" class="img-fluid"></p>
+<p><img src="https://github.com/chechoid/chechoid-blog/blob/main/posts/indicadores_capacitacion/16251.jpg?raw=true" class="img-fluid"></p>
 <p>Con la Capacitación en las empresas pasa algo curioso: hace unos años atrás, entre mis compañeros de la Maestría de Data Mining hice una encuesta sobre beneficios, y una de las preguntas que hacía era&nbsp;<em>“¿Qué beneficio que no tenés hoy te gustaría tener?”</em>. Y 1 de cada 4 respuestas estaba relacionada con Capacitación (capacitación in company, desde cuotas en posgrados, certificaciones, etc.). Y yo pensaba por dentro <em>“Pero… la capacitación no es un beneficio”</em>. Sin embargo las personas perciben a la capacitación como un beneficio.</p>
 <p>Los cambios que impone la tecnología, y la rapidez con la que avanza, hacen que, como dijo&nbsp;<a href="https://www.linkedin.com/in/diegobekerman/">Diego Bekerman</a>, las empresas dejen de buscar&nbsp;<em>“graduados de”</em>&nbsp;para buscar&nbsp;<em>“personas que saben de”</em>. Esto plantea una nueva necesidad de Planificación Estratégica de Capital Humano en donde se plantean las capacidades que hoy tienen las personas y se las contrasta con las capacidades futuras que requiere la empresa. Y acá surge una de las primeras cuestiones: Estas capacidades, ¿las desarrollamos internamente o las salimos a buscar al mercado?</p>
 <p>Después tenemos variables de contexto. No debe haber ni un sólo CEO, Gerente General o Dueño de una empresa que desconozca el valor y la importancia de la capacitación de sus empleados. Sin embargo, es uno de los primeros presupuestos que se corta en épocas de vacas flacas. Y uno de los principales factores que determinan estas decisiones seguramente se relaciona con que no cuentan con suficiente información sobre el impacto de la capacitación en los resultados de la empresa.</p>
@@ -3818,14 +4614,15 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   <category>people analytics</category>
   <category>kpi</category>
   <category>capacitación</category>
-  <guid>https://chechoid.netlify.app/posts/indicadores_capacitacion/index.html</guid>
+  <guid>https://chechoid.netlify.app/posts/indicadores_capacitacion/</guid>
   <pubDate>Sun, 01 Mar 2020 03:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Scrap Learning: La Capacitación Desaprovechada</title>
   <dc:creator>Checho </dc:creator>
-  <link>https://chechoid.netlify.app/posts/scrap_learning/index.html</link>
+  <link>https://chechoid.netlify.app/posts/scrap_learning/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3835,14 +4632,14 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
 <p><em>En Recursos Humanos una de las obsesiones principales es medir el Retorno de la Inversión (ROI) de la capacitación, lo cual, si bien es posible de medir, requiere un esfuerzo enorme. En cambio, poder medir cuánta plata se desperdicia por la <strong>no aplicación</strong> del conocimiento adquirido en las capacitaciones es mucho más sencillo, y también es una métrica muy valiosa para utilizar.</em></p>
 <p>El <strong><em>Scrap Learning</em></strong> es una forma de medir cuántos de los conocimientos adquiridos en las capacitaciones <strong>no se trasladan</strong> al trabajo, lo cual es mucho más sencillo y tan valioso de medir como el ROI.</p>
 <p>La investigación indica el promedio de mercado de Scrap Learning entre las empresas que no lo miden es del 45%. Es decir que si tenemos un presupuesto anual de $ 500.000 para las capacitaciones, $ 225.000 es dinero mal invertido y por ende, la capacitación deja de ser una inversión para convertirse en un costo.</p>
-<p><img src="https://chechoid.netlify.app/posts/scrap_learning/https:/i.pinimg.com/originals/5b/85/0a/5b850afdf51756a3b48667d9acbee743.jpg" class="img-fluid"></p>
+<p><img src="https://i.pinimg.com/originals/5b/85/0a/5b850afdf51756a3b48667d9acbee743.jpg" class="img-fluid"></p>
 <section id="para-muestra-basta-con-un-botón" class="level2">
 <h2 class="anchored" data-anchor-id="para-muestra-basta-con-un-botón"><strong>“Para muestra basta con un botón”</strong></h2>
 <p>Una forma sencilla de medir el Scrap Learning es preguntando a los participantes de un curso cuánto del conocimiento adquirido se aplicará al trabajo. El porcentaje de contenido que <strong>NO</strong> aplicarán al trabajo forma parte del Scrap Learning.</p>
 <p><em>Ejemplo</em>: Le preguntamos a un participante cuántos de los conocimientos adquiridos en una capacitación estima aplicar en sus tareas cotidianas. Si dice que piensa aplicar el 60% del contenido a su trabajo, el scrap learning es del 40%.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://chechoid.netlify.app/posts/scrap_learning/https:/github.com/chechoid/chechoid-blog/blob/main/posts/scrap_learning/archivos/formula_scrap_learning.png?raw=true" class="img-fluid figure-img"></p>
+<p><img src="https://github.com/chechoid/chechoid-blog/blob/main/posts/scrap_learning/archivos/formula_scrap_learning.png?raw=true" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </section>
@@ -3868,7 +4665,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
 <p>En la primera columna hay causas que están bajo el control del área de Capacitación y Desarrollo, como ser la calidad del instructor, del material, la alineación con las necesidades del negocio, entre otras. Pero sin dudas uno de los factores más importantes e influyentes es la involucración de los Jefes y Gerencias en el proceso de Capacitación.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://chechoid.netlify.app/posts/scrap_learning/https:/github.com/chechoid/chechoid-blog/blob/main/posts/scrap_learning/archivos/control_contexto.png?raw=true" class="img-fluid figure-img"></p>
+<p><img src="https://github.com/chechoid/chechoid-blog/blob/main/posts/scrap_learning/archivos/control_contexto.png?raw=true" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 <p>Como en muchas cosas de Recursos Humanos, la clave son los líderes. ¿De qué manera pueden influir en la reducción del scrap learning? Básicamente hay 5 factores preponderantes:</p>
@@ -3909,7 +4706,7 @@ font-style: inherit;">Ninguna tía participó del relevamiento"</span>)</span></
   <category>people analytics</category>
   <category>kpi</category>
   <category>capacitación</category>
-  <guid>https://chechoid.netlify.app/posts/scrap_learning/index.html</guid>
+  <guid>https://chechoid.netlify.app/posts/scrap_learning/</guid>
   <pubDate>Fri, 11 Aug 2017 03:00:00 GMT</pubDate>
 </item>
 </channel>
