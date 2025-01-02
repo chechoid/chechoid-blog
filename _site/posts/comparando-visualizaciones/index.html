@@ -136,7 +136,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/sergiogarciamor"> <i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://bsky.app/profile/checho-puchero.bsky.social"> <i class="bi bi-bluesky" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -236,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="preparación-de-datos">Preparación de datos</h2>
 <p>Estoy cargando datos desde la fuente original. Por eso, esto requiere algo de limpieza de datos. Los datos están filtrados para mostrar solo los resultados de Argentina, y realicé algunos cálculos para estimar los salarios de medio tiempo como equivalentes a un salario de tiempo completo. Esos son los datos que voy a usar para hacer las visualizaciones. Podés descargar una versión limpia de estos datos desde este <a href="https://raw.githubusercontent.com/chechoid/comparing-visualizations/main/hr_salaries_arg.csv">repositorio de GitHub</a>.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Librarias &amp; Data ----</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    <span class="co"># Limpieza y Manipulación de Datos</span></span>
@@ -300,7 +300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>La siguiente sección es para customizar los gráficos.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>) <span class="co"># Cambia la notación científica por valores nominales</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -335,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Veamos un resumen de los datos.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordena los puestos por jerarquía</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>salaries <span class="ot">&lt;-</span> salaries <span class="sc">%&gt;%</span> </span>
@@ -358,7 +358,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Hay un par de valores inusuales. Primero, el valor mínimo, que claramente es un error (o alguien con malas intenciones), y luego el valor máximo, que podría ser posible, pero es altamente inusual para el mercado argentino. Si hacemos un histograma, el resultado sería extraño.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salaries, <span class="fu">aes</span>(<span class="at">x =</span> ft_salary)) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
@@ -379,7 +379,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Acá es donde <code>funModeling</code> hace su magia. La función <code>profiling_num</code> arroja una tabla con un montón de información estadística de resumen.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(numerical <span class="ot">&lt;-</span> <span class="fu">profiling_num</span>(salaries))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -392,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Dado que quiero analizar los valores centrales de los salarios, voy a eliminar todos los valores por fuera de los percentiles 5 y 95.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Guarda los valores de los percentiles 5 y 95 de la tabla numerical</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>p05 <span class="ot">&lt;-</span> numerical[<span class="dv">1</span>,<span class="dv">6</span>]</span>
@@ -412,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Ahora que tenemos una versión más limpia de los datos podemos empezar a comparar las visualizaciones.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salaries, <span class="fu">aes</span>(<span class="at">x =</span> ft_salary)) <span class="sc">+</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span></span>
@@ -443,7 +443,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>¿Por qué usar un boxplot en lugar de un simple gráfico de barras? Probemos usando un gráfico de barras para comparar el salario mediano de hombres y mujeres en cada rol:</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>salaries <span class="sc">%&gt;%</span> </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(role, gender) <span class="sc">%&gt;%</span> </span>
@@ -474,7 +474,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="boxplots">Boxplots</h2>
 <p>En el debate en LinkedIn, Nick Desbarats dice que tiene problemas para encontrar casos de uso donde los boxplots fueran la mejor opción, así que compartí el siguiente gráfico:</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salaries, <span class="fu">aes</span>(<span class="at">x =</span> role, <span class="at">y =</span> ft_salary, <span class="at">fill =</span> gender)) <span class="sc">+</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
@@ -506,7 +506,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>[<img src="https://wac-cdn.atlassian.com/dam/jcr:0ed08845-2adb-48a7-a070-19fe7bc32974/violin-inner-options-1.png?cdnVersion=2484" class="img-fluid" alt="Créditos: atlassian.com"></p>
 <p>Convirtamos nuestro boxplot original en un gráfico de violín.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salaries, <span class="fu">aes</span>(<span class="at">x =</span> role, <span class="at">y =</span> ft_salary, <span class="at">fill =</span> gender)) <span class="sc">+</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
@@ -530,7 +530,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Dada la cantidad de roles, no podemos apreciar el valor de este tipo de gráfico. Así que repitamos el ejercicio pero sólo con los <em>Analistas</em> y <em>Gerentes</em></p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>salaries <span class="sc">%&gt;%</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(role <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Analista"</span>, <span class="st">"Gerente"</span>)) <span class="sc">%&gt;%</span> </span>
@@ -562,7 +562,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="scatter-plot">Scatter plot</h2>
 <p>Una manera de ver la distribución de los puntos de datos es mediante el scatter plot o gráficos de dispersión. Tendemos a usarlos para visualizar las relaciones entre dos variables numéricas, pero también podemos utilizarlos cuando tenemos una variable nominal.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(salaries, <span class="fu">aes</span>(<span class="at">x =</span> role, <span class="at">y =</span> ft_salary, <span class="at">color =</span> gender)) <span class="sc">+</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>,</span>
@@ -589,7 +589,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Nuevamente, con este dataset el scatter plot puede ser más confuso dado que en ciertos roles, como el de <em>Analista</em> o el <em>Responsable</em> tienen muchas observaciones, se dificulta apreciar las diferencias por color. Pero por ejemeplo, en el caso de los <em>Gerentes</em> se puede apreciar el rango de los salarios y dónde se concentran en el caso de los varones.</p>
 <p>Probemos separar los gráficos en gráficos más chicos para ver si ayuda a clarificar la interpretación de los datos.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular mediana de los salarios por género y rol </span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>median_salaries <span class="ot">&lt;-</span> salaries <span class="sc">%&gt;%</span></span>
@@ -648,7 +648,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Guarda el gráfico en un archivo png</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"jittered_strip.png"</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -676,7 +676,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>🤘 Sergio</p>
 <p>PD: ¿Cuál es tu gráfico favorito?</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplot</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>salaries <span class="sc">%&gt;%</span> </span>

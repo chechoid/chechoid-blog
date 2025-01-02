@@ -59,7 +59,7 @@
 <h2 class="anchored" data-anchor-id="preparación-de-datos">Preparación de datos</h2>
 <p>Estoy cargando datos desde la fuente original. Por eso, esto requiere algo de limpieza de datos. Los datos están filtrados para mostrar solo los resultados de Argentina, y realicé algunos cálculos para estimar los salarios de medio tiempo como equivalentes a un salario de tiempo completo. Esos son los datos que voy a usar para hacer las visualizaciones. Podés descargar una versión limpia de estos datos desde este <a href="https://raw.githubusercontent.com/chechoid/comparing-visualizations/main/hr_salaries_arg.csv">repositorio de GitHub</a>.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -435,7 +435,7 @@ font-style: inherit;">";"</span>)</span></code></pre></div>
 </div>
 <p>La siguiente sección es para customizar los gráficos.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -612,7 +612,7 @@ font-style: inherit;">R4HR Club de R para RRHH"</span></span></code></pre></div>
 </div>
 <p>Veamos un resumen de los datos.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -663,7 +663,7 @@ font-style: inherit;">summary</span>(salaries)</span></code></pre></div>
 </div>
 <p>Hay un par de valores inusuales. Primero, el valor mínimo, que claramente es un error (o alguien con malas intenciones), y luego el valor máximo, que podría ser posible, pero es altamente inusual para el mercado argentino. Si hacemos un histograma, el resultado sería extraño.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -728,7 +728,7 @@ font-style: inherit;">+</span></span>
 </div>
 <p>Acá es donde <code>funModeling</code> hace su magia. La función <code>profiling_num</code> arroja una tabla con un montón de información estadística de resumen.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">(numerical <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -745,7 +745,7 @@ font-style: inherit;">profiling_num</span>(salaries))</span></code></pre></div>
 </div>
 <p>Dado que quiero analizar los valores centrales de los salarios, voy a eliminar todos los valores por fuera de los percentiles 5 y 95.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -801,7 +801,7 @@ font-style: inherit;">rm</span>(numerical, p05, p95)</span></code></pre></div>
 </div>
 <p>Ahora que tenemos una versión más limpia de los datos podemos empezar a comparar las visualizaciones.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -868,7 +868,7 @@ font-style: inherit;">+</span></span>
 </div>
 <p>¿Por qué usar un boxplot en lugar de un simple gráfico de barras? Probemos usando un gráfico de barras para comparar el salario mediano de hombres y mujeres en cada rol:</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">salaries <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -967,7 +967,7 @@ font-style: inherit;">caption =</span> fuente)</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="boxplots">Boxplots</h2>
 <p>En el debate en LinkedIn, Nick Desbarats dice que tiene problemas para encontrar casos de uso donde los boxplots fueran la mejor opción, así que compartí el siguiente gráfico:</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1049,7 +1049,7 @@ font-style: inherit;">caption =</span> fuente)</span></code></pre></div>
 <p>[<img src="https://wac-cdn.atlassian.com/dam/jcr:0ed08845-2adb-48a7-a070-19fe7bc32974/violin-inner-options-1.png?cdnVersion=2484" class="img-fluid" alt="Créditos: atlassian.com"></p>
 <p>Convirtamos nuestro boxplot original en un gráfico de violín.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1123,7 +1123,7 @@ font-style: inherit;">caption =</span> fuente)</span></code></pre></div>
 </div>
 <p>Dada la cantidad de roles, no podemos apreciar el valor de este tipo de gráfico. Así que repitamos el ejercicio pero sólo con los <em>Analistas</em> y <em>Gerentes</em></p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">salaries <span class="sc" style="color: #5E5E5E;
 background-color: null;
@@ -1219,7 +1219,7 @@ font-style: inherit;">caption =</span> fuente)</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="scatter-plot">Scatter plot</h2>
 <p>Una manera de ver la distribución de los puntos de datos es mediante el scatter plot o gráficos de dispersión. Tendemos a usarlos para visualizar las relaciones entre dos variables numéricas, pero también podemos utilizarlos cuando tenemos una variable nominal.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -1310,7 +1310,7 @@ font-style: inherit;">caption =</span> fuente)</span></code></pre></div>
 <p>Nuevamente, con este dataset el scatter plot puede ser más confuso dado que en ciertos roles, como el de <em>Analista</em> o el <em>Responsable</em> tienen muchas observaciones, se dificulta apreciar las diferencias por color. Pero por ejemeplo, en el caso de los <em>Gerentes</em> se puede apreciar el rango de los salarios y dónde se concentran en el caso de los varones.</p>
 <p>Probemos separar los gráficos en gráficos más chicos para ver si ayuda a clarificar la interpretación de los datos.</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -1625,7 +1625,7 @@ font-style: inherit;">element_blank</span>())</span></code></pre></div>
 </figure>
 </div>
 </div>
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><span class="co" style="color: #5E5E5E;
 background-color: null;
@@ -1663,7 +1663,7 @@ font-style: inherit;">300</span>)</span></code></pre></div>
 <p>🤘 Sergio</p>
 <p>PD: ¿Cuál es tu gráfico favorito?</p>
 <div class="cell">
-<details open="" class="code-fold">
+<details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><span class="co" style="color: #5E5E5E;
 background-color: null;

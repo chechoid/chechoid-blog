@@ -282,7 +282,7 @@ Nick tiene un punto a su favor. ¿Cuántos casos tenemos en cada rol? ¿3, 15, 3
 
 Los gráficos de violín son una alternativa a los boxplots. Muestran el rango de valores con su largo, y las distintas concentraciones de datos con su ancho. La sección más ancha del gráfico suele indicar la mediana de los valores numéricos.:
 
-[![Créditos: atlassian.com](https://wac-cdn.atlassian.com/dam/jcr:0ed08845-2adb-48a7-a070-19fe7bc32974/violin-inner-options-1.png?cdnVersion=2484)
+\[![Créditos: atlassian.com](https://wac-cdn.atlassian.com/dam/jcr:0ed08845-2adb-48a7-a070-19fe7bc32974/violin-inner-options-1.png?cdnVersion=2484)
 
 Convirtamos nuestro boxplot original en un gráfico de violín.
 
@@ -321,7 +321,7 @@ salaries %>%
 
 ```
 
-El ancho de cada gráfico indica que esa zona contiene mayor cantidad de casos. Para Gerentes hombres, podemos apreciar que la mayoría de los casos están cerca de la mediana. El largo o altura del gráfico indica el rango de valores. Para el caso de las Gerentas ese rango va desde aproximadamente AR\$ 50.000 hasta cerca de los  AR\$ 200.000 y el ancho es bastante parejo a lo largo de las observaciones.
+El ancho de cada gráfico indica que esa zona contiene mayor cantidad de casos. Para Gerentes hombres, podemos apreciar que la mayoría de los casos están cerca de la mediana. El largo o altura del gráfico indica el rango de valores. Para el caso de las Gerentas ese rango va desde aproximadamente AR\$ 50.000 hasta cerca de los AR\$ 200.000 y el ancho es bastante parejo a lo largo de las observaciones.
 
 En el caso de los analistas, en las mujeres vemos que la sección más ancha se encuentra en torno a los AR\$ 50.000 y se hace más delgada hacia arriba. En el caso de los varones, la parte más ancha del gráfico está más arriba que el de las mujeres, y el rango se expande hasta valores más altos.
 
@@ -410,7 +410,7 @@ ggplot(salaries, aes(x = gender, y = ft_salary, color = gender)) +
 ggsave("jittered_strip.png", dpi = 300)
 ```
 
-Ahora podemos apreciar de mejor manera todas las posiciones de los puntos de datos, donde los datos están más concentrados y también los diferentes rangos de los salarios tanto para hombres como para mujeres en los diferentes roles. Por lo tanto, es más fácil comparar y analizar los resultados y ver el número de observaciones. 
+Ahora podemos apreciar de mejor manera todas las posiciones de los puntos de datos, donde los datos están más concentrados y también los diferentes rangos de los salarios tanto para hombres como para mujeres en los diferentes roles. Por lo tanto, es más fácil comparar y analizar los resultados y ver el número de observaciones.
 
 Dado que estoy diseñando todas estas visualizaciones, podría estar sesgado, pero en mi opinión, al ver todos los roles juntos en una visualización, la carga cognitiva aumenta para interpretar la situación salarial tanto para el género como para todos los roles a la vez.
 
@@ -420,10 +420,10 @@ Mi percepción de los gráficos está sesgada por mi experiencia y por haber cre
 
 Creo que es Alberto Cairo quien dice que la visualización es una herramienta para representar una realidad compleja con una codificación visual. Por lo tanto, cada visualización tendrá algunos altibajos (simplicidad para los gráficos de barras, mucha información para los boxplots) y desventajas (simplificación excesiva y ocultación de la realidad para los gráficos de barras; demasiada información y "ocultación" de la cantidad de puntos de datos para los boxplots), por lo que tenemos que tomar decisiones conscientes cuando usamos visualizaciones para comunicar resultados:
 
-- Cuál es la mejor visualización que representa la historia de los datos.
-- ¿Cuál es mi propósito? ¿Sorprender y asombrar? ¿Para educar? ¿Cuánto tiempo tengo para explicar la visualización?
-- Considere cuánto sabe la audiencia sobre los datos, una visualización, y cuánto realmente quiere mejorar sus capacidades.
-- ¿Necesitamos una visualización sencilla que todo el mundo entienda, o deberíamos utilizar una visualización más compleja para expertos en la materia?
+-   Cuál es la mejor visualización que representa la historia de los datos.
+-   ¿Cuál es mi propósito? ¿Sorprender y asombrar? ¿Para educar? ¿Cuánto tiempo tengo para explicar la visualización?
+-   Considere cuánto sabe la audiencia sobre los datos, una visualización, y cuánto realmente quiere mejorar sus capacidades.
+-   ¿Necesitamos una visualización sencilla que todo el mundo entienda, o deberíamos utilizar una visualización más compleja para expertos en la materia?
 
 Para este ejemplo en particular, y para este conjunto de datos específico, y si desea mostrar los resultados de todos los roles en un gráfico, el diagrama de caja es la mejor opción, porque, incluso con su complejidad, condensa suficiente información para sacar conclusiones y comprender la historia detrás de los datos. Creo que para este caso en particular, su forma consistente a lo largo de los roles y géneros reduce la carga cognitiva y ayuda al usuario a comparar resultados una vez que entiende cómo interpretar el gráfico.
 
@@ -431,8 +431,7 @@ De todos modos, no des por sentada mi palabra. Como dije antes, no soy un expert
 
 Supongo que eso refuerza mi afirmación inicial. No hay un gráfico que sea mejor que otros per se, sino que hay gráficos que funcionan mejor en situaciones concretas, para un público concreto, con una finalidad concreta y en función de los datos que se tengan.
 
-
-Si querés ponerte en contacto conmigo, escribime a través de mi perfil en [LinkedIn profile](https://www.linkedin.com/in/sergiogarciamora/), en [Blue Sky](https://bsky.app/profile/checho-puchero.bsky.social), por [Telegram](https://t.me/SergioGarciaMora) o simplemente escribime un email a [sergio.garciamora@gmail.com.com](mailto:sergio.garciamora@gmail.com). Podés acceder al repo original en [GitHub](https://github.com/chechoid/comparing-visualizations) para reproducir los resultados. Seguí a [Nightingaledvs.com](https://nightingaledvs.com/) para ver contenido genial sobre visualización de datos. Fue muy interesante recorrer su contenido
+Si querés ponerte en contacto conmigo, escribime a través de mi perfil en [LinkedIn profile](https://www.linkedin.com/in/sergiogarciamora/), en [Blue Sky](https://bsky.app/profile/checho-puchero.bsky.social), por [Telegram](https://t.me/SergioGarciaMora) o simplemente escribime un email a [sergio.garciamora\@gmail.com.com](mailto:sergio.garciamora@gmail.com). Podés acceder al repo original en [GitHub](https://github.com/chechoid/comparing-visualizations) para reproducir los resultados. Seguí a [Nightingaledvs.com](https://nightingaledvs.com/) para ver contenido genial sobre visualización de datos. Fue muy interesante recorrer su contenido
 
 Gracias por leer.
 
@@ -508,4 +507,3 @@ Estos son los paquetes de R usados para hacer este post:
 -   **gargle:** Jennifer Bryan, Craig Citro and Hadley Wickham (2021). gargle: Utilities for Working with Google APIs. R package version 1.2.0. <https://CRAN.R-project.org/package=gargle>
 
 -   **emo:** Hadley Wickham, Romain François and Lucy D'Agostino McGowan (2021). emo: Easily Insert 'Emoji'. R package version 0.0.0.9000. <https://github.com/hadley/emo>
-

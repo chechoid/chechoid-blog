@@ -10,8 +10,8 @@ website:
       - about.qmd
       - icon: github
         href: https://github.com/chechoid
-      - icon: twitter
-        href: https://twitter.com/sergiogarciamor
+      - icon: bluesky
+        href: https://bsky.app/profile/checho-puchero.bsky.social
       - icon: linkedin
         href: https://linkedin.com/in/sergiogarciamora
 format:
