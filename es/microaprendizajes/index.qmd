@@ -1,9 +1,9 @@
 ---
 title: "Microaprendizajes de un proyecto"
 date: "22/05/2021"
+lang: es
 author: "Checho"
 categories: [ggplot2, tipito, tip, visualización, rmarkdown]
-lang: es
 format:
   html:
     toc: true

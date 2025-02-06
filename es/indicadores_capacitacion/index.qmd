@@ -1,9 +1,9 @@
 ---
 title: "Indicadores de Capacitación"
-author: "Checho"
 date: "15/01/2019"
-categories: [code free, people analytics, kpi, capacitación]
 lang: es
+author: "Checho"
+categories: [code free, people analytics, kpi, capacitación]
 format:
   html:
     toc: true

@@ -1,8 +1,8 @@
 ---
 title: "Cargar Campos de Fecha desde Excel Sin Errores"
-author: "Checho"
 date: "12/09/2023"
 lang: es
+author: "Checho"
 categories: [tipito, tip, análisis, date, fecha]
 format:
   html:

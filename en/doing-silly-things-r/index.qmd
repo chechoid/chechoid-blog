@@ -1,8 +1,8 @@
 ---
 title: "Doing silly things in R"
-author: "Checho"
 date: "09/01/2022"
 lang: en
+author: "Checho"
 categories: [fun, ggplot2, proyectos]
 format:
   html:

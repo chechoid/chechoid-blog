@@ -1,9 +1,9 @@
 ---
 title: "Scrap Learning: La Capacitación Desaprovechada"
-author: "Checho"
 date: "08/11/2017"
-categories: [code free, people analytics, kpi, capacitación]
 lang: es
+author: "Checho"
+categories: [code free, people analytics, kpi, capacitación]
 format:
   html:
     toc: true

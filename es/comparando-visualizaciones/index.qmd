@@ -1,8 +1,8 @@
 ---
 title: "Comparando Visualizaciones"
-author: "Checho"
 date: "01/02/2025"
 lang: es
+author: "Checho"
 categories: [visualizacion, ggplot2, data viz]
 format:
   html:

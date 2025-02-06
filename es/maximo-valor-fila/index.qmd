@@ -1,9 +1,9 @@
 ---
 title: "Extraer el máximo valor de una fila"
-author: "Checho"
 date: "10/13/2022"
-categories: [tipito, tip, análisis, dplyr, data wrangling]
 lang: es
+author: "Checho"
+categories: [tipito, tip, análisis, dplyr, data wrangling]
 format:
   html:
     toc: true

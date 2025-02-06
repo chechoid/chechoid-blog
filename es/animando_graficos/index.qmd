@@ -1,8 +1,8 @@
 ---
 title: "Animando gráficos con gganimate"
-author: "Checho"
 date: "05/22/2024"
 lang: es
+author: "Checho"
 categories: [fun, ggplot2, proyectos]
 format:
   html:

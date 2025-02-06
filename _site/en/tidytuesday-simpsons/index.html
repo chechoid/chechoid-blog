@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.57">
@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Checho">
+<meta name="dcterms.date" content="2025-02-05">
 
 <title>Tidy Tuesday - Simpsons – chechoid.netlify.app</title>
 <style>
@@ -92,17 +93,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "Sin resultados",
-    "search-matching-documents-text": "documentos encontrados",
-    "search-copy-link-title": "Copiar el enlace en la búsqueda",
-    "search-hide-matches-text": "Ocultar resultados adicionales",
-    "search-more-match-text": "resultado adicional en este documento",
-    "search-more-matches-text": "resultados adicionales en este documento",
-    "search-clear-button-title": "Borrar",
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancelar",
-    "search-submit-button-title": "Enviar",
-    "search-label": "Buscar"
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -121,8 +122,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <span class="navbar-title">chechoid.netlify.app</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Buscar"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -163,7 +164,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -173,14 +174,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">En esta página</h2>
+    <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#the-simpsons-data" id="toc-the-simpsons-data" class="nav-link active" data-scroll-target="#the-simpsons-data">The Simpsons Data</a></li>
-  <li><a href="#pares-de-personajes" id="toc-pares-de-personajes" class="nav-link" data-scroll-target="#pares-de-personajes">Pares de personajes</a>
+  <li><a href="#pairs-of-characters" id="toc-pairs-of-characters" class="nav-link" data-scroll-target="#pairs-of-characters"><strong>Pairs of characters</strong></a>
   <ul class="collapse">
-  <li><a href="#explicación-del-código" id="toc-explicación-del-código" class="nav-link" data-scroll-target="#explicación-del-código"><strong>Explicación del código</strong></a></li>
-  <li><a href="#calcular-el-rating-promedio-por-duplas" id="toc-calcular-el-rating-promedio-por-duplas" class="nav-link" data-scroll-target="#calcular-el-rating-promedio-por-duplas">Calcular el rating promedio por duplas</a></li>
+  <li><a href="#code-explanation" id="toc-code-explanation" class="nav-link" data-scroll-target="#code-explanation"><strong>Code Explanation</strong></a></li>
+  <li><a href="#calculate-the-average-rating-by-pairs" id="toc-calculate-the-average-rating-by-pairs" class="nav-link" data-scroll-target="#calculate-the-average-rating-by-pairs">Calculate the Average Rating by Pairs</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -212,16 +213,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
 
     <div>
-    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
              <p>Checho </p>
           </div>
   </div>
     
     <div>
-    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">5 de febrero de 2025</p>
+      <p class="date">February 5, 2025</p>
     </div>
   </div>
   
@@ -235,7 +236,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="the-simpsons-data" class="level2">
 <h2 class="anchored" data-anchor-id="the-simpsons-data">The Simpsons Data</h2>
-<p>Vamos a cargar los datos con el paquete <code>tidytuesdayR</code>:</p>
+<p>Let’s load the data with the <code>tidytuesdayR</code> package (or directly with the raw files if it doesn’t work.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Ver código</summary>
@@ -251,39 +252,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>simpsons_characters <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-04/simpsons_characters.csv'</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>simpsons_episodes <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-04/simpsons_episodes.csv'</span>)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>simpsons_locations <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-04/simpsons_locations.csv'</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>simpsons_script_lines <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-04/simpsons_script_lines.csv'</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>simpsons_script_lines <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data/2025/2025-02-04/simpsons_script_lines.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
-<section id="pares-de-personajes" class="level1">
-<h1>Pares de personajes</h1>
-<p>Mi primer análisis consiste en averiguar qué combinaciones de personajes, generan las mejores calificaciones en IMDb, y mayor cantidad de visualizaciones.</p>
-<p>Para eso voy a usar los datos de <code>episodes</code> y los de <code>script_lines</code> y elegir las columnas que necesito.</p>
+<section id="pairs-of-characters" class="level1">
+<h1><strong>Pairs of characters</strong></h1>
+<p>My first analysis involves finding out which combinations of characters generate the best IMDb ratings and the highest number of views.</p>
+<p>For that, I’m going to use the data from <code>episodes</code> and <code>script_lines</code> and select the columns I need.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Ver código</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Librerias</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Libraries</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(extrafont)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">loadfonts</span>()</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset de episodios y script_lines</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset de episodes and script_lines</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>episodes <span class="ot">&lt;-</span> simpsons_episodes <span class="sc">%&gt;%</span> </span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, imdb_rating, </span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">year =</span> original_air_year, </span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">us_viewers =</span> us_viewers_in_millions,</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>         title)</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Quedarme sólo con los scripts que tienen personajes conversando</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep only rows where character have a dialogue</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>script_lines <span class="ot">&lt;-</span> simpsons_script_lines <span class="sc">%&gt;%</span> </span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(speaking_line <span class="sc">==</span> <span class="cn">TRUE</span>) </span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Uno los datos en un dataframe nuevo</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Join dataframes</span></span>
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">left_join</span>(script_lines, episodes, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"episode_id"</span> <span class="ot">=</span> <span class="st">"id"</span>))</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Exploremos los datos</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Data frame exploration</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 26,169
@@ -307,37 +308,37 @@ $ us_viewers         &lt;dbl&gt; 7.18, 6.35, 5.11, 8.65, 8.65, 8.65, 8.65, 8.65,
 $ title              &lt;chr&gt; "Donnie Fatso", "Angry Dad: The Movie", "Million Do…</code></pre>
 </div>
 </div>
-<p>Ahora vamos a crear una lista de personajes que aparecen por episodio:</p>
+<p>Now we are going to create a list of characters that appear per episode.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Ver código</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>personajes_por_episodio <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(raw_character_text <span class="sc">!=</span> <span class="st">"Man"</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(episode_id) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">personajes =</span> <span class="fu">list</span>(<span class="fu">unique</span>(raw_character_text)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">personajes =</span> <span class="fu">list</span>(<span class="fu">unique</span>(raw_character_text)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Este paso genera un data frame que contiene una fila por episodio, y luego una lista con los nombres de todos los personajes que tienen al menos una línea de diálogo en cada capítulo.</p>
-<p>El siguiente paso es procesar la lista de personas para encontrar las parejas dentro de cada capítulo.</p>
+<p>This step generates a data frame that contains one row per episode, and then a list with the names of all the characters who have at least one line of dialogue in each episode.</p>
+<p>The next step is to process the list of characters to find the pairs within each episode.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Ver código</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generar todas las combinaciones de duplas por episodio</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate all combinations of couples per episode</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>duplas_por_episodio <span class="ot">&lt;-</span> personajes_por_episodio <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> <span class="co"># Realiza el análisis por filas en vez de por columnas</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">duplas =</span> <span class="fu">list</span>(<span class="fu">combn</span>(personajes, <span class="dv">2</span>,   <span class="co"># Crea combinaciones de 2 personajes</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span> <span class="co"># Makes the analysis by row instead of columns</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">duplas =</span> <span class="fu">list</span>(<span class="fu">combn</span>(personajes, <span class="dv">2</span>,   <span class="co"># Creates combinations of 2 characters</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">simplify =</span> <span class="cn">FALSE</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(duplas) <span class="sc">%&gt;%</span> <span class="co"># Transforma la listas en dataframe</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(duplas) <span class="sc">%&gt;%</span> <span class="co"># Transform the list into a column</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">dupla =</span> <span class="fu">map_chr</span>(duplas, <span class="sc">~</span> <span class="fu">paste</span>(<span class="fu">sort</span>(.x), <span class="at">collapse =</span> <span class="st">"-"</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(episode_id, dupla)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(episode_id, dupla)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Les soy honesto. Usé deepseek para este paso, así que les paso la explicación del código porque me pareció un enfoque muy interesante:</p>
-<section id="explicación-del-código" class="level3">
-<h3 class="anchored" data-anchor-id="explicación-del-código"><strong>Explicación del código</strong></h3>
+<p>I’ll be honest with you. I used DeepSeek for this step, so I’ll share the explanation of the code because I found it to be a very interesting approach:</p>
+<section id="code-explanation" class="level3">
+<h3 class="anchored" data-anchor-id="code-explanation"><strong>Code Explanation</strong></h3>
 <section id="personajes_por_episodio" class="level4">
 <h4 class="anchored" data-anchor-id="personajes_por_episodio"><strong>1. <code>personajes_por_episodio</code></strong></h4>
-<p>Este es el dataframe que contiene, para cada episodio (<code>episode_id</code>), una lista de los <code>character_id</code> únicos que aparecen en ese episodio. Por ejemplo:</p>
+<p>This is the dataframe that contains, for each episode (<code>episode_id</code>), a list of unique <code>character_id</code>s that appear in that episode. For example:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -356,22 +357,22 @@ $ title              &lt;chr&gt; "Donnie Fatso", "Angry Dad: The Movie", "Millio
 </tr>
 </tbody>
 </table>
-<p>Aquí, <code>characters</code> es una columna de tipo lista, donde cada elemento es un vector de <code>character_id</code>.</p>
+<p>Here, <code>characters</code> is a list-type column, where each element is a vector of <code>character_id</code>s.</p>
 </section>
 <section id="rowwise" class="level4">
 <h4 class="anchored" data-anchor-id="rowwise"><strong>2. <code>rowwise()</code></strong></h4>
-<p>La función <code>rowwise()</code> se usa para aplicar operaciones <strong>fila por fila</strong> en un dataframe. En este caso, queremos generar combinaciones de personajes <strong>para cada episodio</strong> (es decir, para cada fila).</p>
+<p>The <code>rowwise()</code> function is used to apply operations <strong>row by row</strong> in a dataframe. In this case, we want to generate character combinations <strong>for each episode</strong> (i.e., for each row).</p>
 </section>
 <section id="mutateduplas-listcombncharacters-2-simplify-false" class="level4">
 <h4 class="anchored" data-anchor-id="mutateduplas-listcombncharacters-2-simplify-false"><strong>3. <code>mutate(duplas = list(combn(characters, 2, simplify = FALSE)))</code></strong></h4>
 <ul>
-<li><p><strong><code>combn()</code></strong>: Esta función genera todas las combinaciones posibles de un conjunto de elementos. En este caso, queremos combinaciones de 2 personajes (<code>2</code> es el segundo argumento).</p></li>
-<li><p><strong><code>characters</code></strong>: Es la lista de <code>character_id</code> para el episodio actual.</p></li>
-<li><p><strong><code>simplify = FALSE</code></strong>: Esto asegura que el resultado sea una lista de combinaciones en lugar de una matriz.</p></li>
-<li><p><strong><code>list()</code></strong>: Envuelve el resultado en una lista para que sea compatible con <code>mutate()</code>.</p></li>
-<li><p><strong><code>mutate(duplas = ...)</code></strong>: Crea una nueva columna llamada <code>duplas</code>, que contiene una lista de todas las combinaciones de 2 personajes para ese episodio.</p></li>
+<li><p><strong><code>combn()</code></strong>: This function generates all possible combinations of a set of elements. Here, we want combinations of 2 characters (<code>2</code> is the second argument).</p></li>
+<li><p><strong><code>characters</code></strong>: This is the list of <code>character_id</code>s for the current episode.</p></li>
+<li><p><strong><code>simplify = FALSE</code></strong>: This ensures that the result is a list of combinations instead of a matrix.</p></li>
+<li><p><strong><code>list()</code></strong>: Wraps the result in a list to make it compatible with <code>mutate()</code>.</p></li>
+<li><p><strong><code>mutate(duplas = ...)</code></strong>: Creates a new column called <code>duplas</code>, which contains a list of all combinations of 2 characters for that episode.</p></li>
 </ul>
-<p>Por ejemplo, si <code>characters = [1, 2, 3]</code>, las combinaciones serían:</p>
+<p>For example, if <code>characters = [1, 2, 3]</code>, the combinations would be:</p>
 <ul>
 <li><p><code>[1, 2]</code></p></li>
 <li><p><code>[1, 3]</code></p></li>
@@ -380,8 +381,8 @@ $ title              &lt;chr&gt; "Donnie Fatso", "Angry Dad: The Movie", "Millio
 </section>
 <section id="unnestduplas" class="level4">
 <h4 class="anchored" data-anchor-id="unnestduplas"><strong>4. <code>unnest(duplas)</code></strong></h4>
-<p>La función <code>unnest()</code> se usa para “desanidar” una columna que contiene listas. En este caso, <code>duplas</code> es una columna de listas, donde cada elemento es una combinación de 2 personajes. Al usar <code>unnest()</code>, cada combinación se convierte en una fila separada.</p>
-<p>Por ejemplo, si teníamos:</p>
+<p>The <code>unnest()</code> function is used to “unnest” a column that contains lists. In this case, <code>duplas</code> is a column of lists, where each element is a combination of 2 characters. By using <code>unnest()</code>, each combination becomes a separate row.</p>
+<p>For example, if we had:</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 22%">
@@ -400,7 +401,7 @@ $ title              &lt;chr&gt; "Donnie Fatso", "Angry Dad: The Movie", "Millio
 </tr>
 </tbody>
 </table>
-<p>Después de <code>unnest()</code>, tendríamos:</p>
+<p>After <code>unnest()</code>, we would have:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -427,21 +428,21 @@ $ title              &lt;chr&gt; "Donnie Fatso", "Angry Dad: The Movie", "Millio
 <section id="mutatedupla-map_chrduplas-pastesort.x-collapse--" class="level4">
 <h4 class="anchored" data-anchor-id="mutatedupla-map_chrduplas-pastesort.x-collapse--"><strong>5. <code>mutate(dupla = map_chr(duplas, ~ paste(sort(.x), collapse = "-")))</code></strong></h4>
 <ul>
-<li><p><strong><code>map_chr()</code></strong>: Aplica una función a cada elemento de una lista y devuelve un vector de caracteres.</p></li>
-<li><p><strong><code>sort(.x)</code></strong>: Ordena los <code>character_id</code> en cada dupla. Esto asegura que la dupla “1-2” sea la misma que “2-1”.</p></li>
-<li><p><strong><code>paste(..., collapse = "-")</code></strong>: Convierte la dupla ordenada en una cadena de texto, separando los <code>character_id</code> con un guion (<code>-</code>).</p></li>
-<li><p><strong><code>mutate(dupla = ...)</code></strong>: Crea una nueva columna llamada <code>dupla</code>, que contiene la representación en texto de cada combinación.</p></li>
+<li><p><strong><code>map_chr()</code></strong>: Applies a function to each element of a list and returns a character vector.</p></li>
+<li><p><strong><code>sort(.x)</code></strong>: Sorts the <code>character_id</code>s in each pair. This ensures that the pair “1-2” is the same as “2-1”.</p></li>
+<li><p><strong><code>paste(..., collapse = "-")</code></strong>: Converts the sorted pair into a text string, separating the <code>character_id</code>s with a hyphen (<code>-</code>).</p></li>
+<li><p><strong><code>mutate(dupla = ...)</code></strong>: Creates a new column called <code>dupla</code>, which contains the text representation of each combination.</p></li>
 </ul>
-<p>Por ejemplo, si <code>duplas = [1, 2]</code>, después de este paso tendríamos <code>dupla = "1-2"</code>.</p>
+<p>For example, if <code>duplas = [1, 2]</code>, after this step we would have <code>dupla = "1-2"</code>.</p>
 </section>
 <section id="selectepisode_id-dupla" class="level4">
 <h4 class="anchored" data-anchor-id="selectepisode_id-dupla"><strong>6. <code>select(episode_id, dupla)</code></strong></h4>
-<p>Finalmente, seleccionamos solo las columnas <code>episode_id</code> y <code>dupla</code> para quedarnos con un dataframe limpio que contiene, para cada episodio, todas las duplas de personajes que aparecen juntos.</p>
+<p>Finally, we select only the columns <code>episode_id</code> and <code>dupla</code> to keep a clean dataframe that contains, for each episode, all the pairs of characters that appear together.</p>
 </section>
 </section>
-<section id="calcular-el-rating-promedio-por-duplas" class="level2">
-<h2 class="anchored" data-anchor-id="calcular-el-rating-promedio-por-duplas">Calcular el rating promedio por duplas</h2>
-<p>Vamos a limpiar un poco más los datos, quedándonos únicamente con las duplas que aparezcan al menos 5 veces</p>
+<section id="calculate-the-average-rating-by-pairs" class="level2">
+<h2 class="anchored" data-anchor-id="calculate-the-average-rating-by-pairs">Calculate the Average Rating by Pairs</h2>
+<p>We’ll clean the data a bit more, keeping only the pairs that appear at least 10 times.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Ver código</summary>
@@ -451,10 +452,10 @@ $ title              &lt;chr&gt; "Donnie Fatso", "Angry Dad: The Movie", "Millio
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Reducimos el dataframe</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>duplas_por_episodio <span class="ot">&lt;-</span> duplas_por_episodio <span class="sc">%&gt;%</span> </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dupla <span class="sc">%in%</span> top_duplas<span class="sc">$</span>dupla)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dupla <span class="sc">%in%</span> top_duplas<span class="sc">$</span>dupla)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Ahora podemos unir los datos de <code>duplas_por_episodio</code> y de esa manera calculamos el rating de cada pareja de personajes.</p>
+<p>Now we can join the data from <code>duplas_por_episodio</code> and in that way, calculate the average rating for echar character duo.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Ver código</summary>
@@ -464,35 +465,35 @@ $ title              &lt;chr&gt; "Donnie Fatso", "Angry Dad: The Movie", "Millio
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">imdb_promedio =</span> <span class="fu">mean</span>(imdb_rating, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">episodios =</span> <span class="fu">n</span>())</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrar solo las duplas que aparecen en al menos 10 episodios</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter couples with at least 10 episode appearances</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>duplas_con_rating <span class="ot">&lt;-</span> duplas_con_rating <span class="sc">%&gt;%</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(episodios <span class="sc">&gt;=</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(imdb_promedio))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(imdb_promedio))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Y ahora podemos hacer un gráfico de las 10 parejas con mejor puntaje promedio en <code>imdb_ranking</code>.</p>
+<p>And now we can make a plot of the 10 couples with the best average score of <code>imdb_ranking</code>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Ver código</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar los mejores dúos</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the best 10 duos</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>top_10_duplas <span class="ot">&lt;-</span> duplas_con_rating <span class="sc">%&gt;%</span> </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfico</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Chart</span></span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_10_duplas, <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">reorder</span>(dupla, imdb_promedio), <span class="at">x =</span> imdb_promedio)) <span class="sc">+</span></span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"#4f76df"</span>) <span class="sc">+</span></span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> imdb_promedio,</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> dupla, <span class="at">yend =</span> dupla), <span class="at">color =</span> <span class="st">"#4f76df"</span>) <span class="sc">+</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"Rating: "</span>, <span class="fu">round</span>(imdb_promedio, <span class="dv">2</span>), <span class="st">" Episodios: "</span>, episodios)),<span class="at">nudge_y =</span> <span class="fl">0.35</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"Rating: "</span>, <span class="fu">round</span>(imdb_promedio, <span class="dv">2</span>), <span class="st">" Episodes: "</span>, episodios)),<span class="at">nudge_y =</span> <span class="fl">0.35</span>,</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">3.5</span>, </span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">face =</span> <span class="st">"bold"</span>,</span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"#4f76df"</span>, </span>
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> <span class="st">"Atma Medium"</span>) <span class="sc">+</span></span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Top 10 duplas de personajes con mejor IMDb rating promedio"</span>,</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Dupla de personajes"</span>,</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"IMDb rating promedio"</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Top 10 Character Pairs with the Highest Average IMDb Rating"</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Character Pair"</span>,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Average IMDb Rating"</span></span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>                 <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#ffd90f"</span>),</span>
@@ -500,7 +501,7 @@ $ title              &lt;chr&gt; "Donnie Fatso", "Angry Dad: The Movie", "Millio
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>                 <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"#70d1ff"</span>),</span>
 <span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                 <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">family =</span> <span class="st">"Atma Medium"</span>),</span>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>                 <span class="at">plot.title.position =</span> <span class="st">"plot"</span>) <span class="sc">+</span></span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">8.5</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">8.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -511,26 +512,26 @@ $ title              &lt;chr&gt; "Donnie Fatso", "Angry Dad: The Movie", "Millio
 </div>
 <details class="code-fold">
 <summary>Ver código</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"top_duplas.png"</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"en_top_duplas.png"</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Y si agregamos donas en vez de puntos?</p>
+<p>What if we use donuts instead of points?</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Ver código</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Y si metemos una dona en vez de puntos?</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Library</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggimage)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Agregamos una columna con la imagen de la dona</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a column with the name of the picture</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>top_10_duplas <span class="ot">&lt;-</span> top_10_duplas <span class="sc">%&gt;%</span> </span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">imagen =</span> <span class="st">"dona.png"</span>)</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfico</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Chart</span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(top_10_duplas, <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">reorder</span>(dupla, imdb_promedio), <span class="at">x =</span> imdb_promedio)) <span class="sc">+</span></span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> imdb_promedio,</span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> dupla, <span class="at">yend =</span> dupla), <span class="at">color =</span> <span class="st">"#4f76df"</span>) <span class="sc">+</span></span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_image</span>(<span class="fu">aes</span>(<span class="at">image =</span> imagen), <span class="at">size =</span> <span class="fl">0.06</span>) <span class="sc">+</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"Rating: "</span>, <span class="fu">round</span>(imdb_promedio, <span class="dv">2</span>), <span class="st">" Episodios: "</span>, episodios)),</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"Rating: "</span>, <span class="fu">round</span>(imdb_promedio, <span class="dv">2</span>), <span class="st">" Episodes: "</span>, episodios)),</span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_y =</span> <span class="fl">0.15</span>,</span>
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">nudge_x =</span> <span class="sc">-</span><span class="fl">2.15</span>,</span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">3.7</span>,</span>
@@ -538,9 +539,9 @@ $ title              &lt;chr&gt; "Donnie Fatso", "Angry Dad: The Movie", "Millio
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">face =</span> <span class="st">"bold"</span>,</span>
 <span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">color =</span> <span class="st">"#4f76df"</span>) <span class="sc">+</span></span>
 <span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Top 10 duplas de personajes con mejor IMDb rating promedio"</span>,</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Dupla de personajes"</span>,</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"IMDb rating promedio"</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Top 10 Character Pairs with the Highest Average IMDb Rating"</span>,</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Character Pair"</span>,</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Average IMDb Rating"</span></span>
 <span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>                 <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#ffd90f"</span>),</span>
@@ -548,7 +549,7 @@ $ title              &lt;chr&gt; "Donnie Fatso", "Angry Dad: The Movie", "Millio
 <span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>                 <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"#70d1ff"</span>),</span>
 <span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>                 <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">family =</span> <span class="st">"Atma Medium"</span>),</span>
 <span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>                 <span class="at">plot.title.position =</span> <span class="st">"plot"</span>) <span class="sc">+</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">8.5</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">8.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -559,7 +560,7 @@ $ title              &lt;chr&gt; "Donnie Fatso", "Angry Dad: The Movie", "Millio
 </div>
 <details class="code-fold">
 <summary>Ver código</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"top_duplas_dona.png"</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"top_duplas_dona.png"</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p><img src="apu_vuelva_prontos.png" class="img-fluid" width="248"></p>
@@ -756,12 +757,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copiado");
+    button.setAttribute("title", "Copied!");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copiado");
+      button.setAttribute("data-bs-title", "Copied!");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",

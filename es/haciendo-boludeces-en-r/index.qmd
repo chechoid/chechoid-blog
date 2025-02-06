@@ -1,9 +1,9 @@
 ---
 title: "Haciendo pavadas en R"
-author: "Checho"
 date: "09/01/2022"
-categories: [fun, ggplot2, proyectos]
 lang: es
+author: "Checho"
+categories: [fun, ggplot2, proyectos]
 format:
   html:
     toc: true
