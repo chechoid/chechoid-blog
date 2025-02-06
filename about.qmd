@@ -1,25 +1,23 @@
 ---
 title: "Sergio Garcia Mora aka Checho"
+lang: es
 image: profile.jpg
 about:
   template: trestles
   links:
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com/sergiogarciamor
+    - text: "{{<fa brands bluesky>}}"
+      href: https://bsky.app/profile/checho-puchero.bsky.social
     - icon: linkedin
-      text: LinkedIn
       href: https://linkedin.com/in/sergiogarciamora
     - icon: github
-      text: Github
       href: https://github.com/chechoid
 ---
 
 ## ¿De qué va este blog?
 
-Este blog va a ser un espacio en donde centraré contenido sobre programación en R, mayormente orientado a temas relacionados con Recursos Humanos y People Analytics.
+Este blog va a ser un espacio en donde centraré contenido sobre programación en R, mayormente orientado a temas relacionados con Recursos Humanos y People Analytics *(actualización 2025: también incluiré contenido en Python).*
 
-Honestamente, a esta altura del partido no me interesa hacer algo solemne para *"parecer profesional"*, lo que busco más que nada es generar contenido que le sirva a principiantes y a los que están permanentemente aprendiendo.
+Honestamente, a esta altura del partido no me interesa hacer algo solemne para *"parecer profesional"*, lo que busco más que nada es generar contenido que le sirva a todos los que estén arrancando sus carreras en People Analytics y a quienes están permanentemente aprendiendo.
 
 Todo el contenido de este blog se puede compartir de manera abierta y libre, citando por supuesto la fuente.
 

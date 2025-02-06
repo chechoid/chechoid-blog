@@ -1,0 +1,307 @@
+---
+title: "Doing silly things in R"
+author: "Checho"
+date: "09/01/2022"
+lang: en
+categories: [fun, ggplot2, proyectos]
+format:
+  html:
+    toc: true
+    toc-location: left
+    code-fold: true
+    code-summary: "View code"
+    code-copy: hover
+execute: 
+  warning: false
+  error: false
+  message: false
+  dpi: 300
+---
+
+# Why Did I Choose This as My First Post?
+
+I once watched Ryan Timpe, the Lead Data Scientist at Lego, where he shared how he sometimes took on fun projects to learn new data analysis skills. In [his talk at the RStudio Conference](https://www.rstudio.com/resources/rstudioconf-2020/learning-r-with-humorous-side-projects/), he mentioned analyzing the dialogues from **The Golden Girls** using text mining techniques to find the most frequent words. Every time one of the characters said the magic words, they'd take a "white shot" of whatever they were drinking.
+
+This post is about something similar. I wanted to learn how to use images in my visualizations, and that’s how this project was born—using images of people with "similar" features to mine and incorporating those photos into a scatter plot.
+
+What might seem like a silly project involved:
+
+-   Creating a Google Form.
+
+-   Collecting data from responses.
+
+-   Processing the results.
+
+-   Including visualizations with people’s images.
+
+Projects like this make learning feel less heavy and give you extra motivation to find solutions and get results.
+
+# A Bit of Context
+
+This is me:
+
+![*Photo of me on my honeymoon in Mendoza*](archivos/sergio.jpg){fig-alt="Foto de Sergio, sosteniendo una copa de vino" width="372"}
+
+As you can see, I have medium-length hair, bangs, and a goatee. A lot of people say I look like Nicolás del Caño 🤷 —a member of the Socialist Workers Party in Argentina—because he has a similar haircut and also rocks a beard.
+
+![Nicolás del Caño](https://www.izquierdadiario.es/IMG/auton3.jpg?1605455691){width="221"}
+
+We don’t look that similar in these photos, but let me share a story. When my daughter was around three years old, there was a campaign for parliamentary elections, and posters of all the political parties were everywhere—including, of course, the PTS with Nicolás del Caño. One day, my wife and daughter were walking down the street, and as they approached one of Del Caño’s posters, my daughter pointed at it and said, “Daddy!” as if it were me on the poster. So, there’s some resemblance, I guess.
+
+She also once pointed at a Johnny Depp poster for Sauvage perfume and said the same thing, but no one believes that one.
+
+Other characters my friends joke I resemble include Gigoló, Roberto Baradel, and Mono Burgos.
+
+![El Gigoló](https://www.elesquiu.com/u/fotografias/m/2023/10/22/f1280x720-487186_618861_5050.jpeg){width="340"}
+
+![Roberto Baradel](https://cdn.cnn.com/cnnnext/dam/assets/190306231108-pba-baradel-large-169.jpg){width="339"}
+
+![El Mono Burgos](https://phantom-elmundo.unidadeditorial.es/6744bff920f7004ccfe5c7f23aefac88/crop/0x29/1972x1340/resize/1200/f/webp/assets/multimedia/imagenes/2020/06/03/15912134233683.jpg)
+
+I know what you’re thinking: *“With friends like these, who needs enemies?”* But they’re lovable anyway.
+
+# The Idea: k-nn
+
+This analysis idea came up one day while explaining a clustering method called **k-nn**. Clustering methods are data science techniques used to find groups (or "clusters") within data.
+
+The k-nn method (*“k-nearest neighbors”*) assigns each individual to a cluster based on the features of their “neighbors.” In other words, it determines which group each case belongs to based on what it most closely resembles.
+
+To explain this visually, I drew this on Paint:
+
+![Paint drawing showing clusters](images/clipboard-3058012685.jpeg)
+
+The idea is that, within this dataset, I’m closer to the cluster of Mono Burgos and Nicolás del Caño than to the cluster of Keanu Reeves, Jeff Bridges, and Brad Pitt.
+
+Then I had a thought: **what if I did this with actual data?**
+
+![](https://media1.giphy.com/media/3oz8xP6SaSkSU9dhcI/200w.gif?cid=82a1493b6dys6v5sl1wm0y65sc1ej72nglv6y40cwx6rrtw2&rid=200w.gif&ct=g)
+
+# Doing Weird Stuff for Normal People in R
+
+The idea was to replicate the graphic above but with real data. So, I started by searching for photos of Argentine and international figures with medium-to-long hair, beards, and, in some cases, a few extra pounds.
+
+To standardize the images, I used Canva to resize them to similar dimensions. Then, I created a Google Form with each image and asked my friends to rate the “facha” (Argentine slang for physical attractiveness) and “copadez” (how cool or likable someone is) on a scale from 1 to 10.
+
+The characters involved were:
+
+-   Nicolás del Caño
+
+-   Roberto Baradel
+
+-   Mono Burgos
+
+-   Ricardo Caruso Lombardi
+
+-   Ben Affleck
+
+-   Jeff Bridges
+
+-   Brad Pitt
+
+-   Javier Bardem
+
+-   Keanu Reeves
+
+-   And yours truly 😉
+
+In my original analysis, I pulled the data directly from the Google Sheets linked to the form. For reproducibility purposes, I’ll use a CSV file here so you can replicate the results.
+
+## Loading and Preparing Data
+
+Let’s start by loading the libraries and importing data from a repository.
+
+```{r librerias_datos}
+#| warning: false
+#| message: false
+
+# Libraries
+library(tidyverse) # Load, cleand and wrangle data
+library(ggimage)   # To use images withing chart
+
+# Data
+clones <- read_delim("https://raw.githubusercontent.com/chechoid/silliest-use-of-r/main/source.csv", delim = ";")
+
+
+comentarios <- clones %>% 
+  select(comentarios = `Poné lo que quieras... parecidos, chistes, comentarios, etc...`) %>% 
+  filter(!is.na(comentarios))
+
+# Explore the data
+head(clones)
+```
+
+The dataset included columns for each character’s “facha” (gorgeousness) and “copadez” (awesomeness) scores. The next steps were:
+
+1.  Removing irrelevant columns and adding an ID column.
+
+2.  Pivoting the table so that all the score columns ended up in two columns (one for “facha” and one for “copadez”).
+
+```{r preproceso1}
+# Remove unnecesary columns
+clones <- clones %>% 
+  select(-`Marca temporal`, -`Poné lo que quieras... parecidos, chistes, comentarios, etc...`)
+
+# Add id column
+clones <- clones %>% 
+  rowid_to_column(var = "id")
+
+# Pivot to a lonf format
+clones <- clones %>% 
+  pivot_longer(cols = c("Facha de Keanu": "Copadez de Javier"),
+               names_to = "personaje",
+               values_to = "puntaje")
+
+# Explore the dataset again
+head(clones)
+```
+
+We started with 66 rows and 24 columns and ended up with a data frame of 1,452 rows and 3 columns. After removing intermediary words like `"de"` and `"del"` from names, we created separate columns for `“facha”` and `“copadez.”`
+
+```{r preproceso2}
+#| warning: false
+#| message: false
+#| fig.retina: 3
+
+# Split nominal variables
+clones <- clones %>% 
+  mutate(personaje = str_remove(personaje, "de "),
+         personaje = str_remove(personaje, "del "))
+
+# Explore average score of each character
+clones %>% 
+  group_by(personaje) %>% 
+  summarise(valor_promedio = mean(puntaje)) %>% 
+  ggplot(aes(x = valor_promedio, y = personaje)) +
+  geom_point(size = 2)
+
+# Split the column 'personaje' (character) into two columns, one for the metric, the other for the name
+clones <- clones %>% 
+  separate(personaje,  into = c("metrica", "persona"))
+
+
+# Pivot to wide format 
+clones <- clones %>% 
+  pivot_wider(id_cols = c(id, persona),
+              names_from = metrica,
+              values_from = puntaje)
+
+# Explore the new data frame
+head(clones)
+
+```
+
+Finally, we had a dataset with 726 rows—one for each vote per character—and four columns: `ID`, `character` (personaje), `“facha,”` and `“copadez.”`
+
+```{r resultados_promedios}
+#| warning: false
+#| message: false
+
+# Calculate the average scores for each character and plot results
+resultados <- clones %>% 
+  group_by(persona) %>% 
+  summarise(facha_promedio = mean(Facha),
+            copadez_promedio = mean(Copadez))
+
+ggplot(resultados, aes(x = copadez_promedio, y = facha_promedio, color = persona)) +
+  geom_point(size = 3) +
+  labs(title = "Average Awesomeness and Gorgeousness",
+       x = "Avg Awesomeness",
+       y = "Avg Gourgeness",
+       color = "Person")
+
+```
+
+This gave us the foundation for our results. To make the chart less boring, let’s spice it up with images.
+
+## Adding Images to the Chart
+
+As mentioned earlier, I used Canva to resize all the images and saved them in a folder called “clones.” Instead of uploading each photo individually, I created a data frame linking the names of the characters to their corresponding image files.
+
+```{r imagenes}
+#| warning: false
+#| message: false
+
+# Create a vector with the name of the people
+persona <- resultados %>% 
+  select(persona) %>% 
+  pull()
+
+# Create a vector of images
+ruta <- "pics"       # Picture path
+extension <- "png"   # Extension of the image files
+
+# Name of the files
+imagen <- c("Ben", "Brad", "Javier", "jeff", "keanu", "mono", "nico", 
+            "ricky", "roberto", "russell", "sergio")
+
+# Create the vector of photos with the path and file extension
+foto <- str_c(ruta, imagen, sep = "/")
+foto <- str_c(foto, extension, sep = ".")
+
+# Create the data frame and add the scores to it
+pics <- data.frame(persona, foto)
+
+# See the results of this process
+pics
+
+```
+
+We now had a data frame with 11 rows and 2 columns (name and image path), which we integrated into the dataset with average “facha” (gorgeousness) and “copadez” (awesomeness) scores.
+
+Finally, it was time to add the images to the chart:
+
+```{r joining}
+#| warning: false
+#| message: false
+
+# Join datasets
+resultados <- left_join(resultados, pics)
+
+head(resultados)
+
+```
+
+Finally, it was time to add the images to the chart:
+
+```{r grafico_final}
+#| fig.retina: 3
+#| fig.height: 8
+#| fig.width: 10
+
+
+# Final Result
+ggplot(resultados, aes(x = copadez_promedio, y = facha_promedio)) +
+  geom_image(aes(image=foto), size = 0.08) +
+  theme_minimal() +
+  scale_x_continuous(limits = c(1,10)) +
+  scale_y_continuous(limits = c(1,10)) +
+  labs(title = "Average Awesomeness and Gorgeousness",
+       subtitle = "n = 66",
+       x = "Avg Awesomeness",
+       y = "Avg Gourgeness",
+       caption = "No aunt was part of this analysis")
+```
+
+**According to the data**, I’m farther from Nicolás del Caño and Roberto Baradel and closer to Keanu Reeves. So, **the data says I look like Keanu**. Facts, not opinions 😎.
+
+# What Did I Learn?
+
+1.  I learned to use a new package, `ggimage`*,* which allows you to add images to charts.
+
+2.  A mistake in the form design (labeling one field as “Facha del Mono" in Spanish) required extra data cleaning—a valuable lesson that helped me prevent potential issues in a subsequent diversity survey project for a client.
+
+3.  Handling data transformations—pivoting from “wide” to “long” formats and back—was key. Once I managed that, calculating results became straightforward.
+
+This project took two days of work, tutorials, documentation, and a lot of trial and error. While it was a lot of effort, the silliness of the project removed much of the pressure, making it easier to interpret error messages and find the right solutions.
+
+Projects like this are perfect right after finishing a tutorial or course. The datasets in tutorials are often clean and controlled, but working with your own data introduces real-world challenges. Doing a fun project like this without the pressure of “adding business value” is a great way to test your skills.
+
+So, I invite you to take on a ridiculous project and share it with the world.
+
+### Closing Words
+
+If you'd like to see the script, you can find it in the repository following [this link](https://github.com/chechoid/chechoid-blog/blob/main/posts/haciendo-boludeces-en-r/index.qmd).
+
+Thanks for reading!
+
+![](https://media.giphy.com/media/QAsBwSjx9zVKoGp9nr/giphy.gif)

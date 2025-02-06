@@ -1,7 +1,7 @@
 ---
 title: "Mi blog de R y People Analytics"
 listing:
-  contents: posts
+  contents: en, es
   sort: "date desc"
   type: default
   categories: true

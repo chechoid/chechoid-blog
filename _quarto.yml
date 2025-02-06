@@ -4,23 +4,33 @@ project:
 website:
   title: "chechoid.netlify.app"
   site-url: "https://chechoid.netlify.app"
-  description: "Un blog sobre R y People Analytics"
+  description: "Un blog sobre R y People Analytics (y Python)"
   navbar:
     right:
       - about.qmd
       - icon: github
         href: https://github.com/chechoid
-      - icon: bluesky
+      - text: "{{<fa brands bluesky>}}"
         href: https://bsky.app/profile/checho-puchero.bsky.social
       - icon: linkedin
         href: https://linkedin.com/in/sergiogarciamora
+      - text: "Idioma / Language"
+        menu:
+        - text: Español
+          href: /es/
+        - text: English
+          href: /en/
+language:
+  es:
+    label: Español
+  en:
+    label: English
 format:
   html:
     theme:
-      light: minty
+      light: yeti
       dark: slate
     css: styles.css
     highlight-style: nord
 
 editor: visual
-

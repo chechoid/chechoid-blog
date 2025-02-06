@@ -1,0 +1,339 @@
+---
+title: "Gestionar capacitación buscando el mejor vino"
+lang: es 
+author: "Checho"
+date: "01/23/2025"
+format:
+  html:
+    toc: true
+    toc-location: left
+    code-fold: true
+    code-summary: "Ver código"
+    code-copy: hover
+categories: [ggplot2, proyectos, capacitación, training, tidyverse, dplyr, data viz, people analytics, fun, r, python, tidytuesday]
+execute: 
+  warning: false
+  error: false
+  message: false
+  dpi: 600
+---
+
+# Cómo la búsqueda de los mejores vinos de Mendoza puede ayudar a la gestión de proveedores de capacitación
+
+![Yo durante mi luna de miel en Finca Adelma.](IMG_20220316_132649177_HDR.jpg){fig-align="left" width="292"}
+
+El objetivo de este post es mostrar cómo se puede aplicar un análisis de un tema cualquiera, a un problema de RRHH.
+
+La razón detrás de esta idea es que cuando estamos aprendiendo a usar cualquier programa de análisis de datos, llámese R, Python, Power BI o Excel, encontramos mucho contenido sobre muchos tipos de análisis, pero muy poco contenido relacionado con RRHH. **Y eso es algo que podemos hacer por nuestra cuenta.**
+
+Con esto en mente, lo que vamos a hacer es ver cómo podemos aprovechar un análisis en el cual buscamos en qué región de Mendoza podemos hallar los mejores malbecs[^1], haciendo un ránking de las mejores regiones. Luego veremos cómo ese mismo tipo de análisis lo podemos usar para **detectar cuáles son los mejores proveedores de capacitación de una empresa**.
+
+[^1]: Mendoza es la provincia más importante en producción de vinos de Argentina, y la cepa más representativa del país es el malbec.
+
+# Primer Análisis: Dónde encontrar los mejores vinos
+
+Para el primer ejercicio vamos a imaginar que estamos planeando un viaje a Mendoza, y queremos saber en qué región se producen los mejores malbecs.
+
+Vamos a usar un dataset que se llama [Wine Ratings Dataset](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-05-28) que lo compartió la comunidad de R a través su iniciativa [#TidyTuesday](https://github.com/rfordatascience/tidytuesday) en la que cada martes, comparten un dataset diferente para que cualquier persona pueda practicar y compartir su trabajo. Ahí se puede encontrar datos sobre casi cualquier cosa.
+
+Manos a la obra... Salú! 🍷
+
+## Librerías y datos
+
+Vamos a usar varios paquetes dentro de `tidyverse` y cargamos los datos directamente desde el repositorio de GitHub del proyecto TidyTuesday.
+
+```{r}
+library(tidyverse)
+
+# Carga de datos
+wine_ratings <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-05-28/winemag-data-130k-v2.csv")
+
+# Filtramos los datos de la provincia de Mendoza
+wine_ar <- wine_ratings %>% 
+  filter(province == "Mendoza Province") 
+```
+
+El dataset original contiene `r nrow(wine_ratings)` filas y `r ncol(wine_ratings)`. Después de filtrar los datos sólo por `Mendoza Province` nos quedamos con `r nrow(wine_ar)` filas que representan los puntajes que personas expertas le han dado a los vinos. De ahora en más seguiremos trabajando con el dataset `wine_ar`.
+
+```{r}
+# Exploremos el contenido del dataset
+glimpse(wine_ar)
+```
+
+Solo de explorar el dataset se me hace agua la boca. En fin, sigamos...
+
+## Calcular puntaje promedio de vinos por regiones
+
+El paso siguiente es filtrar por la cepa `Malbec` y luego podemos calcular un promedio de los puntajes de la columna `points` agrupados por la columna `region_1` así podemos establecer un ranking de las regiones que tienen los mejores Malbecs de Mendoza.
+
+```{r}
+# Filtramos por Malbec
+malbec <- wine_ar %>% 
+  filter(variety == "Malbec")
+
+# Creamos un ranking de las mejores regiones productoras de Malbec
+promedio_regiones <- malbec %>% 
+  filter(!is.na(region_1)) %>%  # Eliminamos filas sin datos
+  group_by(region_1) %>%        # Agrupamos por region
+  summarise(puntaje_promedio = mean(points)) %>% # Calculamos el promedio
+  arrange(desc(puntaje_promedio)) # Ordenamos de mayor a menor
+
+# Ver el resultado
+promedio_regiones
+```
+
+De esta manera descubrimos, para mi sorpresa incluso, que en Perdriel (una [localidad](https://es.wikipedia.org/wiki/Perdriel_(Mendoza)) dentro de Luján de Cuyo) podemos encontrar los mejores malbecs de la provincia.
+
+Y ahora esto lo podemos visualizar en un gráfico.
+
+```{r}
+ggplot(promedio_regiones, aes(x = puntaje_promedio, 
+                              y = reorder(region_1, puntaje_promedio))) + # Ordenamos las regiones por puntaje_promedio
+  geom_col(fill = "#82163D") + # Color malbec ;p
+  theme_minimal()  + # Modificamos el estilo del gráfico
+  # Añadimos el título al gráfico y a los ejes
+  labs(title = "Ranking de regiones de Mendoza con los mejores Malbec", 
+       x = "Puntaje Promedio",
+       y = "Región de Mendoza") +
+  theme(title = element_text(color = "#82163D"),
+        plot.title.position = "plot") +
+  # Añadimos el puntaje a cada barra
+  geom_text(aes(label = round(puntaje_promedio,1)),
+            size = 2.5,
+            color = "white",
+            hjust = 1.2) 
+
+# Guardamos el gráfico en un archivo png
+ggsave("output/ranking_regiones.png", dpi = 300, create.dir = TRUE)
+```
+
+Así podemos ver fácilmente las localidades con los mejores vinos malbec, y podríamos planificar el viaje asegurándonos de visitar las mejores bodegas.
+
+Después me agradecen.
+
+![](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3RpMWlkZGhpam9zdWs4MmoweXkzM3drcm45ZzFleXdzOTk4MjdrbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8Iv5lqKwKsZ2g/giphy.gif)
+
+# Segundo Análisis: ¿Cuáles son los mejores proveedores de capacitación en mi empresa?
+
+Cómo decía anteriormente. Es probable que si trabajamos en un equipo de Capacitación, y busquemos cómo hacer un análisis de proveedores de capacitación, no encontremos ningún artículo que nos enseñe a hacerlo.
+
+Pero, podemos usar el ejemplo del ranking de vinos para hacer un análisis similar usando las encuestas de capacitación que hacemos completar a nuestros empleados después que terminan un curso.
+
+## Los datos
+
+Para realizar este ejercicio, vamos a usar un dataset ficticio, que simula compilar resultados de encuestas de capacitación, e incluye métricas como:
+
+-   **satisfaction:** evalúa en qué medida el curso gustó o no.
+
+-   **facilitator_score:** puntúa la calidad del facilitador/a de la actividad.
+
+-   **materials_satisfaction:** mide la satisfacción con los materiales provistos por el proveedor del curso.
+
+-   **willing_recommend:** evalúa si recomendaría el curso o no.
+
+-   **area_goals_alignment:** mide en qué porcentaje el curso está alineado con los objetivos del área.
+
+-   **work_aplication:** en qué medida el contenido del curso se puede trasladar al trabajo.
+
+-   **scrap_learning:** mide cuánto del contenido de la actividad no tiene aplicación en el trabajo (leer más en [este artículo](https://chechoid.netlify.app/posts/scrap_learning/)).
+
+```{r}
+# Carga de datos
+training <- read_delim("data/training_ratings.csv",
+                       delim = ";")
+
+# Explorar dataset
+glimpse(training)
+```
+
+Como podemos apreciar, hay muchas dimensiones en las que nos podemos enfocar para medir la calidad de nuestros proveedores de capacitación. Para este ejercicio vamos a **analizar a los proveedores según qué tan alineados están con los objetivos del área**.
+
+¿Por qué vamos a analizar a los proveedores según su alineación con los objetivos?
+
+![](no_hay_porque.jpg){fig-align="left" width="458"}
+
+### Paréntesis: Nombres de los proveedores de capacitación
+
+Casi todos los datos de este dataset son inventados por mí, los puntajes fueron generados aleatoriamente, pero los nombres de los proveedores y de los cursos los saqué de los proveedores y cursos que teníamos en Pilkington de la época que trabajé ahí (2010-2016).
+
+Así que para no herir susceptibilidades, ni que se malinterprete la información que vamos a generar, vamos a usar el paquete `noah` que lo que hace es generar nombres aleatorios para enmascarar los nombres reales, y mostrar un nombre simpático en vez del real.
+
+![](https://teebusch.github.io/noah/reference/figures/logo.png){fig-align="left" width="205"}
+
+```{r}
+# Cargar la librería
+# install.packages("noah")
+library(noah)
+
+# Crear columna con nombres random
+training <- training %>% 
+    mutate(pseudo_supplier = pseudonymize(supplier)) 
+
+# Guardamos el archivo nuevo
+write_delim(training, "output/training_data_fake_names.csv", delim = ";")
+
+# Veamos los nombres nuevos que tienen los proveedores con este cambio
+fake_names <- unique(training$pseudo_supplier)
+
+fake_names
+```
+
+¿Quién no querría hacer un curso en `r fake_names[1]`? 😁
+
+Cierro paréntesis.
+
+## Calcular proveedores mejor alineados con los objetivos del área
+
+El siguiente paso es calcular el promedio de alineación con objetivos por cada proveedor. De nuevo, podría ser por cualquier métrica, pero para este artículo elejimos esa.
+
+Como la idea del análisis es analizar proveedores externos. Vamos a filtrar los cursos dictados internamente, y luego vamos a calcular el promedio de alineación con objetivos para cada proveedor.
+
+```{r}
+# Crear un dataset de proveedores externos
+external_vendors <- training %>% 
+  filter(supplier != "INTERNO") # Elimina las filas de cursos internos
+
+# Calculamos el puntaje promedio de alineación para cada proveedor
+vendor_alignment_score <-  external_vendors %>% 
+  group_by(pseudo_supplier) %>% 
+  summarise(puntaje_promedio = mean(area_goals_alignment)) %>%
+  arrange(desc(puntaje_promedio))
+
+# Veamos el ranking
+vendor_alignment_score
+```
+
+De esta manera podemos ver que *`r pull(vendor_alignment_score[1,1])`* es el mejor proveedor con un puntaje de `r scales::percent(pull(vendor_alignment_score[1,2]),accuracy = 0.1)` y que el peor proveedor es *`r pull(vendor_alignment_score[nrow(vendor_alignment_score),1])`*.
+
+Con estos datos podemos hacer un gráfico de la misma manera que lo hicimos con el gráfico de vinos.
+
+```{r}
+ggplot(vendor_alignment_score, aes(x = puntaje_promedio, 
+                              y = reorder(pseudo_supplier, puntaje_promedio))) + # Ordenamos los vendors por puntaje_promedio
+  geom_col(fill = "#103F79") +
+  theme_minimal()  + # Modificamos el estilo del gráfico
+  # Añadimos el título al gráfico y a los ejes
+  labs(title = "Ranking de proveedores de capacitación",
+       subtitle = "Ordenados por Alineación con Objetivos del Área",
+       x = "Puntaje Promedio",
+       y = "Vendor",
+       caption = "Datos generados aleatoriamente") +
+  theme(title = element_text(color = "#103F79"),
+        plot.title.position = "plot") +
+  # Añadimos el puntaje a cada barra
+  geom_text(aes(label = scales::percent(puntaje_promedio,
+                                        accuracy = 0.1)),
+            size = 2.5,
+            color = "white",
+            hjust = 1.2) +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1))
+
+# Guardamos el gráfico en un archivo png
+ggsave("output/ranking_proveedores_basico.png", dpi = 300, create.dir = TRUE)
+```
+
+Incluso podemos ir un paso más allá y agregar una línea que nos indique el target de alineación mínimo. De esta manera podremos saber qué proveedores debemos mantener sí o sí independiemente del costo, y cuáles son los vendors que tenemos que reemplazar.
+
+```{r}
+ggplot(vendor_alignment_score, aes(x = puntaje_promedio, 
+                              y = reorder(pseudo_supplier, puntaje_promedio))) + # Ordenamos los vendors por puntaje_promedio
+  geom_col(fill = "#103F79") +
+  theme_minimal()  + # Modificamos el estilo del gráfico
+  # Añadimos el título al gráfico y a los ejes
+  labs(title = "Ranking de proveedores de capacitación",
+       subtitle = "Ordenados por Alineación con Objetivos del Área",
+       x = "Puntaje Promedio",
+       y = "Vendor",
+       caption = "Datos generados aleatoriamente") +
+  theme(title = element_text(color = "#103F79"),
+        plot.title.position = "plot") +
+  # Añadimos el puntaje a cada barra
+  geom_text(aes(label = scales::percent(puntaje_promedio,
+                                        accuracy = 0.1)),
+            size = 2.5,
+            color = "white",
+            hjust = 1.2) +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  # Definimos un umbral de 60% con una línea punteada amarilla
+  geom_vline(xintercept = 0.6,
+             color = "#F3B229",
+             linetype = 2,
+             linewidth = 1)
+
+# Guardamos el gráfico en un archivo png
+ggsave("output/ranking_proveedores.png", dpi = 300, create.dir = TRUE)
+```
+
+Incluso podríamos asignar colores distintos a los proveedores cuyo puntaje sea inferior al 40% para indicar de esa manera qué proveedores deberían ser reemplazados.
+
+```{r}
+# Guardemos el gráfico en un objeto para simplificar la lectura
+p <- ggplot(vendor_alignment_score, aes(x = puntaje_promedio, 
+                              y = reorder(pseudo_supplier, puntaje_promedio))) + 
+  # Definimos los cortes en función del puntaje promedio
+  geom_col(aes(fill = cut(puntaje_promedio,
+                           c(-Inf,0.4, Inf)))) 
+# Los valores van de menos infinito, a 0.4, y luego hasta el infinito
+
+# Veamos este paso
+p
+
+# Ahora asignemos el color en función de los valores de puntaje_promedio
+# Si el valor es mayor a 0.4 (40%) entonces el color es azul.
+# Si el valor es menor a 0.4, entonces el color de la barra será naranja.
+p <- p +
+  scale_fill_manual(values = c("(-Inf,0.4]" = "#F7B234",
+                               "(0.4, Inf]" = "#103F79"),
+                    labels = c("Reemplazar", "Mantener")
+                    )
+# Veamos como queda hasta ahora
+p
+
+# Gráfico final con todos los lujos
+p +
+  # Añadimos el título al gráfico y a los ejes
+  labs(title = "Ranking de proveedores de capacitación",
+       subtitle = "Ordenados por Alineación con Objetivos del Área",
+       x = "Puntaje Promedio",
+       y = "Vendor",
+       caption = "Datos generados aleatoriamente",
+       fill = "Acción") +
+  # Añadimos el puntaje a cada barra
+  geom_text(aes(label = scales::percent(puntaje_promedio,
+                                        accuracy = 0.1)),
+            size = 2.5,
+            color = "white",
+            hjust = 1.2) +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  # Definimos un umbral de 60% con una línea punteada amarilla
+  geom_vline(xintercept = 0.6,
+             color = "#F3B229",
+             linetype = 2,
+             linewidth = 1) +
+  theme_minimal() +  # Modificamos el estilo del gráfico
+  guides(fill = guide_legend(reverse=TRUE)) +
+  theme(title = element_text(color = "#103F79"),
+        plot.title.position = "plot",
+        legend.position = "top") 
+
+
+ggsave("output/ranking_proveedores_final.png")
+  
+```
+
+# Conclusión
+
+En este ejercicio podemos ver como un análisis aplicado a realizar un ranking de mejores lugares para encontrar vinos nos sirve como *inspiración* para realizar un ranking de los mejores proveedores de capacitación.
+
+Hacer este tipo de ejercicios me parece muy importante por dos motivos:
+
+-   No siempre vamos a encontrar precisamente lo que necesitamos.
+-   A veces haciendo cosas *divertidas* podemos aprender a usar una herramienta (llámese, R, Excel, Power BI o Python) y luego aplicar lo que aprendemos a lo que necesitamos.
+
+Estoy seguro que si googleamos *"cómo hacer un ranking de capacitación en (inserte su herramienta aquí)"*, probablemente no encontremos mucha información, en cambio si buscamos cómo hacer un ranking en "x" tecnología, hallaremos muchos recursos para aprender como hacerlo.
+
+Por siempre en cada proyecto de datos, **lo más importante es saber qué queremos lograr**, qué es lo que estamos buscando, cuál es el problema que tenemos que resolver, para qué, etc., etc., etc.. La parte técnica se resuelve fácil cuando sabemos cuál es nuestro objetivo.
+
+Espero que les haya gustado este ejercicio. Próximamente subiré el código para hacerlo en Python, así que stay tuned!
+
+![](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTB3YnRidWxybXp5bTB6ZDdwNnY5amZhMm90eXJqOG5uejVsNW5xNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3ohjUSrMV1hm4BmG9a/giphy.gif)
