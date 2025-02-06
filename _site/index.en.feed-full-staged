@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>chechoid.netlify.app</title>
+<link>https://chechoid.netlify.app/index.en.html</link>
+<atom:link href="https://chechoid.netlify.app/index.en.xml" rel="self" type="application/rss+xml"/>
+<description>Un blog sobre People Analytics, R y Python</description>
+<generator>quarto-1.5.57</generator>
+<lastBuildDate>Wed, 05 Feb 2025 03:00:00 GMT</lastBuildDate>
+<item>
+  <title>{B4F502887207:/en/tidytuesday-simpsons/index.html}</title>
+  <dc:creator>Checho </dc:creator>
+  <link>https://chechoid.netlify.app/en/tidytuesday-simpsons/</link>
+  <description>{B4F502887207:/en/tidytuesday-simpsons/index.html}</description>
+  <category>ggplot2</category>
+  <category>tidytuesday</category>
+  <category>tidyverse</category>
+  <category>dplyr</category>
+  <category>data viz</category>
+  <category>fun</category>
+  <category>r</category>
+  <category>simpsons</category>
+  <guid>https://chechoid.netlify.app/en/tidytuesday-simpsons/</guid>
+  <pubDate>Wed, 05 Feb 2025 03:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>{B4F502887207:/en/doing-silly-things-r/index.html}</title>
+  <dc:creator>Checho </dc:creator>
+  <link>https://chechoid.netlify.app/en/doing-silly-things-r/</link>
+  <description>{B4F502887207:/en/doing-silly-things-r/index.html}</description>
+  <category>fun</category>
+  <category>ggplot2</category>
+  <category>proyectos</category>
+  <guid>https://chechoid.netlify.app/en/doing-silly-things-r/</guid>
+  <pubDate>Thu, 01 Sep 2022 03:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

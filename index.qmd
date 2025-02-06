@@ -1,7 +1,7 @@
 ---
-title: "Mi blog de R y People Analytics"
+title: "Mi blog de People Analytics, R y Python"
 listing:
-  contents: es, en  # Listar archivos de las carpetas 'es' y 'en'
+  contents: es  # Listar archivos de las carpetas 'es' 
   sort: "date desc"  # Ordenar por fecha descendente
   type: default      # Tipo de lista predeterminada
   categories: true   # Mostrar categorías (si las tienes)
@@ -11,3 +11,19 @@ listing:
 page-layout: full
 title-block-banner: true
 ---
+
+```{r}
+# Español
+
+#| echo: false
+#| warning: false
+#| message: false
+quarto::quarto_listing("es")
+```
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+quarto::quarto_listing("en")
+```

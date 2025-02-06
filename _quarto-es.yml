@@ -1,0 +1,10 @@
+website:
+  navbar: 
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/chechoid
+      - text: "{{<fa brands bluesky>}}"
+        href: https://bsky.app/profile/checho-puchero.bsky.social
+      - icon: linkedin
+        href: https://linkedin.com/in/sergiogarciamora

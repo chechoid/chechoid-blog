@@ -4,7 +4,7 @@ project:
 website:
   title: "chechoid.netlify.app"
   site-url: "https://chechoid.netlify.app"
-  description: "Un blog sobre R y People Analytics (y Python)"
+  description: "Un blog sobre People Analytics, R y Python"
   navbar:
     right:
       - about.qmd
@@ -20,11 +20,7 @@ website:
           href: /es/
         - text: English
           href: /en/
-language:
-  es:
-    label: Español
-  en:
-    label: English
+          
 format:
   html:
     theme:
@@ -33,4 +29,15 @@ format:
     css: styles.css
     highlight-style: nord
 
-editor: visual
+babelquarto:
+  languagecodes:
+  - name: en
+    text: "English"
+  - name: es
+    text: "Español"
+  mainlanguage: 'es'
+  languages: ['en']
+title-en: "chechoid.netlify.app"
+description-en: My blog of People Analytics, R & Python
+author-en: Sergio Garcia Mora aka Checho
+lang: es

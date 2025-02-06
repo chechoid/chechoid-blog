@@ -1,0 +1,13 @@
+---
+title: "My blog about People Analytics, R & Python"
+listing:
+  contents: en  # Listar archivos de las carpetas 'en' 
+  sort: "date desc"  # Ordenar por fecha descendente
+  type: default      # Tipo de lista predeterminada
+  categories: true   # Mostrar categorías (si las tienes)
+  feed: true         # Habilitar feed RSS
+  sort-ui: false     # Deshabilitar interfaz de ordenación
+  filter-ui: true    # Habilitar interfaz de filtrado
+page-layout: full
+title-block-banner: true
+---
