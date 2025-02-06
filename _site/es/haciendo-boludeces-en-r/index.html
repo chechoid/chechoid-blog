@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Checho">
+
+<title>Haciendo pavadas en R – chechoid.netlify.app</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">chechoid.netlify.app</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">Sergio Garcia Mora aka Checho</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/chechoid"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://bsky.app/profile/checho-puchero.bsky.social"> 
+<span class="menu-text"><i class="fa-brands fa-bluesky" aria-label="bluesky"></i></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/sergiogarciamora"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-idioma--language" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Idioma / Language</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-idioma--language">    
+        <li>
+    <a class="dropdown-item" href="../../es/">
+ <span class="dropdown-text">Español</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../en/">
+ <span class="dropdown-text">English</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Alternar modo oscuro"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#por-qué-elegí-esto-como-mi-primer-post" id="toc-por-qué-elegí-esto-como-mi-primer-post" class="nav-link active" data-scroll-target="#por-qué-elegí-esto-como-mi-primer-post">¿Por qué elegí esto como mi primer post?</a></li>
+  <li><a href="#un-poco-de-contexto" id="toc-un-poco-de-contexto" class="nav-link" data-scroll-target="#un-poco-de-contexto">Un poco de contexto</a>
+  <ul class="collapse">
+  <li><a href="#génesis-de-la-idea-k-nn" id="toc-génesis-de-la-idea-k-nn" class="nav-link" data-scroll-target="#génesis-de-la-idea-k-nn">Génesis de la idea: k-nn</a></li>
+  </ul></li>
+  <li><a href="#haciendo-cosas-raras-para-gente-normal-en-r" id="toc-haciendo-cosas-raras-para-gente-normal-en-r" class="nav-link" data-scroll-target="#haciendo-cosas-raras-para-gente-normal-en-r">Haciendo cosas raras para gente normal en R</a>
+  <ul class="collapse">
+  <li><a href="#cargando-los-datos-y-preparándolos" id="toc-cargando-los-datos-y-preparándolos" class="nav-link" data-scroll-target="#cargando-los-datos-y-preparándolos">Cargando los datos y preparándolos</a></li>
+  <li><a href="#trabajando-con-las-imágenes" id="toc-trabajando-con-las-imágenes" class="nav-link" data-scroll-target="#trabajando-con-las-imágenes">Trabajando con las imágenes</a></li>
+  <li><a href="#poniendo-imágenes-al-gráfico" id="toc-poniendo-imágenes-al-gráfico" class="nav-link" data-scroll-target="#poniendo-imágenes-al-gráfico">Poniendo imágenes al gráfico</a></li>
+  <li><a href="#qué-saqué-de-todo-esto" id="toc-qué-saqué-de-todo-esto" class="nav-link" data-scroll-target="#qué-saqué-de-todo-esto">¿Qué saqué de todo esto?</a>
+  <ul class="collapse">
+  <li><a href="#final" id="toc-final" class="nav-link" data-scroll-target="#final">Final</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Haciendo pavadas en R</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">fun</div>
+    <div class="quarto-category">ggplot2</div>
+    <div class="quarto-category">proyectos</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Checho </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">1 de septiembre de 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="por-qué-elegí-esto-como-mi-primer-post" class="level1">
+<h1>¿Por qué elegí esto como mi primer post?</h1>
+<p>Una vez vi una charla de Ryan Timpe, un Data Scientist de Lego, que en una <a href="https://www.rstudio.com/resources/rstudioconf-2020/learning-r-with-humorous-side-projects/">charla en la RStudio Conference</a> contaba cómo a veces hacía proyectos que fueran divertidos para aprender nuevos skills de análisis de datos. En su charla cuenta por ejemplo, que hizo un análisis de los diálogos de la serie <em>The Golden Girls</em> usando técnicas de text mining para detectar cuáles eran las palabras más frecuentes, entonces cada vez que una protagonista decía esa palabra ellos hacían un fondo blanco de lo que estuvieran tomando.</p>
+<p>Este post va de lo mismo. Yo quería aprender a usar imágenes en mis visualizaciones, así nació este proyecto en el que usé imágenes de personas con rasgos “similares” a los míos e incluir las fotos en un gráfico de dispersión.</p>
+<p>Esto que es una boludez implicó:</p>
+<ul>
+<li><p>Crear un formulario en Google Forms</p></li>
+<li><p>Levantar los datos de las respuestas</p></li>
+<li><p>Procesar los resultados</p></li>
+<li><p>E incluir visualizaciones usando las imágenes de las personas.</p></li>
+</ul>
+<p>Este tipo de proyectos lo que permite es que el esfuerzo que dedicás a aprender no se sienta pesado, y que te da una motivación extra para buscar la solución para lograr el resultado.</p>
+</section>
+<section id="un-poco-de-contexto" class="level1">
+<h1>Un poco de contexto</h1>
+<p>Este soy yo:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="archivos/sergio.jpg" class="img-fluid figure-img" alt="Foto de Sergio, sosteniendo una copa de vino" width="372"></p>
+<figcaption>En mi luna de miel en Mendoza</figcaption>
+</figure>
+</div>
+<p>Como verán, tengo el pelo más o menos largo, con flequillo y barba candado. Mucha gente dice que me parezco a Nicolás del Caño 🤷, un diputado del Partido de los Trabajadores Socialistas de Argentina y que tiene un corte de pelo parecido al mío y también usa barba.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.izquierdadiario.es/IMG/auton3.jpg?1605455691" class="img-fluid figure-img" width="221"></p>
+<figcaption>Nicolás del Caño</figcaption>
+</figure>
+</div>
+<p>En estas fotos no nos vemos tan parecidos, pero déjenme contarles una anécdota. Cuando mi hija tenía 3 años aproximadamente estábamos en campaña electoral de diputados y había afiches de todos los partidos políticos pegados por todos lados, incluyendo claro está los del PTS y Nicolás del Caño obviamente.</p>
+<p>En esa época mi hija y mi esposa iban caminando por la calle, y cuando se estaban acercando a uno de los afiches de Del Caño mi hija apunta con su dedito y dice “Papá!” como si yo fuera el que estaba en el afiche. Así que algún parecido hay.</p>
+<p>También dijo lo mismo mirando un afiche de Johnny Depp promocionando el perfume Savage, pero esa no me la cree nadie.</p>
+<p>Otros personajes con los que mis amigos suelen bromear que somos parecidos son el Gigoló, Roberto Baradel, o el Mono Burgos.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.cronica.com.ar/export/sites/cronica/img/2019/05/06/gigolo_2.jpg_343233968.jpg" class="img-fluid figure-img" width="184"></p>
+<figcaption>El Gigoló</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cdn.cnn.com/cnnnext/dam/assets/190306231108-pba-baradel-large-169.jpg" class="img-fluid figure-img" width="339"></p>
+<figcaption>Roberto Baradel</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://phantom-elmundo.unidadeditorial.es/6744bff920f7004ccfe5c7f23aefac88/crop/0x29/1972x1340/resize/1200/f/webp/assets/multimedia/imagenes/2020/06/03/15912134233683.jpg" class="img-fluid figure-img"></p>
+<figcaption>El Mono Burgos</figcaption>
+</figure>
+</div>
+<p>Ya sé lo que están pensando: <em>Con amigos así quién necesita enemigos</em>. Pero igual se hacen querer.</p>
+<section id="génesis-de-la-idea-k-nn" class="level2">
+<h2 class="anchored" data-anchor-id="génesis-de-la-idea-k-nn">Génesis de la idea: k-nn</h2>
+<p>La idea de este análisis surgió un día después de hacer una explicación sobre un método de clustering llamado <strong>k-nn</strong>. Los métodos de clustering son técnicas de ciencia de datos que permiten hallar grupos entre los datos (llamados <em>clusters</em> en la jerga).</p>
+<p>El método k-nn, <em>k</em> <em>nearest neighbors</em> o de vecinos más cercanos lo que hace es asignar a cada individuo a un cluster en función de las características de sus “vecinos”. Es decir que determina a qué grupo pertenece cada caso en función a qué casos se parece más.</p>
+<p>La forma que se me ocurrió para explicar esto de manera visual fue con este dibujo que hice en Paint:</p>
+<p><img src="archivos/clones_paint.jpg" class="img-fluid"></p>
+<p>La explicación es que yo, dentro de ese conjunto de datos, estoy más cerca de pertenecer al cluster del Mono Burgos y de Nicolás del Caño, más que del cluster de Keanu Reeves, Jeff Bridges y Brad Pitt.</p>
+<p>Y después tuve una idea. <strong>¿Y si hago esto con datos?</strong></p>
+<p><img src="https://media1.giphy.com/media/3oz8xP6SaSkSU9dhcI/200w.gif?cid=82a1493b6dys6v5sl1wm0y65sc1ej72nglv6y40cwx6rrtw2&amp;rid=200w.gif&amp;ct=g" class="img-fluid"></p>
+</section>
+</section>
+<section id="haciendo-cosas-raras-para-gente-normal-en-r" class="level1">
+<h1>Haciendo cosas raras para gente normal en R</h1>
+<p>La idea entonces es replicar el gráfico de arriba pero usando datos. Entonces lo que hice fue en primer lugar buscar fotos de personajes argentinos e internacionales que tengan el pelo más o menos largo, usen barba, y en algunos casos tengan unos kilos de más.</p>
+<p>Para este paso lo que hice fue pasar todas las fotos de los personas en Canva para que me queden todas las imágenes del mismo tamaño.</p>
+<p>Luego me armé un formulario en Google Forms con cada imagen para compartir con amigas y amigos para que voten del 1 al 10 la <em>facha</em> (facha en Argentina es una forma de decir belleza) y la <em>copadez</em> (que tan agradables son las personas).</p>
+<p>Los personajes involucrados fueron:</p>
+<ul>
+<li><p>Nicolás del Caño</p></li>
+<li><p>Roberto Baradel</p></li>
+<li><p>El Mono Burgos</p></li>
+<li><p>Ricardo Caruso Lombardi</p></li>
+<li><p>Ben Affleck</p></li>
+<li><p>Jeff Bridges</p></li>
+<li><p>Brad Pitt</p></li>
+<li><p>Javier Bardem</p></li>
+<li><p>Keanu Reeves</p></li>
+<li><p>Y su fiel servidor 😉</p></li>
+</ul>
+<p>En mi análisis original cargué los datos directamente desde el Google Sheets que se genera con los resultados del Forms. Solo para los fines de reproducibilidad en este caso voy a usar un archivo csv así si quieren pueden replicar los resultados.</p>
+<p>Así que ahora podemos armar el script.</p>
+<section id="cargando-los-datos-y-preparándolos" class="level2">
+<h2 class="anchored" data-anchor-id="cargando-los-datos-y-preparándolos">Cargando los datos y preparándolos</h2>
+<p>Empecemos cargando las librerías y los datos directamente desde un repositorio:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># Cargar, limpiar y preparar datos</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggimage)   <span class="co"># Para usar imágenes en las visualizaciones</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Datos</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>clones <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"https://raw.githubusercontent.com/chechoid/silliest-use-of-r/main/source.csv"</span>, <span class="at">delim =</span> <span class="st">";"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>comentarios <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">comentarios =</span> <span class="st">`</span><span class="at">Poné lo que quieras... parecidos, chistes, comentarios, etc...</span><span class="st">`</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(comentarios))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Exploremos los datos</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(clones)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 24
+  `Marca temporal`    `Facha de Keanu` `Copadez de Keanu` `Facha de Russell`
+  &lt;dttm&gt;                         &lt;dbl&gt;              &lt;dbl&gt;              &lt;dbl&gt;
+1 2021-06-23 12:37:28               10                 10                  7
+2 2021-06-23 12:39:12                4                 10                  5
+3 2021-06-23 12:42:21                8                  9                  8
+4 2021-06-23 12:43:24               10                 10                  1
+5 2021-06-23 12:45:03               10                  8                  4
+6 2021-06-23 12:45:12                5                  9                  1
+# ℹ 20 more variables: `Copadez de Russell` &lt;dbl&gt;, `Facha de Nico` &lt;dbl&gt;,
+#   `Copadez de Nico` &lt;dbl&gt;, `Facha de Roberto` &lt;dbl&gt;,
+#   `Copadez de Roberto` &lt;dbl&gt;, `Facha de Jeff` &lt;dbl&gt;, `Copadez de Jeff` &lt;dbl&gt;,
+#   `Facha de Brad` &lt;dbl&gt;, `Copadez de Brad` &lt;dbl&gt;, `Facha del Mono` &lt;dbl&gt;,
+#   `Copadez del Mono` &lt;dbl&gt;, `Facha de Sergio` &lt;dbl&gt;,
+#   `Copadez de Sergio` &lt;dbl&gt;, `Facha de Ricky` &lt;dbl&gt;,
+#   `Copadez de Ricky` &lt;dbl&gt;, `Facha de Ben` &lt;dbl&gt;, `Copadez de Ben` &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>Ahí podemos ver que para cada personaje tenemos una columna con el puntaje de su facha y su puntaje de copadez.</p>
+<p>El siguiente paso consiste en eliminar algunas columnas que no son relevantes para el análisis, y agregamos una columna de <code>id</code>. Y luego tenemos que “pivotear” la tabla para que nos queden todas las columnas de puntajes de los personajes en dos columnas:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminar columnas innecesarias</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>clones <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Marca temporal</span><span class="st">`</span>, <span class="sc">-</span><span class="st">`</span><span class="at">Poné lo que quieras... parecidos, chistes, comentarios, etc...</span><span class="st">`</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Agregar columna de id</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>clones <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowid_to_column</span>(<span class="at">var =</span> <span class="st">"id"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivotear variables</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>clones <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"Facha de Keanu"</span><span class="sc">:</span> <span class="st">"Copadez de Javier"</span>),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"personaje"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"puntaje"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Veamos como queda el dataset ahora</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(clones)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+     id personaje          puntaje
+  &lt;int&gt; &lt;chr&gt;                &lt;dbl&gt;
+1     1 Facha de Keanu          10
+2     1 Copadez de Keanu        10
+3     1 Facha de Russell         7
+4     1 Copadez de Russell      10
+5     1 Facha de Nico            1
+6     1 Copadez de Nico          1</code></pre>
+</div>
+</div>
+<p>Habíamos comenzado con un dataset de 66 filas y 24 columnas. Ahora terminamos con un data frame de 1.452 filas en 3 columnas. Ahora necesitamos eliminar las palabras intermedias <code>de</code> y <code>del</code> de los nombres en la columna <code>personaje</code> así después podemos crear una columna para <code>facha</code>, y otra para <code>copadez</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separar variables categóricas</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>clones <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">personaje =</span> <span class="fu">str_remove</span>(personaje, <span class="st">"de "</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">personaje =</span> <span class="fu">str_remove</span>(personaje, <span class="st">"del "</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Veamos el puntaje promedio de cada personaje y sus caraceterísticas</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>clones <span class="sc">%&gt;%</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(personaje) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">valor_promedio =</span> <span class="fu">mean</span>(puntaje)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> valor_promedio, <span class="at">y =</span> personaje)) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/preproceso2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dividimos la columna 'personaje' en dos columnas, una para la métrica y otra para el nombre</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>clones <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(personaje,  <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"metrica"</span>, <span class="st">"persona"</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivotear ancho </span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>clones <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(id, persona),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from =</span> metrica,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> puntaje)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Veamos como queda el data frame ahora</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(clones)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+     id persona Facha Copadez
+  &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+1     1 Keanu      10      10
+2     1 Russell     7      10
+3     1 Nico        1       1
+4     1 Roberto     1       1
+5     1 Jeff        5       5
+6     1 Brad       10      10</code></pre>
+</div>
+</div>
+<p>Luego de estos pasos quedamos con un data frame de 726 filas, una para cada votación para cada personaje, y con 4 columnas, <code>id</code>, <code>persona</code>, <code>Facha</code> y <code>Copadez</code>. Con estos datos podemos ver los resultados de cada persona:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculamos los resultados promedios para cada persona y graficamos los resultados</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>resultados <span class="ot">&lt;-</span> clones <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(persona) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">facha_promedio =</span> <span class="fu">mean</span>(Facha),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">copadez_promedio =</span> <span class="fu">mean</span>(Copadez))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(resultados, <span class="fu">aes</span>(<span class="at">x =</span> copadez_promedio, <span class="at">y =</span> facha_promedio, <span class="at">color =</span> persona)) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/resultados_promedios-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>En esencia, este es el gráfico al que queremos llegar. Así como está es medio aburrido, así que vamos a enchular este gráfico con imágenes.</p>
+</section>
+<section id="trabajando-con-las-imágenes" class="level2">
+<h2 class="anchored" data-anchor-id="trabajando-con-las-imágenes">Trabajando con las imágenes</h2>
+<p>Como contaba antes, primero armé una presentación en Canva y pegué todas las imágenes de cada personaje para que queden más o menos del mismo tamaño. Luego guardé cada imagen en un archivo separado, y en este caso las guardé en una carpeta que se llama <code>clones</code>.</p>
+<p>Podría haber hecho la carga de las fotos una por una, pero quería hacer este trabajo lo más eficiente posible tratando de repetir pasos. Para eso tenemos que crear un data frame que tenga por un lado el nombre de la persona <strong>tal cual</strong> lo tenemos en la tabla de las votaciones, y que incluya la dirección a la imagen.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Creamos un vector con los nombres de las personas</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>persona <span class="ot">&lt;-</span> resultados <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(persona) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Creo un vector de imágenes</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>ruta <span class="ot">&lt;-</span> <span class="st">"pics"</span>        <span class="co"># Ruta de las fotos</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>extension <span class="ot">&lt;-</span> <span class="st">"png"</span>   <span class="co"># Extensión de los archivos de imágenes</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># nombres de los archivos</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>imagen <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Ben"</span>, <span class="st">"Brad"</span>, <span class="st">"Javier"</span>, <span class="st">"jeff"</span>, <span class="st">"keanu"</span>, <span class="st">"mono"</span>, <span class="st">"nico"</span>, </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>            <span class="st">"ricky"</span>, <span class="st">"roberto"</span>, <span class="st">"russell"</span>, <span class="st">"sergio"</span>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Creo el vector de fotos con dirección y extensión completa</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>foto <span class="ot">&lt;-</span> <span class="fu">str_c</span>(ruta, imagen, <span class="at">sep =</span> <span class="st">"/"</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>foto <span class="ot">&lt;-</span> <span class="fu">str_c</span>(foto, extension, <span class="at">sep =</span> <span class="st">"."</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Creo el dataframe y lo agrego al dataframe resultados</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>pics <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(persona, foto)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Ver el resultado de este proceso</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>pics</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   persona             foto
+1      Ben     pics/Ben.png
+2     Brad    pics/Brad.png
+3   Javier  pics/Javier.png
+4     Jeff    pics/jeff.png
+5    Keanu   pics/keanu.png
+6     Mono    pics/mono.png
+7     Nico    pics/nico.png
+8    Ricky   pics/ricky.png
+9  Roberto pics/roberto.png
+10 Russell pics/russell.png
+11  Sergio  pics/sergio.png</code></pre>
+</div>
+</div>
+<p>Ahora tenemos un data frame de 11 filas y dos columnas, con el nombre de cada persona, y la dirección al archivo que contiene las imágenes de cada una. Estos datos lo podemos integrar al data frame que veníamos trabajando con los resultados de Facha y Copadez promedio de cada personaje.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Unimos los datasets</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>resultados <span class="ot">&lt;-</span> <span class="fu">left_join</span>(resultados, pics)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(resultados)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  persona facha_promedio copadez_promedio foto           
+  &lt;chr&gt;            &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;          
+1 Ben               8.23             6.47 pics/Ben.png   
+2 Brad              8.52             7.55 pics/Brad.png  
+3 Javier            6.89             6.56 pics/Javier.png
+4 Jeff              5.06             6.45 pics/jeff.png  
+5 Keanu             7.77             8.74 pics/keanu.png 
+6 Mono              3.30             6.30 pics/mono.png  </code></pre>
+</div>
+</div>
+</section>
+<section id="poniendo-imágenes-al-gráfico" class="level2">
+<h2 class="anchored" data-anchor-id="poniendo-imágenes-al-gráfico">Poniendo imágenes al gráfico</h2>
+<p>Y ahora si, a lo que venimos: incluir las fotos en el gráfico</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># El gráfico final</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(resultados, <span class="fu">aes</span>(<span class="at">x =</span> copadez_promedio, <span class="at">y =</span> facha_promedio)) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_image</span>(<span class="fu">aes</span>(<span class="at">image=</span>foto), <span class="at">size =</span> <span class="fl">0.08</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">10</span>)) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Facha y Copadez Promedio de cada Personaje"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Copadez Promedio"</span>, </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Facha Promedio"</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"n = 66</span><span class="sc">\n</span><span class="st">Ninguna tía participó del relevamiento"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/grafico_final-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Como conclusión del análisis <strong>los datos dicen</strong> que estoy alejado de las características de Nicolás del Caño y Roberto Baradel por ejemplo y <strong>tengo características muy similares que Keanu Reeves</strong>. O sea que los datos indican que me parezco a Keanu. Dato, no opinión 😎.</p>
+</section>
+<section id="qué-saqué-de-todo-esto" class="level2">
+<h2 class="anchored" data-anchor-id="qué-saqué-de-todo-esto">¿Qué saqué de todo esto?</h2>
+<p>En primer lugar aprender a usar un paquete nuevo, <code>ggimage</code> que permite incluir imágenes en los gráficos. Por otro lado hubo un error en el diseño del formulario (poner “Facha del Mono”) lo que implicó un paso extra en la limpieza de los datos. Ese error en este proyecto me ayudó a prevenir un potencial problema con una encuesta de diversidad para un cliente.</p>
+<p>Otro tema fue la manipulación de los datos, pivotearlos de un formato “ancho” a uno “largo” y después nuevamente a uno “ancho” otra vez. Una vez que logré eso el cálculo de los resultados salió de manera muy simple.</p>
+<p>Todo esto llevó dos días de trabajo, mirar tutoriales y documentación y mucha prueba y error. La verdad es que fue mucho trabajo, pero el hecho de ser un proyecto medio delirante le sacó mucha presión y me dió la motivación para aprender algo nuevo y superar las barreras y errores que me fui encontrando. Creo que el hecho que sea un proyecto divertido me liberó para tratar interpretar los mensajes de error y buscar la solución apropiada.</p>
+<p>Este tipo de proyecto me parece ideal para realizar apenas terminás un tutorial o un curso. Los datos que usamos en un tutorial siempre están bastante limpios, controlados, divinos y cuando trabajás con tus propios datos te encontrás con barreras. Realizar este tipo de análisis sin la presión de “agregar valor” al negocio y pone a prueba las habilidades que tenés.</p>
+<p>Así que te invito a que hagas un proyecto ridículo y que lo compartas con el mundo.</p>
+<section id="final" class="level3">
+<h3 class="anchored" data-anchor-id="final">Final</h3>
+<p>Si querés ver el script final de este post, lo podés encontrar en el repositorio <a href="https://github.com/chechoid/chechoid-blog/blob/main/posts/haciendo-boludeces-en-r/index.qmd">en este link</a>.</p>
+<p>Y como regalo final, me reí mucho con los comentarios que hicieron las personas que participaron del relevamiento de datos así que los comparto con ustedes:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="descwesmtc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#descwesmtc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#descwesmtc thead, #descwesmtc tbody, #descwesmtc tfoot, #descwesmtc tr, #descwesmtc td, #descwesmtc th {
+  border-style: none;
+}
+
+#descwesmtc p {
+  margin: 0;
+  padding: 0;
+}
+
+#descwesmtc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#descwesmtc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#descwesmtc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#descwesmtc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#descwesmtc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#descwesmtc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#descwesmtc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#descwesmtc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#descwesmtc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#descwesmtc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#descwesmtc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#descwesmtc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#descwesmtc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#descwesmtc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#descwesmtc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#descwesmtc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#descwesmtc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#descwesmtc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#descwesmtc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#descwesmtc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#descwesmtc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#descwesmtc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#descwesmtc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#descwesmtc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#descwesmtc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#descwesmtc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#descwesmtc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#descwesmtc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#descwesmtc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#descwesmtc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#descwesmtc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#descwesmtc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#descwesmtc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#descwesmtc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#descwesmtc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#descwesmtc .gt_left {
+  text-align: left;
+}
+
+#descwesmtc .gt_center {
+  text-align: center;
+}
+
+#descwesmtc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#descwesmtc .gt_font_normal {
+  font-weight: normal;
+}
+
+#descwesmtc .gt_font_bold {
+  font-weight: bold;
+}
+
+#descwesmtc .gt_font_italic {
+  font-style: italic;
+}
+
+#descwesmtc .gt_super {
+  font-size: 65%;
+}
+
+#descwesmtc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#descwesmtc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#descwesmtc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#descwesmtc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#descwesmtc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#descwesmtc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#descwesmtc .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#descwesmtc .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#descwesmtc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="comentarios" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Comentarios</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">te rompí los patrones a la merd</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">jaja me rei mucho!</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Caruso a la Final!</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">Johnny Depp, 8/8</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Hajajja</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">De Brad Pitt te copiaste el peinado, no?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">¿es requisito tener pelo largo para parecer fachero? mostrame indicadores</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">Sergio vos no estas bien haciendo esto!!! Jajaja</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Falta Denicolay</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">Jajaj muy bueno</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Haces todo esto para levantarte minas Mora, lo sabemos!!!</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">ME ENCANTÓ! curiosa, dinámica y original iniciativa como siempre!!</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Copado el test!!</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">¿todos hombres?</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Hajajja</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">WTH??</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Sos un capo!!! me divertí mucho!!!</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">Falta el test de mujeres.....</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Bronn, de game of thrones.</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">Muy buen ejercicio! A algunos personajes el 1 le quedaba grande! habiliten el 0 jaja Éxitos!</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Un genio Sergio 😂😂😂 Podría ser también a la versión adulta del niño del sexto sentido, el que dice"veo gente muerta" ¿? 🤔</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="comentarios">Puedo decir que la foto que te sacaste, es muy de MA de instagram</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="comentarios">Jaja me hiciste reír. Cómo no soy de Argentina tuve que googlear algunos, pero todo bien. Super entretenido</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Muchas gracias por leer!</p>
+<p><img src="https://media.giphy.com/media/QAsBwSjx9zVKoGp9nr/giphy.gif" class="img-fluid"></p>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/chechoid\.netlify\.app");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Checho">
 
-<title>Sergio Garcia Mora aka Checho – chechoid.netlify.app</title>
+<title>Extraer el máximo valor de una fila – chechoid.netlify.app</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +21,63 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/all.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-1.2.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,17 +107,17 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">chechoid.netlify.app</span>
     </a>
   </div>
@@ -92,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">Sergio Garcia Mora aka Checho</span></a>
   </li>  
   <li class="nav-item compact">
@@ -115,11 +151,11 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-idioma--language">    
         <li>
-    <a class="dropdown-item" href="./es/">
+    <a class="dropdown-item" href="../../es/">
  <span class="dropdown-text">Español</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./en/">
+    <a class="dropdown-item" href="../../en/">
  <span class="dropdown-text">English</span></a>
   </li>  
     </ul>
@@ -135,50 +171,206 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">En esta página</h2>
+   
+  <ul>
+  <li><a href="#extraer-el-máximo-valor-de-una-fila" id="toc-extraer-el-máximo-valor-de-una-fila" class="nav-link active" data-scroll-target="#extraer-el-máximo-valor-de-una-fila">Extraer el máximo valor de una fila</a>
+  <ul class="collapse">
+  <li><a href="#datos-de-ejemplo" id="toc-datos-de-ejemplo" class="nav-link" data-scroll-target="#datos-de-ejemplo">Datos de ejemplo</a></li>
+  <li><a href="#la-solución" id="toc-la-solución" class="nav-link" data-scroll-target="#la-solución">La solución</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
-<div class="quarto-about-trestles">
-  <div class="about-entity">
-    <img src="profile.jpg" class="about-image
-  rounded " style="width: 20em;">
+<main class="content" id="quarto-document-content">
+
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Sergio Garcia Mora aka Checho</h1>
-</div>
+<h1 class="title">Extraer el máximo valor de una fila</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">tipito</div>
+    <div class="quarto-category">tip</div>
+    <div class="quarto-category">análisis</div>
+    <div class="quarto-category">dplyr</div>
+    <div class="quarto-category">data wrangling</div>
+  </div>
+  </div>
+
+
+
 <div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Checho </p>
+          </div>
   </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">13 de octubre de 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
 </header>
-    <div class="about-links">
-  <a href="https://bsky.app/profile/checho-puchero.bsky.social" class="about-link" rel="" target="">
-     <span class="about-link-text">{{<fa brands="" bluesky="">}}</fa></span>
-  </a>
-  <a href="https://linkedin.com/in/sergiogarciamora" class="about-link" rel="" target="">
-    <i class="bi bi-linkedin"></i>
-     <span class="about-link-text"></span>
-  </a>
-  <a href="https://github.com/chechoid" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text"></span>
-  </a>
+
+
+<section id="extraer-el-máximo-valor-de-una-fila" class="level1">
+<h1>Extraer el máximo valor de una fila</h1>
+<p>En este pequeño tutorial (por eso el tag de <code>tipito</code>, o sea un tip chiquito), voy a contar cómo resolví un problema que me encontré en el trabajo y me trajo más de un dolor de cabeza.</p>
+<p>Estaba trabajando con una tabla en la que tenía varios cursos, con sus fechas de finalización, y para el análisis que estaba haciendo necesitaba extraer la fecha del último curso completado por cada persona (el valor más alto).</p>
+<p>El problema es que cuando estaba ejecutando la función <code>max()</code> en vez de obtener el valor más alto de la fila, obtenía el valor más alto de la columna. Así que en este post vamos a ver la función <code>rowwise()</code> que permite resolver este inconveniente.</p>
+<p>En este ejemplo vamos a reemplazar las fechas por un número, que a los fines prácticos plantea el mismo problema.</p>
+<section id="datos-de-ejemplo" class="level2">
+<h2 class="anchored" data-anchor-id="datos-de-ejemplo">Datos de ejemplo</h2>
+<p>Primero carguemos la librería <code>dplyr</code> que además de contener la función <code>rowwise()</code> nos permite trabajar con el <em>pipe</em> <code>%&gt;%</code> para simplificar la lectura del código. Luego crearemos un data frame de ejemplo con datos inventados</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En caso que no esté instalado 'dplyr' primero ejecutar install.package("dplyr")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Creación de datos</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>ejemplo <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"Nombre"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Carla"</span>, <span class="st">"Daniela"</span>, <span class="st">"Sergio"</span>, <span class="st">"Yanel"</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Valor A"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">8</span>, <span class="dv">300</span>, <span class="dv">17</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Valor B"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">21</span>, <span class="dv">18</span>, <span class="dv">400</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Valor C"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">39</span>, <span class="dv">200</span>, <span class="dv">26</span>, <span class="dv">64</span>), </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Valor D"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">43</span>, <span class="dv">86</span>, <span class="dv">12</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-  </div>
-  <div class="about-contents"><main class="content" id="quarto-document-content">
-<section id="de-qué-va-este-blog" class="level2">
-<h2 data-anchor-id="de-qué-va-este-blog">¿De qué va este blog?</h2>
-<p>Este blog va a ser un espacio en donde centraré contenido sobre programación en R, mayormente orientado a temas relacionados con Recursos Humanos y People Analytics <em>(actualización 2025: también incluiré contenido en Python).</em></p>
-<p>Honestamente, a esta altura del partido no me interesa hacer algo solemne para <em>“parecer profesional”</em>, lo que busco más que nada es generar contenido que le sirva a todos los que estén arrancando sus carreras en People Analytics y a quienes están permanentemente aprendiendo.</p>
-<p>Todo el contenido de este blog se puede compartir de manera abierta y libre, citando por supuesto la fuente.</p>
-<p>En este blog te vas a encontrar con contenido relacionado con R y otros más generales y “conceptuales” sobre People Analytics.</p>
-<p>Para contactarme o saber más de mí podés hacerlo a través de mis redes sociales o las redes de <a href="https://linktr.ee/r4hrclub">R4HR - Club de R para RRHH</a>.</p>
-<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Licencia Creative Commons" style="border-width:0"></a><br>Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional</a>.</p>
-<p>Este blog está hecho en R usando Quarto, un sistema de publicación de código abierto desarrollado por el equipo de RStudio. Para más informacion visita este <a href="https://ivelasq.quarto.pub/building-a-blog-with-quarto/intro.html">contenido desarrollado por Isabella Velásquez</a>.</p>
+<p>Ahora veamos cómo quedan los datos</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ejecutar para ver el contenido del data frame</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ejemplo</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Nombre Valor.A Valor.B Valor.C Valor.D
+1   Carla      12       5      39     100
+2 Daniela       8      21     200      43
+3  Sergio     300      18      26      86
+4   Yanel      17     400      64      12</code></pre>
+</div>
+</div>
+<p>Lo que necesitaba lograr (en un archivo con muchas más columnas que en este ejemplo) es poner en una columna nueva el valor más alto para cada persona. Entonces para <code>Carla</code> esperaba que el resultado fuera <code>100</code>, para <code>Daniela</code> <code>200</code> y así sucesivamente.</p>
+<p>Instintivamente lo que hice para intentar obtener el valor más alto de cada caso, fue usar dentro de una función <code>mutate()</code> (para crear una columna nueva) la función <code>max()</code> a un vector con los nombres de las 4 columnas.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ejemplo <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">"Valor Máximo"</span> <span class="ot">=</span> <span class="fu">max</span>(<span class="fu">c</span>(Valor.A, Valor.B, Valor.C, Valor.D)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Nombre Valor.A Valor.B Valor.C Valor.D Valor Máximo
+1   Carla      12       5      39     100          400
+2 Daniela       8      21     200      43          400
+3  Sergio     300      18      26      86          400
+4   Yanel      17     400      64      12          400</code></pre>
+</div>
+</div>
+<p>Claramente no es es el resultado que esperaba, así que mi reacción fue la siguiente:</p>
+<p><img src="https://media.giphy.com/media/PmRgaD2xj0KH2pPrVF/giphy.gif" class="img-fluid" width="286"></p>
+</section>
+<section id="la-solución" class="level2">
+<h2 class="anchored" data-anchor-id="la-solución">La solución</h2>
+<p>El problema del enfoque anterior es que la función <code>max()</code> busca entre todos los datos que le pasamos, las 4 columnas con los valores numéricos, y lo que nos devuelve el valor máximo de entre todas las celdas. <strong>Este es un claro ejemplo de que R está haciendo lo que le dijimos que haga, no lo que estábamos queriendo que haga</strong>.</p>
+<p>Para resolver esto, antes de crear una columna nueva con <code>mutate()</code>, usamos la función <code>rowwise()</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ejemplo <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span>   <span class="co"># Con esta función indicamos que queremos los cálculos sobre las filas</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">"Valor Máximo"</span> <span class="ot">=</span> <span class="fu">max</span>(<span class="fu">c</span>(Valor.A, Valor.B, Valor.C, Valor.D)))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 6
+# Rowwise: 
+  Nombre  Valor.A Valor.B Valor.C Valor.D `Valor Máximo`
+  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;          &lt;dbl&gt;
+1 Carla        12       5      39     100            100
+2 Daniela       8      21     200      43            200
+3 Sergio      300      18      26      86            300
+4 Yanel        17     400      64      12            400</code></pre>
+</div>
+</div>
+<p>La función <code>rowwise()</code> lo que nos permite hacer es cálculos sobre las filas. Dependiendo el caso de uso se puede usar esta alternativa, o <em>“pivotear”</em> o <em>transponer</em> la tabla para que las columnas queden dentro de las filas y luego combinar <code>group_by()</code> y <code>summarise()</code> para calcular el valor máximo para cada persona.</p>
+<p>Este enfoque sería así:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ejemplo_largo <span class="ot">&lt;-</span> ejemplo <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pivoteamos los datos a un formato 'largo'</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"Valor.A"</span>, <span class="st">"Valor.B"</span>, <span class="st">"Valor.C"</span>, <span class="st">"Valor.D"</span>), </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Variable"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Valor"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Veamos el dataset transformado</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>ejemplo_largo</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 3
+   Nombre  Variable Valor
+   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;
+ 1 Carla   Valor.A     12
+ 2 Carla   Valor.B      5
+ 3 Carla   Valor.C     39
+ 4 Carla   Valor.D    100
+ 5 Daniela Valor.A      8
+ 6 Daniela Valor.B     21
+ 7 Daniela Valor.C    200
+ 8 Daniela Valor.D     43
+ 9 Sergio  Valor.A    300
+10 Sergio  Valor.B     18
+11 Sergio  Valor.C     26
+12 Sergio  Valor.D     86
+13 Yanel   Valor.A     17
+14 Yanel   Valor.B    400
+15 Yanel   Valor.C     64
+16 Yanel   Valor.D     12</code></pre>
+</div>
+<details class="code-fold">
+<summary>Ver código</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ahora hacemos el cálculo combinando 'group_by' y 'summarise'</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ejemplo_largo <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Nombre) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="st">"Valor Máximo"</span> <span class="ot">=</span> <span class="fu">max</span>(Valor))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  Nombre  `Valor Máximo`
+  &lt;chr&gt;            &lt;dbl&gt;
+1 Carla              100
+2 Daniela            200
+3 Sergio             300
+4 Yanel              400</code></pre>
+</div>
+</div>
+<p>Claramente este es otro enfoque, y depende de la necesidad es una opción válida. Pero en este caso particular necesitaba mantener una fila para cada persona porque después iba a exportar esta tabla a un archivo que luego es cargado en un tablero en Power BI.</p>
+<p>Así que, una vez logrado mi objetivo, me dispuse a celebrar como corresponde.</p>
+<p><img src="https://media.giphy.com/media/lhwgeqN0pLPBMlFNnn/giphy.gif" class="img-fluid"></p>
 
 
 </section>
-</main></div>
-</div>
- <!-- /main -->
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -343,6 +535,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
