@@ -11,19 +11,3 @@ listing:
 page-layout: full
 title-block-banner: true
 ---
-
-```{r}
-# Español
-
-#| echo: false
-#| warning: false
-#| message: false
-quarto::quarto_listing("es")
-```
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-quarto::quarto_listing("en")
-```

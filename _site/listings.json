@@ -1,0 +1,24 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/es/tidytuesday-simpsons/index.html",
+      "/es/vino-y-capacitacion/index.html",
+      "/es/comparando-visualizaciones/index.html",
+      "/es/animando_graficos/index.html",
+      "/es/cargar_fechas_desde_excel/index.html",
+      "/es/maximo-valor-fila/index.html",
+      "/es/microaprendizajes/index.html",
+      "/es/haciendo-boludeces-en-r/index.html",
+      "/es/indicadores_capacitacion/index.html",
+      "/es/scrap_learning/index.html"
+    ]
+  },
+  {
+    "listing": "/index.en.html",
+    "items": [
+      "/en/tidytuesday-simpsons/index.html",
+      "/en/doing-silly-things-r/index.html"
+    ]
+  }
+]
